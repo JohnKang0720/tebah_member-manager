@@ -12,6 +12,7 @@ import AddMember from './components/AddMember';
 import Profile from './components/Profile';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { createContext, useContext, useState } from 'react';
+import Family from './components/Family';
 
 export const UserContext = createContext(null);
 
@@ -70,11 +71,14 @@ function App() {
             <li class="nav-item">
               <Link class="nav-link" to="/tebah-family">가족기록</Link>
             </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/profile">프로필</Link>
+            </li>
           </ul>
         </div>
       </nav>
       <br />
-      <UserContext.Provider value={currUser}>
+      <UserContext.Provider value={[currUser, auth]}>
       <Routes>
         <Route path="/" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -85,6 +89,7 @@ function App() {
         {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("child") ? <Route path="/child" element={<Child />} /> :  <Route path="/" element={<></>} />}
         {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("finance") ? <Route path="/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />}
         <Route path="/add" element={<AddMember />} />
+        <Route path={`/tebah-family`} element={<Family />}/>
         <Route path={`/contacts/${window.location.href.split('/').pop().toString()}`} element={<Contacts route={window.location.href.split('/').pop().toString()} />} />   
       </Routes>
       </UserContext.Provider>   

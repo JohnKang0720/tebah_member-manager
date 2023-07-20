@@ -7,16 +7,24 @@ body {
   z-index: 999;
 }
 
-.table {
+.table, .table2 {
   width: 100%;
   border: solid 1px black;
   margin: 2.5px;
   display: grid;
-  grid-template-columns: repeat(20, 1fr);
   overflow-x: auto;
   white-space: nowrap;
   text-align: center;
 }
+
+.table {
+  grid-template-columns: repeat(20, 1fr);
+}
+
+.table2 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
 
 .table__header{
   padding: 10px;

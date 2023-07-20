@@ -14,9 +14,13 @@ function Contacts({ route }) {
     const [data, error, loading] = useFetch(`contacts/${route}`);
 
     const filter = () => {
-        axios.get(`http://localhost:5000/contacts-search/${route}/${code}`, {
+        axios.post(`http://localhost:5000/contacts/${route}`, {
+            code: code
         }).then(res => {
             console.log(res)
+            if (res.data.length === 0) {
+                alert("No such family code.")
+            }
             setArr(res.data)
         }).catch(err => console.log(err))
     }
@@ -37,7 +41,7 @@ function Contacts({ route }) {
             <br />
             <br />
             <br />
-            <View data={[loading, text, data, filtered]} />
+            <View data={[loading, text, data, arr]} />
         </div>
     )
 }

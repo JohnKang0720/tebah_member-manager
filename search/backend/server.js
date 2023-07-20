@@ -181,26 +181,35 @@ app.post('/contacts/:group', (req, res) => {
     const { group } = req.params;
     const { code } = req.body;
 
-    db.query(`SELECT eng_name, kor_name, gender, category, age, telephone, email FROM contact_a WHERE family_code=${code} UNION ALL SELECT eng_name, kor_name, gender, category, age, telephone, email FROM contact_b WHERE family_code=${code}`, (err, result) => {
+    db.query(`SELECT * FROM contact_a WHERE family_code=${code} UNION ALL SELECT * FROM contact_b WHERE family_code=${code}`, (err, result) => {
         if (err) throw err;
+        console.log(result)
         res.status(200).send(result)
     })
 
 })
 
-//finding parents of a single child & displaying family tables
-app.post('/tebah-family', (req, res) => {
-    const { search_id } = req.body;
-    let query = ``;
-    if (search_id) {
-        query = `SELECT contact_a.eng_name, contact_b.eng_name, cb2.eng_name, contact_a.family_code FROM contact_a JOIN contact_b ON contact_b.id = contact_a.parent_id_2 LEFT JOIN contact_b cb2 ON cb2.id = contact_a.parent_id_1 WHERE contact_a.id = ${search_id};`;
-    } else {
-        query = `SELECT contact_a.eng_name, contact_b.eng_name, cb2.eng_name, contact_a.family_code FROM contact_a JOIN contact_b ON contact_b.id = contact_a.parent_id_2 LEFT JOIN contact_b cb2 ON cb2.id = contact_a.parent_id_1`
-    }
+app.get('/tebah-family', (req, res) => {
+    const columns = "contact_a.eng_name AS Children, contact_b.eng_name AS Parent1, cb2.eng_name AS Parent2, contact_a.family_code"
+    const query = `SELECT ${columns} FROM contact_a JOIN contact_b ON contact_b.id = contact_a.parent_id_2 LEFT JOIN contact_b cb2 ON cb2.id = contact_a.parent_id_1;`
 
     db.query(query, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
+        console.log(result)
+    })
+})
+
+//finding parents of a single child & displaying family tables
+app.post('/tebah-family', (req, res) => {
+    const { search_id } = req.body;
+    const columns = "contact_a.eng_name AS Children, contact_b.eng_name AS Parent1, cb2.eng_name AS Parent2, contact_a.family_code"
+    let query = `SELECT ${columns} FROM contact_a INNER JOIN contact_b ON contact_b.id = contact_a.parent_id_2 INNER JOIN contact_b cb2 ON cb2.id = contact_a.parent_id_1 WHERE contact_a.id = ${search_id};`;
+    
+    db.query(query, (err, result) => {
+        if (err) throw err;
+        res.status(200).send(result);
+        console.log(result)
     })
 })
 

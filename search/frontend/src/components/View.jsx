@@ -4,7 +4,7 @@ function View(props) {
   const [loading, text, data, filtered] = props.data
   return (
     <>
-    {!loading ? data.length > 0 && text.length === 0 ? <div className="table">
+    {!loading ? data.length > 0 && text.length === 0 && filtered.length === 0 ? <div className="table">
         <div>
           <section class="table__header"> ID </section>
           {data.map(info => {
