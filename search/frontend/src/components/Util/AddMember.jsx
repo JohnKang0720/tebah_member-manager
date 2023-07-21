@@ -17,7 +17,6 @@ function AddMember() {
     const [address, setAd] = useState("");
     const [hobby, setHob] = useState("");
     const [vol, setVol] = useState("");
-    const [offering, setOffering] = useState(0);
     const [fcode, setF] = useState(0);
 
     const handleSubmit = () => {
@@ -35,7 +34,7 @@ function AddMember() {
             address: address,
             hobby: hobby,
             vol_exp: vol,
-            offering: offering,
+            offering: 0,
             f_code: fcode
         })
             .then(res => {
@@ -97,10 +96,6 @@ function AddMember() {
             <br />
             <input placeholder='봉사여부' onChange={e => setVol(e.target.value)} />
             <br />
-            {window.location.href.split('/').pop() === "finance" ?
-                <input placeholder='새맴버 헌금 #' onChange={e => setOffering(e.target.value)} />
-                : null}
-            {window.location.href.split('/').pop() === "finance" ? <br /> : null}
             <input placeholder='새맴버 가족코드' onChange={e => setF(e.target.value)} />
             <br />
             <button onClick={handleSubmit}> Add </button>

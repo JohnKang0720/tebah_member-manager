@@ -2,10 +2,9 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
 import axios from 'axios'
-import AddMember from './AddMember';
-import DeleteMember from './DeleteMember';
+import DeleteMember from './Util/DeleteMember';
 import View from './View';
-import EditMember from './EditMember';
+import EditMember from './Util/EditMember';
 function Finance() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
@@ -38,12 +37,9 @@ function Finance() {
           <strong> 맴버 검색: </strong>
           <br />
           <input placeholder='검색' onChange={e => setText(e.target.value)} />
-          <br />
+          <DeleteMember />
         </div>
         <EditMember />
-        <br />
-        <DeleteMember />
-        <br />
         <div className='inputs'>
           <strong> Assign offering number: </strong>
           <br />
@@ -53,8 +49,8 @@ function Finance() {
           <br />
           <button onClick={assignNum}> Submit </button>
         </div>
-        <br />
       </div>
+      <br/>
       <br/>
       <View data={[loading, text, data, filtered]} />
     </div>

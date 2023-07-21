@@ -8,7 +8,7 @@ import Youth from "./components/Youth";
 import Secondary from "./components/Second";
 import Child from "./components/Child";
 import Contacts from './components/Contacts';
-import AddMember from './components/AddMember';
+import AddMember from './components/Util/AddMember';
 import Profile from './components/Profile';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { createContext, useContext, useState } from 'react';

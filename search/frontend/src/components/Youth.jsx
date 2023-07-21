@@ -1,11 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
-import axios from 'axios'
-import AddMember from './AddMember';
-import DeleteMember from './DeleteMember';
+import DeleteMember from './Util/DeleteMember';
 import View from './View';
-import EditMember from './EditMember';
+import EditMember from './Util/EditMember';
 
 function Youth() {
   const [text, setText] = useState("");

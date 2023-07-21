@@ -1,9 +1,9 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
-import DeleteMember from './DeleteMember';
+import DeleteMember from './Util/DeleteMember';
 import View from './View';
-import EditMember from './EditMember';
+import EditMember from './Util/EditMember';
 
 function Second() {
   const [text, setText] = useState("");
