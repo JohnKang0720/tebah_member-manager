@@ -33,11 +33,10 @@ function Contacts({ route }) {
             <br />
             <br /> */}
             <br />
-            <strong> Search family: </strong>
+            <h5> 가족검색창 </h5>
             <br />
-            <input placeholder='Enter family code' onChange={e => setCode(e.target.value)} />
-            <br />
-            <button onClick={filter}> Search </button>
+            <input placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} />
+            <button onClick={filter}> 검색 </button>
             <br />
             <br />
             <br />

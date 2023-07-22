@@ -13,6 +13,8 @@ import Profile from './components/Profile';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { createContext, useContext, useState } from 'react';
 import Family from './components/Family';
+import EditMember from './components/Util/EditMember';
+import DeleteMember from './components/Util/DeleteMember';
 
 export const UserContext = createContext(null);
 
@@ -45,6 +47,12 @@ function App() {
             <li class="nav-item">
               <Link class="nav-link" to="/add">등록</Link>
             </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/edit">맴버수정</Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/delete">맴버삭제</Link>
+            </li>
             {/* Adults */}
             <li class="nav-item">
               <Link class="nav-link" to="/contacts/admin">기본주소록 A</Link>
@@ -57,16 +65,16 @@ function App() {
               <Link class="nav-link " to="/main">메인</Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link " to="/finance">재정부</Link>
+              <Link class="nav-link " to="/main/finance">재정부</Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link " to="/youth">청년부</Link>
+              <Link class="nav-link " to="/main/youth">청년부</Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link " to="/secondary">중고등부</Link>
+              <Link class="nav-link " to="/main/secondary">중고등부</Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/child">아동부</Link>
+              <Link class="nav-link" to="/main/child">아동부</Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link" to="/tebah-family">가족기록</Link>
@@ -84,10 +92,12 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/profile" element={<Profile />} />
         {currUser && currUser.email.includes("admin") ? <Route path="/main" element={<MainData />} /> : <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("youth") ? <Route path="/youth" element={<Youth />} /> :  <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("secondary") ? <Route path="/secondary" element={<Secondary />} /> :  <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("child") ? <Route path="/child" element={<Child />} /> :  <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("finance") ? <Route path="/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />}
+        {currUser && currUser.email.includes("admin") ? <Route path="/edit" element={<EditMember />} /> : <Route path="/" element={<></>} />}
+        {currUser && currUser.email.includes("admin") ? <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />}
+        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("youth") ? <Route path="/main/youth" element={<Youth />} /> :  <Route path="/" element={<></>} />}
+        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("secondary") ? <Route path="/main/secondary" element={<Secondary />} /> :  <Route path="/" element={<></>} />}
+        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("child") ? <Route path="/main/child" element={<Child />} /> :  <Route path="/" element={<></>} />}
+        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("finance") ? <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />}
         <Route path="/add" element={<AddMember />} />
         <Route path={`/tebah-family`} element={<Family />}/>
         <Route path={`/contacts/${window.location.href.split('/').pop().toString()}`} element={<Contacts route={window.location.href.split('/').pop().toString()} />} />   

@@ -10,12 +10,12 @@ export default function Profile() {
 
     return (
         <div>
-            <h1> Profile </h1>
+            <h1> 프로필 </h1>
             {user ? <>
-                Email: <p> {user.email} </p>
-                Created At: <p> {user.metadata.creationTime} </p>
+                이메일: <p> {user.email} </p>
+                생성날짜: <p> {user.metadata.creationTime} </p>
                 UID: <p> {user.uid} </p>  
-                <button onClick={() => logout(navigate)}> Sign Out </button>
+                <button onClick={() => logout(navigate)}> 로그아웃 </button>
                 </> : "Not signed in"}
             
         </div>

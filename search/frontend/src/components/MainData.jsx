@@ -14,7 +14,7 @@ function MainData() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.eng_name.includes(text) || info.category.includes(text) || info.kor_name.includes(text) );
+      let filteredArray = data.filter(info => info.eng_name.toLowerCase().includes(text.toLowerCase()) || info.category.toLowerCase() === text.toLowerCase()|| info.kor_name.toLowerCase().includes(text.toLowerCase()) );
       setFiltered(filteredArray)
     }
   }, [text])
@@ -22,15 +22,13 @@ function MainData() {
   return (
     <div>
       <h1> 새가족부 데이터 </h1>
+      <br />
       <div class="input-div">
         <div class="inputs">
-          <strong> 맴버 검색: </strong>
+          <h5> 맴버 검색: </h5>
           <br />
           <input placeholder='검색' onChange={e => setText(e.target.value)} />
-          <br />
-          <DeleteMember />
         </div>
-        <EditMember />
       </div>
       <br/>
       <View data={[loading, text, data, filtered]} />

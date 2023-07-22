@@ -10,11 +10,11 @@ function Register() {
 
     return (
         <>
-            <h1>Tebah Member Registration Page</h1>
+            <h1> 테바 계정등록 </h1>
             <div>
-                <p> Username: </p>
+                <p> 이메일: </p>
                 <input onChange={e => setUser(e.target.value)}/>
-                <p> Password: </p>
+                <p> 비밀번호: </p>
                 <input onChange={e => setPass(e.target.value)}/>
                 <br />
                 <button onClick={() => createAccount(username, password, navigate)}> Register </button>

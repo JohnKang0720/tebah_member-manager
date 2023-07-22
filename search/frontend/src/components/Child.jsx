@@ -8,11 +8,11 @@ function Child() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, error, loading] = useFetch("children");
+  const [data, error, loading] = useFetch("main/children");
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.name.includes(text) || info.category === text);
+      let filteredArray = data.filter(info => info.name.toLowerCase().includes(text.toLowerCase()) || info.category.toLowerCase() === text.toLowerCase());
       setFiltered(filteredArray)
     }
   }, [text])
@@ -24,13 +24,12 @@ function Child() {
       <br/>
       <div class="input-div">
         <div class="inputs">
-          <strong> 맴버 검색: </strong>
+          <h5> 맴버 검색: </h5>
           <br />
           <input placeholder='검색' onChange={e => setText(e.target.value)} />
         </div>
       </div>
       <br/>
-      <DeleteMember />
       <br/>
       <View data={[loading, text, data, filtered]} />
     </div>

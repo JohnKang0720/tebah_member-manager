@@ -10,7 +10,7 @@ function EditMember() {
     });
 
     const handleEdit = () => {
-        axios.put("http://localhost:5000/edit-main", {
+        axios.put("http://localhost:5000/main", {
             id: info.id,
             column: info.column.toLowerCase(),
             content: info.content
@@ -20,27 +20,31 @@ function EditMember() {
 
     return (
         <div className='inputs'>
-            <h3> 맴버 수정 </h3>
+            <h5> 맴버 수정 </h5>
             <div>
-                <p> Enter ID: </p>
-                <input value={info.id} onChange={e => setInfo({
+                <br />
+                <input placeholder='ID' onChange={e => setInfo({
                     id: e.target.value,
                     column: info.column,
                     content: info.content
                 })} />
-                <p> Column: </p>
-                <input value={info.column} onChange={e => setInfo({
+                <br />
+                <br />
+                <input value={info.column} placeholder='Column' onChange={e => setInfo({
                     id: info.id,
                     column: e.target.value,
                     content: info.content
                 })} />
-                <p> New content: </p>
-                <input value={info.content} onChange={e => setInfo({
+                <br />
+                <br />
+                <input value={info.content} placeholder='New content' onChange={e => setInfo({
                     id: info.id,
                     column: info.column,
                     content: e.target.value
                 })} />
-                <button onClick={handleEdit}> Edit </button>
+                <br/>
+                <br />
+                <button onClick={handleEdit}> 수정 </button>
             </div>
         </div>
     )

@@ -26,11 +26,11 @@ function Family() {
     <div>
       <h1> 테바 가족정보 </h1>
       <br />
-      <strong> Search family: </strong>
+      <h5> 가족정보 검색창 </h5>
       <br />
-      <input placeholder='Enter children ID' onChange={e => setMemberId(e.target.value)} />
+      <input placeholder='아동 ID' onChange={e => setMemberId(e.target.value)} />
       <br />
-      <button onClick={filter}> Search </button>
+      <button onClick={filter}> 검색 </button>
       <br />
       <br />
       {!loading && arr.length === 0? <div className="table2">

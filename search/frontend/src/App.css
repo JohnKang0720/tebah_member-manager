@@ -49,3 +49,13 @@ body {
   align-items: center;
 }
 
+.inputs__inner {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.inputs__inner input, select {
+  margin: 15px;
+}
+

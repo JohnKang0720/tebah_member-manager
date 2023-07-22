@@ -9,26 +9,25 @@ function Second() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, error, loading] = useFetch("secondary");
+  const [data, error, loading] = useFetch("main/secondary");
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.name.includes(text) || info.category.includes(text));
+      let filteredArray = data.filter(info => info.eng_name.toLowerCase().includes(text.toLowerCase()) || info.category.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])
 
   return (
     <div><h1> 중고등부 데이터 </h1>
+    <br />
       <div class="input-div">
         <div class="inputs">
-          <strong> 맴버 검색: </strong>
+          <h5> 맴버 검색: </h5>
           <br />
           <input placeholder='검색' onChange={e => setText(e.target.value)} />
-          <br />
-          <DeleteMember />
+          <br /> 
         </div>
-        <EditMember />
       </div>
       <View data={[loading, text, data, filtered]} />
     </div>

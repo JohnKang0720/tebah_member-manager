@@ -6,8 +6,7 @@ function DeleteMember() {
     const [name, setName] = useState("");
 
     const handleSubmit = () => {
-        axios.post("http://localhost:5000/delete-main", {
-            name: name
+        axios.delete(`http://localhost:5000/main/${name}`, {
         })
             .then(res => {
                 console.log(res)
@@ -16,11 +15,10 @@ function DeleteMember() {
 
     return (
         <div className='inputs'>
-            <strong> 맴버 삭제: </strong>
-            <br />
+            <h5> 맴버 삭제: </h5>
             <input placeholder='맴버 이름' onChange={e => setName(e.target.value)} />
             <br />
-            <button onClick={handleSubmit}> Delete </button>
+            <button onClick={handleSubmit}> 삭제 </button>
         </div>
     )
 }

@@ -2,6 +2,7 @@ USE my_db;
 
 SET FOREIGN_KEY_CHECKS=0;
 SET SQL_SAFE_UPDATES = 0;
+TRUNCATE TABLE some_table;
 
 DELETE FROM church_table WHERE eng_name is not null;
 DELETE FROM cont_a WHERE eng_name is not null;
