@@ -33,11 +33,15 @@ function Contacts({ route }) {
             <br />
             <br /> */}
             <br />
-            <h5> 가족검색창 </h5>
-            <br />
-            <input placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} />
-            <button onClick={filter}> 검색 </button>
-            <br />
+            <div class="input-div" style={{ flexDirection: "column" }}>
+                <h5> 가족검색창 </h5>
+                <div class="inputs" style={{ flexDirection: "column" }}>
+                    <br />
+                    <input class="form-control" placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} />
+                    <button class="btn btn-primary" onClick={filter}> 검색 </button>
+                    <br />
+                </div>
+            </div>
             <br />
             <br />
             <View data={[loading, text, data, arr]} />

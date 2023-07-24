@@ -27,7 +27,7 @@ function MainData() {
         <div class="inputs">
           <h5> 맴버 검색: </h5>
           <br />
-          <input placeholder='검색' onChange={e => setText(e.target.value)} />
+          <input class="form-control" placeholder='검색' onChange={e => setText(e.target.value)} />
         </div>
       </div>
       <br/>

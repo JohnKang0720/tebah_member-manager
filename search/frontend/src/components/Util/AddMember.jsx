@@ -54,17 +54,17 @@ function AddMember() {
             <br />
             <div className='inputs__inner'>
                 <div>
-                    <input placeholder='영어 이름' onChange={e => setEng(e.target.value)} />
+                    <input class="form-control" placeholder='영어 이름' onChange={e => setEng(e.target.value)} />
                     <br />
-                    <input placeholder='한국 이름' onChange={e => setKor(e.target.value)} />
+                    <input class="form-control" placeholder='한국 이름' onChange={e => setKor(e.target.value)} />
                     <br />
-                    <select placeholder='성' onChange={e => setGen(e.target.value)}>
+                    <select class="form-control" placeholder='성' onChange={e => setGen(e.target.value)}>
                         <option value="">  </option>
                         <option value="남"> 남 </option>
                         <option value="여"> 여 </option>
                     </select>
                     <br />
-                    <select placeholder='직분' onChange={e => setCat(e.target.value)}>
+                    <select class="form-control" placeholder='직분' onChange={e => setCat(e.target.value)}>
                         <option value="">  </option>
                         <option value="admin"> 집사 </option>
                         <option value="admin"> 장로 </option>
@@ -76,15 +76,15 @@ function AddMember() {
                         <option value="secondary"> 중/고등 </option>
                     </select>
                     <br />
-                    <select placeholder='결혼여부' onChange={e => setMar(e.target.value)}>
+                    <select class="form-control" placeholder='결혼여부' onChange={e => setMar(e.target.value)}>
                         <option value="">  </option>
                         <option value={true}> 기혼 </option>
                         <option value={false}> 미혼 </option>
                     </select>
                     <br />
-                    <input placeholder='나이' onChange={e => setAge(e.target.value)} />
+                    <input class="form-control" placeholder='나이' onChange={e => setAge(e.target.value)} />
                     <br />
-                    <select placeholder='셰례여부' onChange={e => setBap(e.target.value)}>
+                    <select class="form-control" placeholder='셰례여부' onChange={e => setBap(e.target.value)}>
                         <option value="">  </option>
                         <option value="유아세레"> 유아세레 </option>
                         <option value="입교"> 입교 </option>
@@ -92,31 +92,31 @@ function AddMember() {
                         <option value="없음"> 없음 </option>
                     </select>
                     <br />
-                    <input placeholder='셰례년도' onChange={e => setYear(e.target.value)} />
+                    <input class="form-control" placeholder='셰례년도' onChange={e => setYear(e.target.value)} />
                     <br />
-                    <input placeholder='이메일' onChange={e => setEmail(e.target.value)} />
+                    <input class="form-control" placeholder='이메일' onChange={e => setEmail(e.target.value)} />
                 </div>
                 <br />
                 <div>
-                    <input placeholder='전화번호' onChange={e => setTel(e.target.value)} />
+                    <input class="form-control" placeholder='전화번호' onChange={e => setTel(e.target.value)} />
                     <br />
-                    <input placeholder='주소' onChange={e => setAd(e.target.value)} />
+                    <input class="form-control" placeholder='주소' onChange={e => setAd(e.target.value)} />
                     <br />
-                    <input placeholder='취미/직업' onChange={e => setHob(e.target.value)} />
+                    <input class="form-control" placeholder='취미/직업' onChange={e => setHob(e.target.value)} />
                     <br />
-                    <input placeholder='봉사여부' onChange={e => setVol(e.target.value)} />
+                    <input class="form-control" placeholder='봉사여부' onChange={e => setVol(e.target.value)} />
                     <br />
-                    <input placeholder='새맴버 가족코드' onChange={e => setF(e.target.value)} />
+                    <input class="form-control" placeholder='새맴버 가족코드' onChange={e => setF(e.target.value)} />
                     <br />
-                    <input placeholder='부모코드 1' onChange={e => setP1(e.target.value)} />
+                    <input class="form-control" placeholder='부모코드 1' onChange={e => setP1(e.target.value)} />
                     <br />
-                    <input placeholder='부모 코드 2' onChange={e => setP2(e.target.value)} />
+                    <input class="form-control" placeholder='부모 코드 2' onChange={e => setP2(e.target.value)} />
                     <br />
-                    <input placeholder='동의 (사진, 정보)' onChange={e => setAg(e.target.value)} />
+                    <input class="form-control" placeholder='동의 (사진, 정보)' onChange={e => setAg(e.target.value)} />
                 </div>
             </div>
             <br />
-            <button onClick={handleSubmit}> 등록 </button>
+            <button class="btn btn-primary" onClick={handleSubmit}> 등록 </button>
         </div>
     )
 }

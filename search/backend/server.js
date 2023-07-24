@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 })
 
 app.use("/main", require("./routes/Main"));
-app.use("/contacts/:group", require("./routes/Contact"));
+app.use("/contacts", require("./routes/Contact"));
 app.use("/tebah-family", require("./routes/Family"));
 
 app.listen(5000, () => {

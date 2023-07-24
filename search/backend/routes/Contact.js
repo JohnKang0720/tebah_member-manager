@@ -10,7 +10,7 @@ const db = sql.createConnection({
 });
 
 //get contacts information
-router.get('/', (req, res) => {
+router.get('/:group', (req, res) => {
     const { group } = req.params;
     let table = null;
     if (group === "youth") {
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 })
 
 //search family information
-router.post('/', (req, res) => {
+router.post('/:group', (req, res) => {
     const { group } = req.params;
     const { code } = req.body;
 

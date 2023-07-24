@@ -35,16 +35,16 @@ function Finance() {
         <div className='inputs'>
           <h5> 맴버 검색: </h5>
           <br />
-          <input placeholder='검색' onChange={e => setText(e.target.value)} />
+          <input class="form-control" placeholder='검색' onChange={e => setText(e.target.value)} />
         </div>
         <div className='inputs'>
           <h5> Assign offering #: </h5>
           <br />
-          <input placeholder="Enter id" onChange={e => setId(e.target.value)} />
+          <input class="form-control" placeholder="Enter id" onChange={e => setId(e.target.value)} />
           <br />
-          <input placeholder="Offering #" onChange={e => setNum(e.target.value)} />
+          <input class="form-control" placeholder="Offering #" onChange={e => setNum(e.target.value)} />
           <br />
-          <button onClick={assignNum}> Submit </button>
+          <button class="btn btn-success" onClick={assignNum}> Submit </button>
         </div>
       </div>
       <br />

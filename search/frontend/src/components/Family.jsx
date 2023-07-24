@@ -26,14 +26,21 @@ function Family() {
     <div>
       <h1> 테바 가족정보 </h1>
       <br />
-      <h5> 가족정보 검색창 </h5>
+      <div>
+        <div class="input-div" style={{ flexDirection: "column" }}>
+          <h5> 가족정보 검색창 </h5>
+          <div class="inputs">
+            <br />
+            <input class="form-control" placeholder='아동 ID' onChange={e => setMemberId(e.target.value)} />
+            <br />
+            <button class="btn btn-primary" onClick={filter}> 검색 </button>
+            <br />
+          </div>
+        </div>
+        <br />
+      </div>
       <br />
-      <input placeholder='아동 ID' onChange={e => setMemberId(e.target.value)} />
-      <br />
-      <button onClick={filter}> 검색 </button>
-      <br />
-      <br />
-      {!loading && arr.length === 0? <div className="table2">
+      {!loading && arr.length === 0 ? <div className="table2">
         <div>
           <section class="table__header"> Children </section>
           {data.map(info => {

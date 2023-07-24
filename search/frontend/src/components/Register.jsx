@@ -11,13 +11,15 @@ function Register() {
     return (
         <>
             <h1> 테바 계정등록 </h1>
-            <div>
-                <p> 이메일: </p>
-                <input onChange={e => setUser(e.target.value)}/>
-                <p> 비밀번호: </p>
-                <input onChange={e => setPass(e.target.value)}/>
-                <br />
-                <button onClick={() => createAccount(username, password, navigate)}> Register </button>
+            <div class="input-div" style={{ flexDirection: "column" }}>
+                <div class="inputs">
+                    <p> 이메일: </p>
+                    <input class="form-control" onChange={e => setUser(e.target.value)} />
+                    <p> 비밀번호: </p>
+                    <input class="form-control" onChange={e => setPass(e.target.value)} />
+                    <br />
+                    <button class="btn btn-danger" onClick={() => createAccount(username, password, navigate)}> Register </button>
+                </div>
             </div>
         </>
     )

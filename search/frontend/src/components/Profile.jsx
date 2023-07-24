@@ -15,7 +15,7 @@ export default function Profile() {
                 이메일: <p> {user.email} </p>
                 생성날짜: <p> {user.metadata.creationTime} </p>
                 UID: <p> {user.uid} </p>  
-                <button onClick={() => logout(navigate)}> 로그아웃 </button>
+                <button class="btn btn-danger" onClick={() => logout(navigate)}> 로그아웃 </button>
                 </> : "Not signed in"}
             
         </div>

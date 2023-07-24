@@ -23,28 +23,28 @@ function EditMember() {
             <h5> 맴버 수정 </h5>
             <div>
                 <br />
-                <input placeholder='ID' onChange={e => setInfo({
+                <input class="form-control" placeholder='ID' onChange={e => setInfo({
                     id: e.target.value,
                     column: info.column,
                     content: info.content
                 })} />
                 <br />
                 <br />
-                <input value={info.column} placeholder='Column' onChange={e => setInfo({
+                <input class="form-control"  value={info.column} placeholder='Column' onChange={e => setInfo({
                     id: info.id,
                     column: e.target.value,
                     content: info.content
                 })} />
                 <br />
                 <br />
-                <input value={info.content} placeholder='New content' onChange={e => setInfo({
+                <input class="form-control" value={info.content} placeholder='New content' onChange={e => setInfo({
                     id: info.id,
                     column: info.column,
                     content: e.target.value
                 })} />
                 <br/>
                 <br />
-                <button onClick={handleEdit}> 수정 </button>
+                <button class="btn btn-success" onClick={handleEdit}> 수정 </button>
             </div>
         </div>
     )

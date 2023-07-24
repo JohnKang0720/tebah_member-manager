@@ -17,7 +17,7 @@ function Login() {
         <p> Password: </p>
         <input onChange={e => setPass(e.target.value)} />
         <br />
-        <button onClick={() => authenticate(username, password, navigate)}> Log in </button>
+        <button class="btn btn-success" onClick={() => authenticate(username, password, navigate)}> Log in </button>
       </div>
     </>
   )
