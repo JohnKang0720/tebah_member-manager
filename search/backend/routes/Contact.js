@@ -6,20 +6,19 @@ const db = sql.createConnection({
     host: 'localhost',
     user: 'root',
     password: 'Gyojin1000**',
-    database: "my_db"
+    database: "tebah_db"
 });
 
 //get contacts information
 router.get('/:group', (req, res) => {
     const { group } = req.params;
-    let table = null;
-    if (group === "youth") {
-        table = "contact_a";
-    } else if (group === "admin") {
-        table = "contact_b";
+    g=""
+    if (group == "admin") {
+        g = "교역자"
+    } else {
+        g = "유스"
     }
-    
-    db.query(`SELECT * FROM ${table} WHERE category='${group}'`, (err, result) => {
+    db.query(`SELECT * FROM mytable WHERE category='${g}'`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -30,7 +29,7 @@ router.post('/:group', (req, res) => {
     const { group } = req.params;
     const { code } = req.body;
 
-    db.query(`SELECT * FROM contact_a WHERE family_code=${code} UNION ALL SELECT * FROM contact_b WHERE family_code=${code}`, (err, result) => {
+    db.query(`SELECT * FROM mytable WHERE f_code=${code}`, (err, result) => {
         if (err) throw err;
         console.log(result)
         res.status(200).send(result)

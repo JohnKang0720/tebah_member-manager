@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useFetch } from '../useFetch'
 import axios from 'axios'
 import DeleteMember from './Util/DeleteMember';
@@ -13,9 +13,10 @@ function Finance() {
 
   const [data, error, loading] = useFetch("main/finance");
 
+
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.eng_name.toLowerCase().includes(text.toLowerCase()) || info.category.toLowerCase() === text.toLowerCase());
+      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])

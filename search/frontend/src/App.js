@@ -44,6 +44,9 @@ function App() {
             <li class="nav-item active">
               <Link class="nav-link" to="/">Register <span class="sr-only">(current)</span></Link>
             </li>
+            <li class="nav-item active">
+              <Link class="nav-link" to="/login"> Log in </Link>
+            </li>
             <li class="nav-item">
               <Link class="nav-link" to="/add">등록</Link>
             </li>
@@ -55,11 +58,11 @@ function App() {
             </li>
             {/* Adults */}
             <li class="nav-item">
-              <Link class="nav-link" to="/contacts/admin">기본주소록 A</Link>
+              <Link class="nav-link" to="/contacts/admin">기본주소록 B</Link>
             </li>
             {/* Youths */}
             <li class="nav-item">
-              <Link class="nav-link" to="/contacts/youth">기본주소록 B</Link>
+              <Link class="nav-link" to="/contacts/youth">기본주소록 A</Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link " to="/main">메인</Link>
@@ -68,13 +71,13 @@ function App() {
               <Link class="nav-link " to="/main/finance">재정부</Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link " to="/main/youth">청년부</Link>
+              <Link class="nav-link " to="/main/secondary">청년부</Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link " to="/main/secondary">중고등부</Link>
+              <Link class="nav-link " to="/main/youth">중고등부</Link>
             </li>
             <li class="nav-item">
-              <Link class="nav-link" to="/main/child">아동부</Link>
+              <Link class="nav-link" to="/main/children">아동부</Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link" to="/tebah-family">가족기록</Link>
@@ -96,11 +99,11 @@ function App() {
         {currUser && currUser.email.includes("admin") ? <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />}
         {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("youth") ? <Route path="/main/youth" element={<Youth />} /> :  <Route path="/" element={<></>} />}
         {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("secondary") ? <Route path="/main/secondary" element={<Secondary />} /> :  <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("child") ? <Route path="/main/child" element={<Child />} /> :  <Route path="/" element={<></>} />}
+        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("children") ? <Route path="/main/children" element={<Child />} /> :  <Route path="/" element={<></>} />}
         {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("finance") ? <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />}
         <Route path="/add" element={<AddMember />} />
         <Route path={`/tebah-family`} element={<Family />}/>
-        <Route path={`/contacts/${window.location.href.split('/').pop().toString()}`} element={<Contacts route={window.location.href.split('/').pop().toString()} />} />   
+        <Route path={`/contacts/${window.location.href.split("/")[4]}`} element={<Contacts route={window.location.href.split("/")[4]} />} />   
       </Routes>
       </UserContext.Provider>   
     </div>

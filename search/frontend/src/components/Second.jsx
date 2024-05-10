@@ -13,13 +13,13 @@ function Second() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.eng_name.toLowerCase().includes(text.toLowerCase()) || info.category.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])
 
   return (
-    <div><h1> 중고등부 데이터 </h1>
+    <div><h1> 청년부 데이터 </h1>
     <br />
       <div class="input-div">
         <div class="inputs">

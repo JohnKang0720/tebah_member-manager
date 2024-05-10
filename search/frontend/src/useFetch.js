@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo} from "react";
 import axios from "axios"
 
 export const useFetch = (keyword) => {
     const [data, setData] = useState(null)
     const [error, setError] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [d, setD] = useState(0)
 
     const BASE_URL = "http://localhost:5000/";
 
@@ -16,14 +17,12 @@ export const useFetch = (keyword) => {
         }
     };
 
-    const fetchData = () => {
+    const fetchData = async ()  => {
         setLoading(true)
-        axios.get(`${BASE_URL}${keyword}`, options)
+        await axios.get(`${BASE_URL}${keyword}`, options)
         .then(res => {
             setData(res.data)
-            console.log(res.data)
         })
-        .catch(err => setError(err))
         .finally(() => {
             setLoading(false)
         })

@@ -9,7 +9,8 @@ body {
 
 .table, .table2 {
   width: 100%;
-  border: solid 1px black;
+  height:450px;
+  /* border: solid 1px black; */
   margin: 2.5px;
   display: grid;
   overflow-x: auto;
@@ -19,6 +20,7 @@ body {
 
 .table {
   grid-template-columns: repeat(20, 1fr);
+  padding: 20px;
 }
 
 .table2 {

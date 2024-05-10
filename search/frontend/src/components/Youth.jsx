@@ -13,13 +13,13 @@ function Youth() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.eng_name.toLowerCase().includes(text.toLowerCase()) || info.kor_name.toLowerCase().includes(text.toLowerCase()) || info.category.toLowerCase() === text.toLowerCase());
+      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])
 
   return (
-    <div><h1> 청년부 데이터 </h1>
+    <div><h1> 유스 데이터 </h1>
       <br />
       <div class="input-div">
         <div class="inputs">

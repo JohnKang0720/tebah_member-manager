@@ -3,10 +3,10 @@ const cors = require('cors');
 const sql = require('mysql2');
 
 const db = sql.createConnection({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: 'Gyojin1000**',
-    database: "my_db"
+    database: "tebah_db"
 });
 
 db.connect((err) => {
@@ -23,15 +23,14 @@ app.use(cors())
 
 //create db
 app.get("/", (req, res) => {
-    let sql = "CREATE DATABASE my_db";
+    let sql = "CREATE DATABASE tebah_db";
     db.query(sql, (err, result) => {
         if (err) throw err;
-        console.log(result)
         res.status(200).send("created!");
     })
 })
 
-app.use("/main", require("./routes/Main"));
+app.use("/main", require("./routes/Main")); 
 app.use("/contacts", require("./routes/Contact"));
 app.use("/tebah-family", require("./routes/Family"));
 

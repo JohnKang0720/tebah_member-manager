@@ -45,21 +45,21 @@ function Family() {
           <section class="table__header"> Children </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.Children} </p>
+              <p> {info.child_name} </p>
             </div>
           })} </div>
         <div>
           <section class="table__header"> Parent 1 </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.Parent1} </p>
+              <p> {info.parent_1_name} </p>
             </div>
           })} </div>
         <div>
           <section class="table__header"> Parent 2 </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.Parent2} </p>
+              <p> {info.parent_2_name} </p>
             </div>
           })} </div>
         <div>
@@ -74,21 +74,21 @@ function Family() {
           <section class="table__header"> Children </section>
           {arr.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.Children} </p>
+              <p> {info.child_name} </p>
             </div>
           })} </div>
         <div>
           <section class="table__header"> Parent 1 </section>
           {arr.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.Parent1} </p>
+              <p> {info.parent_1_name} </p>
             </div>
           })} </div>
         <div>
           <section class="table__header"> Parent 2 </section>
           {arr.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.Parent2} </p>
+              <p> {info.parent_2_name} </p>
             </div>
           })} </div>
         <div>

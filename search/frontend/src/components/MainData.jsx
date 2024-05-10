@@ -14,7 +14,7 @@ function MainData() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.eng_name.toLowerCase().includes(text.toLowerCase()) || info.category.toLowerCase() === text.toLowerCase()|| info.kor_name.toLowerCase().includes(text.toLowerCase()) );
+      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])
