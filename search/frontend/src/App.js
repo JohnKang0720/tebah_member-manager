@@ -1,7 +1,7 @@
 import './App.css';
 import Register from './components/Register';
 import Login from './components/Login';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import MainData from './components/MainData';
 import Finance from "./components/Finance";
 import Youth from "./components/Youth";
@@ -11,7 +11,7 @@ import Contacts from './components/Contacts';
 import AddMember from './components/Util/AddMember';
 import Profile from './components/Profile';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { createContext, useContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import Family from './components/Family';
 import EditMember from './components/Util/EditMember';
 import DeleteMember from './components/Util/DeleteMember';
@@ -20,7 +20,6 @@ export const UserContext = createContext(null);
 
 function App() {
   const [currUser, setUser] = useState(null);
-
   const auth = getAuth();
   onAuthStateChanged(auth, (user) => {
     if (user) {
@@ -31,6 +30,7 @@ function App() {
       setUser(null);
     }
   });
+
 
   return (
     <div className="App">
@@ -103,7 +103,10 @@ function App() {
         {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("finance") ? <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />}
         <Route path="/add" element={<AddMember />} />
         <Route path={`/tebah-family`} element={<Family />}/>
-        <Route path={`/contacts/${window.location.href.split("/")[4]}`} element={<Contacts route={window.location.href.split("/")[4]} />} />   
+
+        <Route path={`/contacts/:route`} element={<Contacts/>} >
+        </Route>
+
       </Routes>
       </UserContext.Provider>   
     </div>

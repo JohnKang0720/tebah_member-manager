@@ -64,7 +64,9 @@ function View(props) {
           <section class="table__header"> Baptism </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.baptism+" on "+info.baptism_year} </p>
+              {info.baptism_year !== undefined ? <p> {info.baptism+" on "+info.baptism_year} </p> : 
+                 <p> {info.baptism+" (date unknown)"} </p>
+              }
             </div>
           })}
         </div>

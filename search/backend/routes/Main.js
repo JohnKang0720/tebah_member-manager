@@ -48,6 +48,8 @@ router.put("/", (req, res) => {
 //     });
 // })
 
+
+const proc_command = (c) =>  { return `CALL SelectGroup('${c}')` }
 // //view main data
 router.get("/", (req, res) => {
     
@@ -68,25 +70,26 @@ router.delete("/:name", (req, res) => {
 
 // //view youth data
 router.get("/youth", (req, res) => {
-    db.query("SELECT * FROM mytable WHERE category = '유스'", (err, result) => {
+    db.query(proc_command('유스'), (err, result) => {
         if (err) throw err;
-        res.status(200).send(result);
+        res.status(200).send(result[0]);
+        console.log(result)
     })
 })
 
 // //view secondary data
 router.get("/secondary", (req, res) => {
-    db.query("SELECT * FROM mytable WHERE category = '청년'", (err, result) => {
+    db.query(proc_command('청년'), (err, result) => {
         if (err) throw err;
-        res.status(200).send(result);
+        res.status(200).send(result[0]);
     })
 })
 
 // //view children data
 router.get("/children", (req, res) => {
-    db.query("SELECT * FROM mytable WHERE category = '아동부'", (err, result) => {
+    db.query(proc_command('아동부'), (err, result) => {
         if (err) throw err;
-        res.status(200).send(result);
+        res.status(200).send(result[0]);
     })
 })
 

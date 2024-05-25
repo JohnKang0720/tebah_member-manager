@@ -3,18 +3,19 @@ import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
 import axios from 'axios'
 import View from './View';
-import { getAuth } from 'firebase/auth';
+import { useParams } from 'react-router-dom';
 
-function Contacts({ route }) {
+function Contacts() {
     const [text, setText] = useState("");
     const [filtered, setFiltered] = useState([]);
     const [code, setCode] = useState(1);
     const [arr, setArr] = useState([]);
+    const param = useParams()
 
-    const [data, error, loading] = useFetch(`contacts/${route}`);
+    const [data, error, loading] = useFetch(`contacts/${param.route}`);
 
     const filter = () => {
-        axios.post(`http://localhost:5000/contacts/${route}`, {
+        axios.post(`http://localhost:5000/contacts/${param.route}`, {
             code: code
         }).then(res => {
             console.log(res)
