@@ -4,9 +4,7 @@ import axios from 'axios';
 
 function Family() {
   let [data, error, loading] = useFetch(`tebah-family`);
-  const [text, setText] = useState("");
   const [arr, setArr] = useState([]);
-  const [filtered, setFiltered] = useState([]);
   const [memberId, setMemberId] = useState(0);
 
   const filter = () => {
@@ -14,6 +12,7 @@ function Family() {
       search_id: memberId
     }).then(res => {
       setArr(res.data)
+      console.log(res.data)
       if (res.data.length === 0) {
         alert(`No such member with ID ${memberId}.`)
       }
@@ -42,12 +41,20 @@ function Family() {
       <br />
       {!loading && arr.length === 0 ? <div className="table2">
         <div>
+          <section class="table__header"> 아동 ID </section>
+          {data.map(info => {
+            return <div key={info.child_id} className="table__data">
+              <p> {info.child_id} </p>
+            </div>
+          })} </div>
+        <div>
           <section class="table__header"> Children </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
               <p> {info.child_name} </p>
             </div>
           })} </div>
+          
         <div>
           <section class="table__header"> Parent 1 </section>
           {data.map(info => {
@@ -70,6 +77,13 @@ function Family() {
             </div>
           })} </div>
       </div> : <div className="table2">
+      <div>
+          <section class="table__header"> Children </section>
+          {arr.map(info => {
+            return <div key={info.id} className="table__data">
+              <p> {info.child_id} </p>
+            </div>
+          })} </div>
         <div>
           <section class="table__header"> Children </section>
           {arr.map(info => {
@@ -98,7 +112,9 @@ function Family() {
               <p> {info.family_code} </p>
             </div>
           })} </div>
-      </div>}
+          
+      </div>
+      }
     </div>
   )
 }

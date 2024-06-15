@@ -14,7 +14,7 @@ const query = `
         SELECT * FROM mytable
         WHERE p_code_1 IS NOT NULL OR p_code_2 IS NOT NULL
     ) 
-        SELECT c.english_name AS child_name, c.gender AS child_gender, c.age AS child_age, c.title AS child_title, c.f_code AS family_code,
+        SELECT c.ID AS child_id, c.english_name AS child_name, c.gender AS child_gender, c.age AS child_age, c.title AS child_title, c.f_code AS family_code,
         m.english_name AS parent_1_name, m.gender AS parent_1_gender, m.age AS parent_1_age, m.title AS parent_1_title,
         m2.english_name AS parent_2_name, m2.gender AS parent_2_gender, m2.age AS parent_2_age, m2.title AS parent_2_title
         FROM children_node c
@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 //finding parents of a single child & displaying family tables
 router.post('/', (req, res) => {
     const { search_id } = req.body;
-    let q = query.replace(";", `\n WHERE c.f_code = ${search_id};`)
+    let q = query.replace(";", `\n WHERE c.ID = ${search_id};`)
 
     db.query(q, (err, result) => {
         if (err) throw err;
