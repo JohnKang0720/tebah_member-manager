@@ -22,7 +22,7 @@ function Finance() {
   }, [text])
 
   const assignNum = () => {
-    axios.put(`https://tebah-member-manager.vercel.app/main/finance/${id}/${num}`, {
+    axios.put(`/main/finance/${id}/${num}`, {
     })
       .then(res => {
         console.log(res)

@@ -8,7 +8,7 @@ function Family() {
   const [memberId, setMemberId] = useState(0);
 
   const filter = () => {
-    axios.post(`https://tebah-member-manager.vercel.app/tebah-family`, {
+    axios.post(`/tebah-family`, {
       search_id: memberId
     }).then(res => {
       setArr(res.data)
