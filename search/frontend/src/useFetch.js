@@ -7,7 +7,7 @@ export const useFetch = (keyword) => {
     const [loading, setLoading] = useState(true)
     const [d, setD] = useState(0)
 
-    const BASE_URL = "http://localhost:5000/";
+    const BASE_URL = "https://tebah-member-manager.vercel.app/";
 
     const options = {
         method: 'GET',
