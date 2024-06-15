@@ -23,11 +23,7 @@ app.use(cors())
 
 //create db
 app.get("/", (req, res) => {
-    let sql = "CREATE DATABASE tebah_db";
-    db.query(sql, (err, result) => {
-        if (err) throw err;
-        res.status(200).send("created!");
-    })
+    res.send("connected")
 })
 
 app.use("/main", require("./routes/Main")); 
