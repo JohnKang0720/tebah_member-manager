@@ -16,7 +16,7 @@ function Contacts() {
 
     const filter = () => {
         console.log(param.route)
-        axios.post(`https://tebah-member-manager.vercel.app/contacts/${param.route}`, {
+        axios.post(`http://localhost:5000/contacts/${param.route}`, {
             code: code
         }).then(res => {
             console.log(res)
