@@ -15,7 +15,8 @@ function Contacts() {
     const [data, error, loading] = useFetch(`contacts/${param.route}`);
 
     const filter = () => {
-        axios.post(`/contacts/${param.route}`, {
+        console.log(param.route)
+        axios.post(`https://tebah-member-manager.vercel.app/contacts/${param.route}`, {
             code: code
         }).then(res => {
             console.log(res)

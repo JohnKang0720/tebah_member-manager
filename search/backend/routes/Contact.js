@@ -29,7 +29,7 @@ router.get('/:group', (req, res) => {
 router.post('/:group', (req, res) => {
     const { group } = req.params;
     const { code } = req.body;
-
+    console.log(code)
     db.query(`SELECT * FROM mytable WHERE f_code=${code}`, (err, result) => {
         if (err) throw err;
         console.log(result)
