@@ -7,7 +7,7 @@ const db = sql.createConnection({
     user: 'root',
     password: 'Gyojin1000**',
     database: "tebah_db",
-    port: '8889'
+    port: '3306'
 });
 
 db.connect((err) => {
