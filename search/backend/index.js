@@ -2,21 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const sql = require('mysql2');
 
-const db = sql.createConnection({
+const db = sql.createPool({
     host: '127.0.0.1',
     user: 'root',
     password: 'Gyojin1000**',
     database: "tebah_db",
-    port: '3306'
+    connectionLimit: 10
 });
 
-db.connect((err) => {
-    if (err) {
-        console.log("error")
-        throw err
-    }
-    console.log("connected...")
-})
+// db.connect((err) => {
+//     if (err) {
+//         console.log("error")
+//         throw err
+//     }
+//     console.log("connected...")
+// })
 
 const app = express();
 app.use(express.json())

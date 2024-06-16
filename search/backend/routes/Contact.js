@@ -2,12 +2,12 @@ const express = require('express');
 const router = express.Router();
 const sql = require('mysql2');
 
-const db = sql.createConnection({
+const db = sql.createPool({
     host: '127.0.0.1',
     user: 'root',
     password: 'Gyojin1000**',
     database: "tebah_db",
-    port: '3306'
+    connectionLimit: 10
 });
 
 //get contacts information
