@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const sql = require('mysql2');
+const app = express();
 
 const db = sql.createPool({
     host: '127.0.0.1',
@@ -10,6 +11,10 @@ const db = sql.createPool({
     connectionLimit: 10
 });
 
+app.use("/main", require("./routes/Main")); 
+app.use("/contacts", require("./routes/Contact"));
+app.use("/tebah-family", require("./routes/Family"));
+
 // db.connect((err) => {
 //     if (err) {
 //         console.log("error")
@@ -18,7 +23,6 @@ const db = sql.createPool({
 //     console.log("connected...")
 // })
 
-const app = express();
 app.use(express.json())
 app.use(cors())
 
@@ -30,10 +34,6 @@ app.get("/", (req, res) => {
 app.get("/testing", (req,res) => {
     res.send("testing")
 })
-
-app.use("/main", require("./routes/Main")); 
-app.use("/contacts", require("./routes/Contact"));
-app.use("/tebah-family", require("./routes/Family"));
 
 app.listen(5000, () => {
     console.log("server starting...")
