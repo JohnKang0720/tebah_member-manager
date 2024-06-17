@@ -16,7 +16,7 @@
       "dest": "/index.js"
     },
     {
-      "src": "/routes/(.*)",
+      "src": "/main/(.*)",
       "dest": "/routes/Main.js"
     }
   ]
