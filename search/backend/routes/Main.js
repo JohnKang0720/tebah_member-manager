@@ -2,17 +2,14 @@ const express = require('express');
 const router = express.Router();
 const sql = require('mysql2');
 
-const db = sql.createConnection({
+const db = sql.createPool({
     host: 'localhost',
     user: 'root',
     password: 'Gyojin1000**',
     database: "tebah_db",
     port: 3306,
+    connectionLimit: 100
 });
-
-db.connect((err) => {
-    console.log("connected")
-})
 
 //add to main data
 //update the contact tables 
