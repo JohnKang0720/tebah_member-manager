@@ -6,7 +6,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "/routes/Main.js",
+      "src": "./routes/Main.js",
       "use": "@vercel/node"
     }
   ],
@@ -16,8 +16,8 @@
       "dest": "/index.js"
     },
     {
-      "src": "/main/(.*)",
-      "dest": "/routes/Main.js"
+      "src": "/*/(.*)",
+      "dest": "./routes/Main.js"
     }
   ]
 }
