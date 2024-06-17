@@ -7,7 +7,8 @@ const db = sql.createPool({
     user: 'root',
     password: 'Gyojin1000**',
     database: "tebah_db",
-    connectionLimit: 10
+    connectionLimit: 10,
+    port: 3306
 });
 
 const query = `
