@@ -3,11 +3,11 @@ const router = express.Router();
 const sql = require('mysql2');
 
 const db = sql.createPool({
-    host: 'localhost',
+    host: '127.0.0.1',
     user: 'root',
     password: 'Gyojin1000**',
     database: "tebah_db",
-    connectionLimit: 10
+    connectionLimit: 100
 });
 
 
