@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const sql = require('mysql2');
+// const sql = require('mysql2');
 
-const db = sql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Gyojin1000**',
-    database: "tebah_db",
-    connectionLimit: 10,
-    port: 3306
-});
+const { Pool } = require('pg')
+require('dotenv').config()
+
+const db = new Pool({
+  connectionString: "postgres://default:LgnO1f8UPHDI@ep-crimson-paper-a45txdup-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require?sslmode=require",
+})
 
 //get contacts information
 router.get('/:group', (req, res) => {

@@ -1,15 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-const sql = require('mysql2');
+// const sql = require('mysql2');
 const app = express();
 
-const db = sql.createPool({
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'Gyojin1000**',
-    database: "tebah_db",
-    connectionLimit: 10
-});
+// const db = sql.createPool({
+//     host: '127.0.0.1',
+//     user: 'root',
+//     password: 'Gyojin1000**',
+//     database: "tebah_db",
+//     connectionLimit: 10
+// });
 
 
 // db.connect((err) => {

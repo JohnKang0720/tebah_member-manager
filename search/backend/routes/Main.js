@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const sql = require('mysql2');
+// const sql = require('mysql2');
+const { Pool } = require('pg')
+require('dotenv').config()
 
-const db = sql.createPool({
-    host: 'localhost',
-    user: 'root',
-    password: 'Gyojin1000**',
-    database: "tebah_db",
-    port: 3306,
-    connectionLimit: 100
-});
+const db = new Pool({
+  connectionString: "postgres://default:LgnO1f8UPHDI@ep-crimson-paper-a45txdup-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require?sslmode=require",
+})
+
+db.connect((err) => {
+    console.log("Connected")
+})
 
 //add to main data
 //update the contact tables 
@@ -49,7 +50,7 @@ router.put("/", (req, res) => {
 // })
 
 
-const proc_command = (c) =>  { return `CALL SelectGroup('${c}')` }
+// const proc_command = (c) =>  { return `CALL SelectGroup('${c}')` }
 // //view main data
 router.get("/", (req, res) => {
     
@@ -70,7 +71,7 @@ router.delete("/:name", (req, res) => {
 
 // //view youth data
 router.get("/youth", (req, res) => {
-    db.query(proc_command('유스'), (err, result) => {
+    db.query(`SELECT * FROM mytable WHERE category='유스'`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result[0]);
         console.log(result)
@@ -79,7 +80,7 @@ router.get("/youth", (req, res) => {
 
 // //view secondary data
 router.get("/secondary", (req, res) => {
-    db.query(proc_command('청년'), (err, result) => {
+    db.query(`SELECT * FROM mytable WHERE category='청년'`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result[0]);
     })
@@ -87,7 +88,7 @@ router.get("/secondary", (req, res) => {
 
 // //view children data
 router.get("/children", (req, res) => {
-    db.query(proc_command('아동부'), (err, result) => {
+    db.query(`SELECT * FROM mytable WHERE category='아동부'`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result[0]);
     })
