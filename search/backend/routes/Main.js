@@ -4,7 +4,7 @@ const sql = require('mysql2');
 
 const db = sql.createPool({
     host: '127.0.0.1',
-    user: 'root',
+    user: 'johnni',
     password: 'Gyojin1000**',
     database: "tebah_db",
     connectionLimit: 100,
