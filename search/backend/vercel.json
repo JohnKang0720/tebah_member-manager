@@ -6,7 +6,7 @@
       "use": "@vercel/node"
     },
     {
-      "src": "routes/Main.js",
+      "src": "/routes/Main.js",
       "use": "@vercel/node"
     }
   ],
@@ -21,3 +21,5 @@
     }
   ]
 }
+
+
