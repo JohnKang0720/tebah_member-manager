@@ -71,26 +71,25 @@ router.delete("/:name", (req, res) => {
 
 // //view youth data
 router.get("/youth", (req, res) => {
-    db.query(`SELECT * FROM mytable WHERE category='유스'`, (err, result) => {
+    db.query("SELECT * FROM mytable WHERE category='유스'", (err, result) => {
         if (err) throw err;
-        res.status(200).send(result[0]);
-        console.log(result)
+        res.status(200).send(result);
     })
 })
 
 // //view secondary data
 router.get("/secondary", (req, res) => {
-    db.query(`SELECT * FROM mytable WHERE category='청년'`, (err, result) => {
+    db.query("SELECT * FROM mytable WHERE category='청년'", (err, result) => {
         if (err) throw err;
-        res.status(200).send(result[0]);
+        res.status(200).send(result);
     })
 })
 
 // //view children data
 router.get("/children", (req, res) => {
-    db.query(`SELECT * FROM mytable WHERE category='아동부'`, (err, result) => {
+    db.query("SELECT * FROM mytable WHERE category='아동부'", (err, result) => {
         if (err) throw err;
-        res.status(200).send(result[0]);
+        res.status(200).send(result);
     })
 })
 

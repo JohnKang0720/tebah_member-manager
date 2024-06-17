@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 function View(props) {
   const [loading, text, data, filtered] = props.data
+
   return (
     <>
     {!loading ? data.length > 0 && text.length === 0 && filtered.length === 0 ? <div className="table">
@@ -9,7 +10,7 @@ function View(props) {
           <section class="table__header"> ID </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.ID} </p>
+              <p> {info.id} </p>
             </div>
           })} </div>
         <div>
