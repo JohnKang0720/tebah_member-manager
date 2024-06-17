@@ -17,7 +17,7 @@
     },
     {
       "src": "/routes/(.*)",
-      "dest": "/Main.js"
+      "dest": "/routes/Main.js"
     }
   ]
 }
