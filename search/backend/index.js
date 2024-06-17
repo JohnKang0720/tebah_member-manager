@@ -11,9 +11,6 @@ const db = sql.createPool({
     connectionLimit: 10
 });
 
-app.use("/main", require("./routes/Main")); 
-app.use("/contacts", require("./routes/Contact"));
-app.use("/tebah-family", require("./routes/Family"));
 
 // db.connect((err) => {
 //     if (err) {
@@ -25,6 +22,9 @@ app.use("/tebah-family", require("./routes/Family"));
 
 app.use(express.json())
 app.use(cors())
+app.use("/main", require("./routes/Main")); 
+app.use("/contacts", require("./routes/Contact"));
+app.use("/tebah-family", require("./routes/Family"));
 
 //create db
 app.get("/", (req, res) => {
