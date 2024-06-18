@@ -15,14 +15,14 @@ function Contacts() {
     const [data, error, loading] = useFetch(`contacts/${param.route}`);
 
     const filter = () => {
-        axios.post(`https://tebah-member-manager.vercel.app/contacts/${param.route}`, {
+        const url = `https://tebah-member-manager.vercel.app/contacts/${param.route}`
+        axios.post(url, {
             code: code
         }).then(res => {
-            console.log(res)
-            if (res.data.length === 0) {
+            if (res.data.rows.length === 0) {
                 alert("No such family code.")
             }
-            setArr(res.data)
+            setArr(res.data.rows)
         }).catch(err => console.log(err))
     }
 

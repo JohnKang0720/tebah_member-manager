@@ -6,7 +6,7 @@ function DeleteMember() {
     const [name, setName] = useState("");
 
     const handleSubmit = () => {
-        axios.delete(`http://localhost:5000/main/${name}`, {
+        axios.delete(`https://tebah-member-manager.vercel.app/main/${name}`, {
         })
             .then(res => {
                 console.log(res)

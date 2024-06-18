@@ -11,6 +11,7 @@ function Youth() {
 
   const [data, error, loading] = useFetch("main/youth");
 
+  
   useEffect(() => {
     if (data) {
       let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));

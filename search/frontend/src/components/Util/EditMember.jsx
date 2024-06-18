@@ -10,7 +10,7 @@ function EditMember() {
     });
 
     const handleEdit = () => {
-        axios.put("http://localhost:5000/main", {
+        axios.put("https://tebah-member-manager.vercel.app/main", {
             id: info.id,
             column: info.column.toLowerCase(),
             content: info.content

@@ -25,7 +25,7 @@ function View(props) {
           <section class="table__header"> Korean Name </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.korean_name ? info.korean_name : "N/A"} </p>
+              <p> {info.korean ? info.korean : "N/A"} </p>
             </div>
           })}
         </div>
@@ -46,10 +46,18 @@ function View(props) {
           })}
         </div>
         <div>
+          <section class="table__header"> Category </section>
+          {data.map(info => {
+            return <div key={info.id} className="table__data">
+              <p> {info.title ? info.title : "N/A"} </p>
+            </div>
+          })}
+        </div>
+        <div>
           <section class="table__header"> Marital Status </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.married ? info.married : "N/A"} </p>
+              <p> {info.marital_status ? info.marital_status : "N/A"} </p>
             </div>
           })}
         </div>
@@ -83,7 +91,7 @@ function View(props) {
           <section class="table__header"> Telephone </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.telephone ? info.telephone : "N/A"} </p>
+              <p> {info.mobile ? info.mobile : "N/A"} </p>
             </div>
           })}
         </div>
@@ -91,7 +99,7 @@ function View(props) {
           <section class="table__header"> Address </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.address ? info.address : "N/A"} </p>
+              <p> {info.suite !== "0" && info.suite !== null ? info.suite + " " + info.street : (info.street !== null ? info.street : "N/A") } </p>
             </div>
           })}
         </div>
@@ -107,7 +115,7 @@ function View(props) {
           <section class="table__header"> Volunteer Exp. </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.vol_exp ? info.vol_exp : "N/A"} </p>
+              <p> {info.volunteer ? info.volunteer : "N/A"} </p>
             </div>
           })}
         </div>
@@ -147,26 +155,10 @@ function View(props) {
           <section class="table__header"> Consent </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.agreement ? info.agreement : "N/A"} </p>
+              <p> {info.consent ? info.consent : "N/A"} </p>
             </div>
           })}
         </div>
-        {/* <div>
-          <section class="table__header"> Registration # </section>
-          {data.map(info => {
-            return <div key={info.id} className="table__data">
-              <p> {info.reg_num ? info.reg_num : "N/A"} </p>
-            </div>
-          })}
-        </div> */}
-        {/* <div>
-          <section class="table__header"> Registration Date </section>
-          {data.map(info => {
-            return <div key={info.id} className="table__data">
-              <p> {info.reg_date ? info.reg_date : "N/A"} </p>
-            </div>
-          })}
-        </div> */}
       </div> : <div className="table">
         <div>
           <section class="table__header"> ID </section>
@@ -187,7 +179,7 @@ function View(props) {
           <section class="table__header"> Korean Name </section>
           {filtered.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.korean_name ? info.korean_name : "N/A"} </p>
+              <p> {info.korean ? info.korean : "N/A"} </p>
             </div>
           })}
         </div>
@@ -208,10 +200,18 @@ function View(props) {
           })}
         </div>
         <div>
+          <section class="table__header"> Category </section>
+          {filtered.map(info => {
+            return <div key={info.id} className="table__data">
+              <p> {info.title ? info.title : "N/A"} </p>
+            </div>
+          })}
+        </div>
+        <div>
           <section class="table__header"> Marital Status </section>
           {filtered.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.married ? info.married : "N/A"} </p>
+              <p> {info.marital_status ? info.marital_status : "N/A"} </p>
             </div>
           })}
         </div>
@@ -245,7 +245,7 @@ function View(props) {
           <section class="table__header"> Telephone </section>
           {filtered.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.telephone ? info.telephone : "N/A"} </p>
+              <p> {info.mobile ? info.mobile : "N/A"} </p>
             </div>
           })}
         </div>
@@ -253,7 +253,7 @@ function View(props) {
           <section class="table__header"> Address </section>
           {filtered.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.address ? info.address : "N/A"} </p>
+              <p> {info.suite !== "0" && info.suite !== null ? info.suite + " " + info.street : (info.street !== null ? info.street : "N/A") } </p>
             </div>
           })}
         </div>
@@ -261,7 +261,7 @@ function View(props) {
           <section class="table__header"> Hobby </section>
           {filtered.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.job ? info.job : "N/A"} </p>
+              <p> {info.hobby ? info.hobby : "N/A"} </p>
             </div>
           })}
         </div>
@@ -269,7 +269,7 @@ function View(props) {
           <section class="table__header"> Volunteer Exp. </section>
           {filtered.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.volunteering ? info.volunteering : "N/A"} </p>
+              <p> {info.volunteer ? info.volunteer : "N/A"} </p>
             </div>
           })}
         </div>
@@ -309,7 +309,7 @@ function View(props) {
           <section class="table__header"> Consent </section>
           {filtered.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.agreement ? info.agreement : "N/A"} </p>
+              <p> {info.consent ? info.consent : "N/A"} </p>
             </div>
           })}
         </div>

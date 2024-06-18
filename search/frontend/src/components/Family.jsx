@@ -8,11 +8,10 @@ function Family() {
   const [memberId, setMemberId] = useState(0);
 
   const filter = () => {
-    axios.post(`/tebah-family`, {
+    axios.post(`https://tebah-member-manager.vercel.app/tebah-family`, {
       search_id: memberId
     }).then(res => {
-      setArr(res.data)
-      console.log(res.data)
+      setArr(res.data.rows)
       if (res.data.length === 0) {
         alert(`No such member with ID ${memberId}.`)
       }
@@ -73,7 +72,7 @@ function Family() {
           <section class="table__header"> Family Code </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.family_code} </p>
+              <p> {info.family_code ? info.family_code : "NA"} </p>
             </div>
           })} </div>
       </div> : <div className="table2">
@@ -109,7 +108,7 @@ function Family() {
           <section class="table__header"> Family Code </section>
           {arr.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.family_code} </p>
+              <p> {info.family_code ? info.family_code : "NA"} </p>
             </div>
           })} </div>
           

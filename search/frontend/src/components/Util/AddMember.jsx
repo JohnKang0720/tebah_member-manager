@@ -8,40 +8,58 @@ function AddMember() {
     const [kor, setKor] = useState("");
     const [gender, setGen] = useState("");
     const [category, setCat] = useState("");
-    const [married, setMar] = useState(false);
-    const [age, setAge] = useState(0);
+    const [married, setMar] = useState("");
+    const [age, setAge] = useState("");
     const [baptism, setBap] = useState("");
-    const [year, setYear] = useState(0);
     const [email, setEmail] = useState("");
     const [telephone, setTel] = useState("");
     const [address, setAd] = useState("");
     const [hobby, setHob] = useState("");
     const [vol, setVol] = useState("");
-    const [fcode, setF] = useState(0);
+    const [fcode, setF] = useState("");
     const [p1, setP1] = useState(0);
     const [p2, setP2] = useState(0);
     const [agreement, setAg] = useState("");
+    const [offering_num, setOff] = useState("");
+
+    const [birth, setDate] = useState("");
+    const [baptism_date, setBapDate] = useState("");
+    const [suite, setSuite] = useState("");
+    const [city, setCity] = useState("");
+    const [prov, setProv] = useState("");
+    const [postal, setPostal] = useState("");
+    const [country, setCount] = useState("");
+
+    const date = new Date()
 
     const handleSubmit = () => {
-        axios.post("http://localhost:5000/main", {
-            eng_name: eng,
-            kor_name: kor,
+        axios.post("https://tebah-member-manager.vercel.app/main", {
+            offering_num: offering_num,
+            korean: kor,
+            english_name: eng,
             gender: gender,
-            category: category,
-            married: married,
+            title: category,
+            birthdate: birth,
             age: age,
             baptism: baptism,
-            baptism_year: year,
+            baptism_date: baptism_date,
             email: email,
-            telephone: telephone,
-            address: address,
+            mobile: telephone,
+            suite: suite,
+            street: address,
+            city: city,
+            province: prov,
+            postal_code: postal,
+            country: country,
+            marital_status: married,
             hobby: hobby,
-            vol_exp: vol,
-            offering: 0,
+            volunteer: vol,
+            consent: agreement,
+            registered: date.getDate(),
+            last: date.getDate(),
             f_code: fcode,
-            p_id1: p1,
-            p_id2: p2,
-            agreement: agreement
+            p_code_1: p1,
+            p_code_2: p2
         })
             .then(res => {
                 console.log(res)
@@ -64,43 +82,55 @@ function AddMember() {
                         <option value="여"> 여 </option>
                     </select>
                     <br />
+                    <input class="form-control" placeholder='Birthday (DOW, M D, Y)' onChange={e => setDate(e.target.value)} />
+                    <br />
+                    <select class="form-control" placeholder='셰례여부' onChange={e => setBap(e.target.value)}>
+                        <option value="">  </option>
+                        <option value="Y"> 유아세레 </option>
+                        <option value="A"> 입교 </option>
+                        <option value="B"> 세레 </option>
+                        <option value="None"> 없음 </option>
+                    </select>
+                    <br />
+                    <input class="form-control" placeholder='Baptism Date (MM/DD/YYYY) ' onChange={e => setBapDate(e.target.value)} />
+                    <br />
+                    <input class="form-control" placeholder='Suite' onChange={e => setSuite(e.target.value)} />
+                    <br />
+                    <input class="form-control" placeholder='주소' onChange={e => setAd(e.target.value)} />
+                </div>
+                <br />
+                <div>
+                    <input class="form-control" placeholder='전화번호 (no dash)' onChange={e => setTel(e.target.value)} />
+                    <br />
+                    <input class="form-control" placeholder='City' onChange={e => setCity(e.target.value)} />
+                    <br />
+                    <input class="form-control" placeholder='Province' onChange={e => setProv(e.target.value)} />
+                    <br />
+                    <input class="form-control" placeholder='Postal Code' onChange={e => setPostal(e.target.value)} />
+                    <br />
+                    <input class="form-control" placeholder='Country' onChange={e => setCount(e.target.value)} />
+                    <br />
                     <select class="form-control" placeholder='직분' onChange={e => setCat(e.target.value)}>
                         <option value="">  </option>
-                        <option value="admin"> 집사 </option>
-                        <option value="admin"> 장로 </option>
-                        <option value="admin"> 권사 </option>
-                        <option value="admin"> 전도사 </option>
-                        <option value="admin"> 목사 </option>
-                        <option value="youth"> 청년 </option>
-                        <option value="secondary"> 아동 </option>
-                        <option value="secondary"> 중/고등 </option>
+                        <option value="admin"> Pastor </option>
+                        <option value="admin"> Admin </option>
+                        <option value="regular"> Saint </option>
+                        <option value="regular"> Deacon </option>
                     </select>
                     <br />
                     <select class="form-control" placeholder='결혼여부' onChange={e => setMar(e.target.value)}>
                         <option value="">  </option>
-                        <option value={true}> 기혼 </option>
-                        <option value={false}> 미혼 </option>
+                        <option value="기혼"> 기혼 </option>
+                        <option value="미혼"> 미혼 </option>
                     </select>
                     <br />
                     <input class="form-control" placeholder='나이' onChange={e => setAge(e.target.value)} />
-                    <br />
-                    <select class="form-control" placeholder='셰례여부' onChange={e => setBap(e.target.value)}>
-                        <option value="">  </option>
-                        <option value="유아세레"> 유아세레 </option>
-                        <option value="입교"> 입교 </option>
-                        <option value="세레"> 세레 </option>
-                        <option value="없음"> 없음 </option>
-                    </select>
-                    <br />
-                    <input class="form-control" placeholder='셰례년도' onChange={e => setYear(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='이메일' onChange={e => setEmail(e.target.value)} />
                 </div>
                 <br />
                 <div>
-                    <input class="form-control" placeholder='전화번호' onChange={e => setTel(e.target.value)} />
+                    <input class="form-control" placeholder='Offering #' onChange={e => setOff(e.target.value)} />
                     <br />
-                    <input class="form-control" placeholder='주소' onChange={e => setAd(e.target.value)} />
+                    <input class="form-control" placeholder='이메일' onChange={e => setEmail(e.target.value)} />
                     <br />
                     <input class="form-control" placeholder='취미/직업' onChange={e => setHob(e.target.value)} />
                     <br />
@@ -112,7 +142,7 @@ function AddMember() {
                     <br />
                     <input class="form-control" placeholder='부모 코드 2' onChange={e => setP2(e.target.value)} />
                     <br />
-                    <input class="form-control" placeholder='동의 (사진, 정보)' onChange={e => setAg(e.target.value)} />
+                    <input class="form-control" placeholder='사진 & 영상 동의 (Y or N)' onChange={e => setAg(e.target.value)} />
                 </div>
             </div>
             <br />
