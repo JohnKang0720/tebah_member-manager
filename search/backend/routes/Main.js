@@ -18,8 +18,8 @@ db.connect((err) => {
 router.post("/", (req, res) => {
     const { offering_num, korean,english_name,gender,title,birthdate, age,baptism,baptism_date,email,mobile,suite,street, city, province, postal_code, country, marital_status , hobby,volunteer, consent, registered, last, f_code,p_code_1,p_code_2} = req.body;
     db.query(`INSERT INTO mytable (offering_num,korean,english_name,gender,title,birthdate,age,baptism,baptism_date,email,mobile,suite,street,city,province,postal_code,country,marital_status,hobby,volunteer,consent,registered,last_updated,f_code,p_code_1,p_code_2) VALUES ('${offering_num}',
-         '${korean}', '${english_name}', '${gender}', '${title}', '${birthdate}',  '${age}', ${baptism}, '${baptism_date}', '${email}', '${mobile}', '${suite}', '${street}', '${city}', '${province}', '${postal_code}', '${country}', '${marital_status}', '${hobby}', '${volunteer}', '${consent}',  '${registered}', '${last}', '${f_code}', ${p_code_1}, ${p_code_2});`, (err, result) => {
-        if (err) throw err;
+         '${korean}', '${english_name}', '${gender}', '${title}', '${birthdate}',  '${age}', '${baptism}', '${baptism_date}', '${email}', '${mobile}', '${suite}', '${street}', '${city}', '${province}', '${postal_code}', '${country}', '${marital_status}', '${hobby}', '${volunteer}', '${consent}',  '${registered}', '${last}', '${f_code}', ${p_code_1}, ${p_code_2});`, (err, result) => {
+            if (err) throw err;
         res.status(200).send("member added!");
     })
 })
