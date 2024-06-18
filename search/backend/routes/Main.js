@@ -50,7 +50,7 @@ router.get("/", (req, res) => {
 // //delete data in maindata
 router.delete("/:name", (req, res) => {
     const { name } = req.params;
-    db.query(`DELETE FROM mytable WHERE english_name="${name}" OR korean="${name}"`, (err, result) => {
+    db.query(`DELETE FROM mytable WHERE english_name='${name}' OR korean='${name}'`, (err, result) => {
         if (err) throw err;
     });
     res.status(200).send("deleted");
