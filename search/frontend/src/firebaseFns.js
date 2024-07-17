@@ -1,9 +1,10 @@
 import { signOut, getAuth } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 
 async function authenticate(username, password, n) {
+    
     signInWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
             // Signed in
@@ -33,6 +34,9 @@ async function authenticate(username, password, n) {
 }
 
 async function createAccount(username, password, n) {
+    //TODO: SEND VERIFICATION CODE TO EMAIL OR PHONE
+    // verify the code matches, then create the user and log in
+
     await createUserWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
             // Signed in

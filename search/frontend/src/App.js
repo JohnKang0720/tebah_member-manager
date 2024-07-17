@@ -15,6 +15,7 @@ import { createContext, useEffect, useState } from 'react';
 import Family from './components/Family';
 import EditMember from './components/Util/EditMember';
 import DeleteMember from './components/Util/DeleteMember';
+import Password from './components/Password';
 
 export const UserContext = createContext(null);
 
@@ -103,7 +104,7 @@ function App() {
         {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("finance") ? <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />}
         <Route path="/add" element={<AddMember />} />
         <Route path={`/tebah-family`} element={<Family />}/>
-
+        <Route path={`/password/:username`} element={<Password/>}/>
         <Route path={`/contacts/:route`} element={<Contacts/>} >
         </Route>
 

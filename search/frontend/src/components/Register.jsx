@@ -6,7 +6,19 @@ import { useNavigate } from 'react-router-dom';
 function Register() {
     const [username, setUser] = useState("");
     const [password, setPass] = useState("");
+    const [password2, setPass2] = useState("");
+    const [name, setName] = useState("");
+    const [tel, setTel] = useState("");
+
     const navigate = useNavigate();
+
+    const checkValidThenCreate = (pw) => {
+        if (password == password2) {
+            createAccount(username, password, navigate)
+        } else {
+            alert("Error!")
+        }
+    }
 
     return (
         <>
@@ -17,8 +29,14 @@ function Register() {
                     <input class="form-control" onChange={e => setUser(e.target.value)} />
                     <p> 비밀번호: </p>
                     <input class="form-control" onChange={e => setPass(e.target.value)} />
+                    <p> 비밀번호 (체크): </p>
+                    <input class="form-control" onChange={e => setPass2(e.target.value)} />
+                    <p> FULL NAME: </p>
+                    <input class="form-control" onChange={e => setName(e.target.value.trim())} />
+                    <p> Telephone: </p>
+                    <input class="form-control" onChange={e => setTel(e.target.value)} />
                     <br />
-                    <button class="btn btn-danger" onClick={() => createAccount(username, password, navigate)}> Register </button>
+                    <button class="btn btn-danger" onClick={() => checkValidThenCreate()}> Register </button>
                 </div>
             </div>
         </>
