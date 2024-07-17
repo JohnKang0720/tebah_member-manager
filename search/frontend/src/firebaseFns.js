@@ -1,10 +1,9 @@
-import { signOut, getAuth } from 'firebase/auth';
+import { signOut, getAuth, sendEmailVerification } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from './firebaseConfig';
 
 async function authenticate(username, password, n) {
-    
     signInWithEmailAndPassword(auth, username, password)
         .then((userCredential) => {
             // Signed in
@@ -34,21 +33,44 @@ async function authenticate(username, password, n) {
 }
 
 async function createAccount(username, password, n) {
-    //TODO: SEND VERIFICATION CODE TO EMAIL OR PHONE
-    // verify the code matches, then create the user and log in
-
-    await createUserWithEmailAndPassword(auth, username, password)
-        .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
-            n("/login")
+    const new_user = await createUserWithEmailAndPassword(auth, username, password).catch(err => alert(err))
+    await sendEmailVerification(new_user.user)
+        .then(() => {
+            alert("Email verification sent!");
         })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorCode, errorMessage);
+        .catch((err) => {
+            alert(err);
         });
+
+    const intervalId = setInterval(async () => {
+        const emailVerified = await checkEmailVerification(new_user.user);
+        if (emailVerified) {
+            clearInterval(intervalId); // Stop polling
+            alert("Email verified!");
+            n("/profile"); // Navigate to login
+        }
+    }, 5000);
+
+    setTimeout(async () => {
+        clearInterval(intervalId); // Stop polling after 10 minutes
+        const emailVerified = await checkEmailVerification(new_user.user);
+        if (!emailVerified) {
+            deleteUser(new_user.user)
+                .then(() => {
+                    alert("Email not verified within time limit, user deleted!");
+                    n("/"); // Navigate to home
+                })
+                .catch((error) => {
+                    alert(error);
+                })
+        }
+    }, 20000);
+}
+
+// check status
+async function checkEmailVerification(user) {
+    await user.reload();
+    return user.emailVerified;
 }
 
 const logout = (n) => {
@@ -60,4 +82,4 @@ const logout = (n) => {
     })
 }
 
-export {authenticate, createAccount, logout}
+export { authenticate, createAccount, logout }

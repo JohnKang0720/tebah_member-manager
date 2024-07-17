@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { createAccount } from '../firebaseFns';
 import { useNavigate } from 'react-router-dom';
+import { getAuth, sendEmailVerification } from 'firebase/auth';
 
 function Register() {
     const [username, setUser] = useState("");
@@ -12,7 +13,7 @@ function Register() {
 
     const navigate = useNavigate();
 
-    const checkValidThenCreate = (pw) => {
+    const checkValidThenCreate = () => {
         if (password == password2) {
             createAccount(username, password, navigate)
         } else {

@@ -7,7 +7,7 @@ function Login() {
   const [password, setPass] = useState("");
   const navigate = useNavigate()
 
-  //TODO
+  //TODO: check that the email is in the firebase auth
   const registered = (u) => {
     return true
   }
