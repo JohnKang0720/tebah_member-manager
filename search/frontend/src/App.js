@@ -32,6 +32,10 @@ function App() {
     }
   });
 
+  const checkLevel = (param) => {
+    return currUser && currUser.email.includes(param)
+  }
+
 
   return (
     <div className="App">
@@ -42,44 +46,46 @@ function App() {
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
-            <li class="nav-item active">
+            {!currUser ? <li class="nav-item active">
               <Link class="nav-link" to="/">Register <span class="sr-only">(current)</span></Link>
-            </li>
-            <li class="nav-item active">
+            </li> : null}
+            {!currUser ? <li class="nav-item active">
               <Link class="nav-link" to="/login"> Log in </Link>
-            </li>
+            </li> : null}
+            {checkLevel("admin") ? <section>
+              <li class="nav-item">
+                <Link class="nav-link" to="/add">등록</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/edit">맴버수정</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/delete">맴버삭제</Link>
+              </li>
+            </section> : null}
+            {/* 교역자 */}
             <li class="nav-item">
-              <Link class="nav-link" to="/add">등록</Link>
+              <Link class="nav-link" to="/contacts/pastors">교역자</Link>
             </li>
+            {/* 장년부 */}
             <li class="nav-item">
-              <Link class="nav-link" to="/edit">맴버수정</Link>
+              <Link class="nav-link" to="/contacts/adults">장년부</Link>
             </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/delete">맴버삭제</Link>
-            </li>
-            {/* Adults */}
-            <li class="nav-item">
-              <Link class="nav-link" to="/contacts/admin">기본주소록 B</Link>
-            </li>
-            {/* Youths */}
-            <li class="nav-item">
-              <Link class="nav-link" to="/contacts/youth">기본주소록 A</Link>
-            </li>
-            <li class="nav-item">
+            {checkLevel("admin") ? <li class="nav-item">
               <Link class="nav-link " to="/main">메인</Link>
-            </li>
+            </li> : null}
             <li class="nav-item">
               <Link class="nav-link " to="/main/finance">재정부</Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link " to="/main/secondary">청년부</Link>
             </li>
-            <li class="nav-item">
+            {checkLevel("admin") || checkLevel("secondary") ? <li class="nav-item">
               <Link class="nav-link " to="/main/youth">중고등부</Link>
-            </li>
-            <li class="nav-item">
+            </li> : null}
+            {checkLevel("child") ? <li class="nav-item">
               <Link class="nav-link" to="/main/children">아동부</Link>
-            </li>
+            </li> : null}
             <li class="nav-item">
               <Link class="nav-link" to="/tebah-family">가족기록</Link>
             </li>
@@ -91,25 +97,26 @@ function App() {
       </nav>
       <br />
       <UserContext.Provider value={[currUser, auth]}>
-      <Routes>
-        <Route path="/" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
-        {currUser && currUser.email.includes("admin") ? <Route path="/main" element={<MainData />} /> : <Route path="/" element={<></>} />}
-        {currUser && currUser.email.includes("admin") ? <Route path="/edit" element={<EditMember />} /> : <Route path="/" element={<></>} />}
-        {currUser && currUser.email.includes("admin") ? <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("youth") ? <Route path="/main/youth" element={<Youth />} /> :  <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("secondary") ? <Route path="/main/secondary" element={<Secondary />} /> :  <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("children") ? <Route path="/main/children" element={<Child />} /> :  <Route path="/" element={<></>} />}
-        {currUser &&  currUser.email.includes("admin") || currUser && currUser.email.includes("finance") ? <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />}
-        <Route path="/add" element={<AddMember />} />
-        <Route path={`/tebah-family`} element={<Family />}/>
-        <Route path={`/password/:username`} element={<Password/>}/>
-        <Route path={`/contacts/:route`} element={<Contacts/>} >
-        </Route>
+        <Routes>
+          <Route path="/" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/profile" element={<Profile />} />
 
-      </Routes>
-      </UserContext.Provider>   
+          {checkLevel("admin") ? <Route path="/main" element={<MainData />} /> : <Route path="/" element={<></>} />}
+          {checkLevel("admin") ? <Route path="/edit" element={<EditMember />} /> : <Route path="/" element={<></>} />}
+          {checkLevel("admin") ? <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />}
+          <Route path="/main/secondary" element={<Secondary />} />
+          {checkLevel("admin") || checkLevel("youth") ? <Route path="/main/youth" element={<Youth />} /> : <Route path="/" element={<></>} />}
+          {checkLevel("admin") || checkLevel("children") ? <Route path="/main/children" element={<Child />} /> : <Route path="/" element={<></>} />}
+          <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />
+          <Route path="/add" element={<AddMember />} />
+          <Route path={`/tebah-family`} element={<Family />} />
+          <Route path={`/password/:username`} element={<Password />} />
+          <Route path={`/contacts/:route`} element={<Contacts />} >
+          </Route>
+
+        </Routes>
+      </UserContext.Provider>
     </div>
   );
 }

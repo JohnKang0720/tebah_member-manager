@@ -13,7 +13,6 @@ function Finance() {
 
   const [data, error, loading] = useFetch("main/finance");
 
-
   useEffect(() => {
     if (data) {
       let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));

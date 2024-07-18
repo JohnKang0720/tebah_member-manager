@@ -11,16 +11,18 @@ async function authenticate(username, password, n) {
             console.log(user);
             console.log("logged in!");
 
-            if (user.email.includes("admin")) {
-                n("/main"); //
-            } else if (user.email.includes("youth")) {
+            if (user.email.includes("admin")) { //새가족부
+                n("/main"); 
+            } else if (user.email.includes("youth")) { //유스
                 n("/youth");
-            } else if (user.email.includes("secondary")) {
-                n("/secondary");
-            } else if (user.email.includes("child")) {
-                n("/child");
-            } else if (user.email.includes("/finance")) {
+            } else if (user.email.includes("secondary")) { //청년부
+                n("/adult");
+            } else if (user.email.includes("child")) { //아동부
+                n("/adult");
+            } else if (user.email.includes("/finance")) { //재정부/교역자
                 n("/finance");
+            } else if (user.email.includes("/adult")) { //장년부
+                n("/adult");
             } else {
                 alert("Invalid email! Register again.")
             }

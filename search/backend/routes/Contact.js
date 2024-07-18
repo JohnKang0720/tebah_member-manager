@@ -10,10 +10,11 @@ const db = new Pool({
 })
 
 const returnCat = (group) => {
-    if (group == "admin") {
+    console.log(group)
+    if (group == "pastors") {
         return "교역자"
-    } else {
-        return "유스"
+    } else if (group == "adults") {
+        return "장년"
     }
 }
 //get contacts information
