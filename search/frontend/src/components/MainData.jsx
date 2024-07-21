@@ -10,7 +10,7 @@ function MainData() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, error, loading] = useFetch("main");
+  const [data, fields, error, loading] = useFetch("main");
 
   useEffect(() => {
     if (data) {

@@ -11,7 +11,7 @@ function Finance() {
   const [id, setId] = useState(0);
   const [num, setNum] = useState(0);
 
-  const [data, error, loading] = useFetch("main/finance");
+  const [data, fields, error, loading] = useFetch("main/finance");
 
   useEffect(() => {
     if (data) {

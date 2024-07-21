@@ -9,7 +9,7 @@ function Second() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, error, loading] = useFetch("main/secondary");
+  const [data, fields, error, loading] = useFetch("main/secondary");
 
   useEffect(() => {
     if (data) {

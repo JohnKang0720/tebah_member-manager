@@ -8,7 +8,7 @@ function Child() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, error, loading] = useFetch("main/children");
+  const [data, fields, error, loading] = useFetch("main/children");
 
   useEffect(() => {
     if (data) {

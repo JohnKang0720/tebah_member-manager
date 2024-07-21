@@ -12,7 +12,7 @@ function Contacts() {
     const [arr, setArr] = useState([]);
     const param = useParams()
 
-    const [data, error, loading] = useFetch(`contacts/${param.route}`);
+    const [data, fields, error, loading] = useFetch(`contacts/${param.route}`);
 
     const filter = () => {
         const url = `https://tebah-member-manager.vercel.app/contacts/${param.route}`

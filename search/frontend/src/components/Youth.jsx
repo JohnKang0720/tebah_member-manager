@@ -9,7 +9,7 @@ function Youth() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, error, loading] = useFetch("main/youth");
+  const [data, fields, error, loading] = useFetch("main/youth");
 
   
   useEffect(() => {

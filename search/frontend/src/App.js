@@ -36,7 +36,6 @@ function App() {
     return currUser && currUser.email.includes(param)
   }
 
-
   return (
     <div className="App">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -71,12 +70,14 @@ function App() {
             <li class="nav-item">
               <Link class="nav-link" to="/contacts/adults">장년부</Link>
             </li>
-            {checkLevel("admin") ? <li class="nav-item">
+            {/* {checkLevel("admin") ? <li class="nav-item">
               <Link class="nav-link " to="/main">메인</Link>
-            </li> : null}
-            <li class="nav-item">
-              <Link class="nav-link " to="/main/finance">재정부</Link>
-            </li>
+            </li> : null} */}
+            <Link class="nav-link " to="/main">메인</Link>
+            {checkLevel("finance") ?
+              <li class="nav-item">
+                <Link class="nav-link " to="/main/finance">재정부</Link>
+              </li> : null}
             <li class="nav-item">
               <Link class="nav-link " to="/main/secondary">청년부</Link>
             </li>
@@ -87,7 +88,7 @@ function App() {
               <Link class="nav-link" to="/main/children">아동부</Link>
             </li> : null}
             <li class="nav-item">
-              <Link class="nav-link" to="/tebah-family">가족기록</Link>
+              <Link class="nav-link" to="/tebah-family">교인카드검색</Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link" to="/profile">프로필</Link>
@@ -101,8 +102,8 @@ function App() {
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
-
-          {checkLevel("admin") ? <Route path="/main" element={<MainData />} /> : <Route path="/" element={<></>} />}
+          <Route path="/main" element={<MainData />} />
+          {/* {checkLevel("admin") ? <Route path="/main" element={<MainData />} /> : <Route path="/" element={<></>} />} */}
           {checkLevel("admin") ? <Route path="/edit" element={<EditMember />} /> : <Route path="/" element={<></>} />}
           {checkLevel("admin") ? <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />}
           <Route path="/main/secondary" element={<Secondary />} />
