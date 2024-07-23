@@ -11,8 +11,8 @@ const db = new Pool({
 
 const returnCat = (group) => {
     console.log(group)
-    if (group == "pastors") {
-        return "교역자"
+    if (group == "children") {
+        return "아동부"
     } else if (group == "adults") {
         return "장년"
     }

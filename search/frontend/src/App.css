@@ -7,7 +7,7 @@ body {
   z-index: 999;
 }
 
-.table, .table2 {
+.table, .table2, .table3 {
   width: 100%;
   height:450px;
   /* border: solid 1px black; */
@@ -24,8 +24,13 @@ body {
 }
 
 .table2 {
-  grid-template-columns: repeat(81, 1fr);
+  grid-template-columns: repeat(84, 1fr);
 }
+
+.table3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
 
 
 .table__header{

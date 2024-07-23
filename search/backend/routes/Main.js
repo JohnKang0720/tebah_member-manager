@@ -80,6 +80,14 @@ router.get("/children", (req, res) => {
     })
 })
 
+//pastor data
+router.get("/pastors", (req, res) => {
+    db.query("SELECT * FROM mytable WHERE category='교역자'", (err, result) => {
+        if (err) throw err;
+        res.status(200).send(result);
+    })
+})
+
 
 // //view finance data
 router.get("/finance", (req, res) => {

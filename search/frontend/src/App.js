@@ -16,6 +16,8 @@ import Family from './components/Family';
 import EditMember from './components/Util/EditMember';
 import DeleteMember from './components/Util/DeleteMember';
 import Password from './components/Password';
+import Pastor from './components/Pastor'
+import Agreement from './components/Agreement';
 
 export const UserContext = createContext(null);
 
@@ -62,9 +64,9 @@ function App() {
                 <Link class="nav-link" to="/delete">맴버삭제</Link>
               </li>
             </section> : null}
-            {/* 교역자 */}
+            {/* 아동부 */}
             <li class="nav-item">
-              <Link class="nav-link" to="/contacts/pastors">교역자</Link>
+              <Link class="nav-link" to="/contacts/children">아동부</Link>
             </li>
             {/* 장년부 */}
             <li class="nav-item">
@@ -74,6 +76,7 @@ function App() {
               <Link class="nav-link " to="/main">메인</Link>
             </li> : null} */}
             <Link class="nav-link " to="/main">메인</Link>
+            <Link class="nav-link " to="/agreement">Agreement</Link>
             {checkLevel("finance") ?
               <li class="nav-item">
                 <Link class="nav-link " to="/main/finance">재정부</Link>
@@ -84,11 +87,11 @@ function App() {
             {checkLevel("admin") || checkLevel("secondary") ? <li class="nav-item">
               <Link class="nav-link " to="/main/youth">중고등부</Link>
             </li> : null}
-            {checkLevel("child") ? <li class="nav-item">
-              <Link class="nav-link" to="/main/children">아동부</Link>
+            {checkLevel("admin") || checkLevel("pastor") ? <li class="nav-item">
+              <Link class="nav-link" to="/main/pastors">교역자</Link>
             </li> : null}
             <li class="nav-item">
-              <Link class="nav-link" to="/tebah-family">교인카드검색</Link>
+              <Link class="nav-link" to="/tebah-family"> 전교인 </Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link" to="/profile">프로필</Link>
@@ -112,9 +115,11 @@ function App() {
           <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />
           <Route path="/add" element={<AddMember />} />
           <Route path={`/tebah-family`} element={<Family />} />
+          <Route path={`/agreement`} element={<Agreement />} />
+
           <Route path={`/password/:username`} element={<Password />} />
-          <Route path={`/contacts/:route`} element={<Contacts />} >
-          </Route>
+          <Route path={`/contacts/:route`} element={<Contacts />} />
+          <Route path={`/main/pastors`} element={<Pastor />} />
 
         </Routes>
       </UserContext.Provider>
