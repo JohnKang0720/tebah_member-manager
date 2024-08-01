@@ -38,10 +38,10 @@ function View(props) {
           })}
         </div>
         <div>
-          <section class="table__header"> Category </section>
+          <section class="table__header"> Level </section>
           {data.map(info => {
             return <div key={info.id} className="table__data">
-              <p> {info.category ? info.category : "N/A"} </p>
+              <p> {info.level ? info.level : "N/A"} </p>
             </div>
           })}
         </div>

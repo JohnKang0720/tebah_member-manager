@@ -3,6 +3,10 @@ body {
   text-align: center;
 }
 
+button {
+  margin: 5px;
+}
+
 .nav-link {
   z-index: 999;
 }

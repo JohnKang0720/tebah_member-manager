@@ -15,7 +15,7 @@ function Finance() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info.korean.includes(text));
       setFiltered(filteredArray)
     }
   }, [text])

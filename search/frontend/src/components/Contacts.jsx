@@ -27,21 +27,17 @@ function Contacts() {
     }
 
     return (
-        <div><h1> 기본주소록 </h1>
+        <div><h1> 장년/아동 연락망 </h1>
             {/* <strong> Search member: </strong>
             <br /> */}
             {/* <input placeholder='검색' onChange={e => setText(e.target.value)} />
             <br />
             <br /> */}
             <br />
+
             <div class="input-div" style={{ flexDirection: "column" }}>
-                <h5> 가족검색창 </h5>
-                <div class="inputs" style={{ flexDirection: "column" }}>
-                    <br />
-                    <input class="form-control" placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} />
-                    <button class="btn btn-primary" onClick={filter}> 검색 </button>
-                    <br />
-                </div>
+                <div> <input class="form-control" placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} /> </div>
+                <button class="btn btn-primary" onClick={filter}> 검색 </button>
             </div>
             <br />
             <br />

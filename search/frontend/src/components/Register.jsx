@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import { createAccount } from '../firebaseFns';
 import { useNavigate } from 'react-router-dom';
-import { getAuth, sendEmailVerification } from 'firebase/auth';
+import axios from 'axios';
 
 function Register() {
     const [username, setUser] = useState("");
@@ -15,7 +15,7 @@ function Register() {
 
     const checkValidThenCreate = () => {
         if (password == password2) {
-            createAccount(username, password, navigate)
+            createAccount(username, password, tel, navigate)
         } else {
             alert("Error!")
         }

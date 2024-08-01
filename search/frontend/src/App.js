@@ -18,6 +18,7 @@ import DeleteMember from './components/Util/DeleteMember';
 import Password from './components/Password';
 import Pastor from './components/Pastor'
 import Agreement from './components/Agreement';
+import Verify from './components/Util/Verify';
 
 export const UserContext = createContext(null);
 
@@ -35,7 +36,7 @@ function App() {
   });
 
   const checkLevel = (param) => {
-    return currUser && currUser.email.includes(param)
+    return currUser && (currUser.email.includes(param) || currUser.level === param)
   }
 
   return (
@@ -53,7 +54,7 @@ function App() {
             {!currUser ? <li class="nav-item active">
               <Link class="nav-link" to="/login"> Log in </Link>
             </li> : null}
-            {checkLevel("admin") ? <section>
+            {checkLevel("새가족") ? <section>
               <li class="nav-item">
                 <Link class="nav-link" to="/add">등록</Link>
               </li>
@@ -63,35 +64,30 @@ function App() {
               <li class="nav-item">
                 <Link class="nav-link" to="/delete">맴버삭제</Link>
               </li>
+              <Link class="nav-link " to="/agreement">Agreement</Link>
+              <Link class="nav-link " to="/main">Database - All </Link>
+              <Link class="nav-link" to="/tebah-family"> Database - Family </Link>
             </section> : null}
             {/* 아동부 */}
-            <li class="nav-item">
+            {checkLevel("새가족") || checkLevel("아동부") ? <li class="nav-item">
               <Link class="nav-link" to="/contacts/children">아동부</Link>
-            </li>
-            {/* 장년부 */}
-            <li class="nav-item">
-              <Link class="nav-link" to="/contacts/adults">장년부</Link>
-            </li>
-            {/* {checkLevel("admin") ? <li class="nav-item">
-              <Link class="nav-link " to="/main">메인</Link>
-            </li> : null} */}
-            <Link class="nav-link " to="/main">메인</Link>
-            <Link class="nav-link " to="/agreement">Agreement</Link>
-            {checkLevel("finance") ?
+            </li> : null}
+            {checkLevel("재정부") ?
               <li class="nav-item">
-                <Link class="nav-link " to="/main/finance">재정부</Link>
+                <Link class="nav-link" to="/main/finance">재정부</Link>
               </li> : null}
-            <li class="nav-item">
-              <Link class="nav-link " to="/main/secondary">청년부</Link>
-            </li>
-            {checkLevel("admin") || checkLevel("secondary") ? <li class="nav-item">
+            {checkLevel("새가족") || checkLevel("유스") ? <li class="nav-item">
               <Link class="nav-link " to="/main/youth">중고등부</Link>
             </li> : null}
-            {checkLevel("admin") || checkLevel("pastor") ? <li class="nav-item">
-              <Link class="nav-link" to="/main/pastors">교역자</Link>
-            </li> : null}
+            {/* Anyone can see */}
             <li class="nav-item">
-              <Link class="nav-link" to="/tebah-family"> 전교인 </Link>
+              <Link class="nav-link" to="/main/secondary">청년부</Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/main/pastors">교역자</Link>
+            </li>
+            <li class="nav-item">
+              <Link class="nav-link" to="/contacts/adults">장년부</Link>
             </li>
             <li class="nav-item">
               <Link class="nav-link" to="/profile">프로필</Link>
@@ -106,12 +102,11 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/main" element={<MainData />} />
-          {/* {checkLevel("admin") ? <Route path="/main" element={<MainData />} /> : <Route path="/" element={<></>} />} */}
-          {checkLevel("admin") ? <Route path="/edit" element={<EditMember />} /> : <Route path="/" element={<></>} />}
-          {checkLevel("admin") ? <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />}
+          <Route path="/edit" element={<EditMember />} /> : <Route path="/" element={<></>} />
+          <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />
           <Route path="/main/secondary" element={<Secondary />} />
-          {checkLevel("admin") || checkLevel("youth") ? <Route path="/main/youth" element={<Youth />} /> : <Route path="/" element={<></>} />}
-          {checkLevel("admin") || checkLevel("children") ? <Route path="/main/children" element={<Child />} /> : <Route path="/" element={<></>} />}
+          <Route path="/main/youth" element={<Youth />} /> 
+          <Route path="/main/children" element={<Child />} /> 
           <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />
           <Route path="/add" element={<AddMember />} />
           <Route path={`/tebah-family`} element={<Family />} />
@@ -120,6 +115,7 @@ function App() {
           <Route path={`/password/:username`} element={<Password />} />
           <Route path={`/contacts/:route`} element={<Contacts />} />
           <Route path={`/main/pastors`} element={<Pastor />} />
+          <Route path="/verify" element={<Verify/>}/>
 
         </Routes>
       </UserContext.Provider>

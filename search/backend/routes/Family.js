@@ -1,13 +1,7 @@
 const express = require('express');
 const router = express.Router();
 // const sql = require('mysql2');
-
-const { Pool } = require('pg')
-require('dotenv').config()
-
-const db = new Pool({
-    connectionString: "postgres://default:LgnO1f8UPHDI@ep-crimson-paper-a45txdup-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require?sslmode=require",
-})
+const db = require('../db')
 
 //USE CTE FOR active, visitors, inactive
 
@@ -36,7 +30,7 @@ router.get('/', (req, res) => {
         "korean",
         "english_name",
         "gender",
-        "category",
+        "level",
         "title",
         "birthdate",
         "age",

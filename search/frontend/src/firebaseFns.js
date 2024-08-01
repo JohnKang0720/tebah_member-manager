@@ -2,6 +2,7 @@ import { signOut, getAuth, sendEmailVerification } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { signInWithEmailAndPassword, createUserWithEmailAndPassword, deleteUser } from 'firebase/auth';
 import { auth } from './firebaseConfig';
+import axios from 'axios';
 
 async function authenticate(username, password, n) {
     signInWithEmailAndPassword(auth, username, password)
@@ -12,7 +13,7 @@ async function authenticate(username, password, n) {
             console.log("logged in!");
 
             if (user.email.includes("admin")) { //새가족부
-                n("/main"); 
+                n("/main");
             } else if (user.email.includes("youth")) { //유스
                 n("/youth");
             } else if (user.email.includes("secondary")) { //청년부
@@ -34,11 +35,11 @@ async function authenticate(username, password, n) {
         });
 }
 
-async function createAccount(username, password, n) {
+async function createAccount(username, password, tel, n) {
     const new_user = await createUserWithEmailAndPassword(auth, username, password).catch(err => alert(err))
     await sendEmailVerification(new_user.user)
         .then(() => {
-            alert("Email verification sent!");
+            n('/verify')
         })
         .catch((err) => {
             alert(err);
@@ -46,9 +47,23 @@ async function createAccount(username, password, n) {
 
     const intervalId = setInterval(async () => {
         const emailVerified = await checkEmailVerification(new_user.user);
+        let member = false
+        let email = ""
+        let level = ""
         if (emailVerified) {
+            axios.get("http://localhost:5000/main")
+                .then(res => {
+                    res.data.rows.forEach(u => {
+                        if (username === "kangjohn00000@gmail.com") { //SHOULD BE u.email
+                           member = true
+                           email = u.email
+                           level = u.level
+                        }
+                    })
+                    registerMember(member, tel, email, level)
+                }).catch(err => console.log(err))
+
             clearInterval(intervalId); // Stop polling
-            alert("Email verified!");
             n("/profile"); // Navigate to login
         }
     }, 5000);
@@ -69,6 +84,12 @@ async function createAccount(username, password, n) {
     }, 20000);
 }
 
+const registerMember = (member, tel, email, l) => {
+    if (member == true) {
+        axios.post("http://localhost:5000/registered", {"email": email, "telephone": tel, 'level': l})
+        .catch(err => console.log(err))
+    }
+}
 // check status
 async function checkEmailVerification(user) {
     await user.reload();
