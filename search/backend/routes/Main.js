@@ -59,7 +59,8 @@ router.get("/youth", (req, res) => {
 
 // //view secondary data
 router.get("/secondary", (req, res) => {
-    db.query("SELECT * FROM mytable WHERE level='청년'", (err, result) => {
+    let {cols} = req.query
+    db.query(`SELECT ${cols} FROM mytable WHERE level='청년'`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -75,7 +76,8 @@ router.get("/children", (req, res) => {
 
 //pastor data
 router.get("/pastors", (req, res) => {
-    db.query("SELECT * FROM mytable WHERE level='교역자'", (err, result) => {
+    let {cols} = req.query
+    db.query(`SELECT ${cols} FROM mytable WHERE level='교역자'`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -84,7 +86,8 @@ router.get("/pastors", (req, res) => {
 
 // //view finance data
 router.get("/finance", (req, res) => {
-    db.query("SELECT * FROM mytable ORDER BY offering_num", (err, result) => {
+    let {cols} = req.query
+    db.query(`SELECT ${cols} FROM mytable ORDER BY offering_num`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })

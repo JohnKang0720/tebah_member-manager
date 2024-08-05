@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useFetch } from '../useFetch';
 import DeleteMember from './Util/DeleteMember';
-import View from './View';
+import View from './Util/View';
 import EditMember from './Util/EditMember';
 
 function MainData() {

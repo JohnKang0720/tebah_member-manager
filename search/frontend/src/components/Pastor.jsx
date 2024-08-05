@@ -2,20 +2,24 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
 import DeleteMember from './Util/DeleteMember';
-import View from './View';
+import View from './Util/View';
 
 function Pastor() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("main/pastors");
+  const [data, fields, error, loading] = useFetch("main/pastors", ["id", "korean", "english_name", "offering_num", "registered"]);
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info.korean.includes(text));
       setFiltered(filteredArray)
     }
   }, [text])
+
+  useEffect(() => {
+    console.log(fields)
+  }, [loading])
 
   return (
     <div>
@@ -31,7 +35,7 @@ function Pastor() {
       </div>
       <br/>
       <br/>
-      <View data={[loading, text, data, filtered]} />
+      <View data={[loading, text, data, filtered, fields, 5]} />
     </div>
   )
 }

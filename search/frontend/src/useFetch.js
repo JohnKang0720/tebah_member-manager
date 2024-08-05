@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo} from "react";
 import axios from "axios"
 
-export const useFetch = (keyword) => {
+export const useFetch = (keyword, c) => {
     const [data, setData] = useState(null)
     const [error, setError] = useState(null)
     const [fields, setFields] = useState([])
@@ -14,6 +14,9 @@ export const useFetch = (keyword) => {
         headers: {
             accept: 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
+        },
+        params: {
+            cols: c
         }
     };
 
@@ -24,6 +27,7 @@ export const useFetch = (keyword) => {
             setFields(res.data.fields)
             setData(res.data.rows)
         })
+        .catch(err => console.log(err))
         .finally(() => {
             setLoading(false)
         })

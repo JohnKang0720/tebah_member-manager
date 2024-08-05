@@ -3,7 +3,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { useFetch } from '../useFetch'
 import axios from 'axios'
 import DeleteMember from './Util/DeleteMember';
-import View from './View';
+import View from './Util/View';
 import EditMember from './Util/EditMember';
 function Finance() {
   const [text, setText] = useState("");
@@ -11,7 +11,7 @@ function Finance() {
   const [id, setId] = useState(0);
   const [num, setNum] = useState(0);
 
-  const [data, fields, error, loading] = useFetch("main/finance");
+  const [data, fields, error, loading] = useFetch("main/finance", ["id", "korean", "english_name", "offering_num", "registered"]);
 
   useEffect(() => {
     if (data) {
@@ -49,7 +49,7 @@ function Finance() {
       </div>
       <br />
       <br />
-      <View data={[loading, text, data, filtered]} />
+      <View data={[loading, text, data, filtered, fields, 5]} />
     </div>
   )
 }

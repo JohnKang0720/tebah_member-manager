@@ -9,12 +9,20 @@ function Login() {
   const [password, setPass] = useState("");
   const navigate = useNavigate()
 
+  const validEmails = [
+    'tebah-admin@gmail.com',
+    'tebah-child@gmail.com',
+    'tebah-finance@gmail.com',
+    'tebah-youth@gmail.com',
+    'tebah-general@gmail.com'
+  ]
+
   //TODO: check that the email is in the firebase auth
   const process = (email) => {
     axios.get("http://localhost:5000/registered")
       .then(res => {
         res.data.rows.forEach(data => {
-          if (data.email.trim() === email.trim()) {
+          if (data.email.trim() === email.trim() || validEmails.includes(email)) {
             navigate(`/password/${username}`)
           } else {
             navigate("/")

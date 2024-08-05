@@ -19,6 +19,7 @@ import Password from './components/Password';
 import Pastor from './components/Pastor'
 import Agreement from './components/Agreement';
 import Verify from './components/Util/Verify';
+import SearchCard from './components/SearchCard';
 
 export const UserContext = createContext(null);
 
@@ -36,13 +37,19 @@ function App() {
   });
 
   const checkLevel = (param) => {
-    return currUser && (currUser.email.includes(param) || currUser.level === param)
+    let eng_param = ""
+    if (param == "새가족") eng_param = "admin"
+    else if (param === "아동부") eng_param = "child"
+    else if (param === "재정부") eng_param = "finance"
+    else if (param === "유스") eng_param = "youth"
+    else eng_param = "general"
+    return currUser && (currUser.email.includes(eng_param) || currUser.level === param)
   }
 
   return (
     <div className="App">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">TEBAH Database</a>
+        <a class="navbar-brand"> <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width={'50px'}/> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,7 +61,7 @@ function App() {
             {!currUser ? <li class="nav-item active">
               <Link class="nav-link" to="/login"> Log in </Link>
             </li> : null}
-            {checkLevel("새가족") ? <section>
+            {checkLevel("새가족") ? <section style={{display: "flex", flexDirection: "row"}}>
               <li class="nav-item">
                 <Link class="nav-link" to="/add">등록</Link>
               </li>
@@ -105,17 +112,18 @@ function App() {
           <Route path="/edit" element={<EditMember />} /> : <Route path="/" element={<></>} />
           <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />
           <Route path="/main/secondary" element={<Secondary />} />
-          <Route path="/main/youth" element={<Youth />} /> 
-          <Route path="/main/children" element={<Child />} /> 
+          <Route path="/main/youth" element={<Youth />} />
+          <Route path="/main/children" element={<Child />} />
           <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />
           <Route path="/add" element={<AddMember />} />
           <Route path={`/tebah-family`} element={<Family />} />
           <Route path={`/agreement`} element={<Agreement />} />
+          <Route path={`/search-card`} element={<SearchCard />} />
 
           <Route path={`/password/:username`} element={<Password />} />
           <Route path={`/contacts/:route`} element={<Contacts />} />
           <Route path={`/main/pastors`} element={<Pastor />} />
-          <Route path="/verify" element={<Verify/>}/>
+          <Route path="/verify" element={<Verify />} />
 
         </Routes>
       </UserContext.Provider>

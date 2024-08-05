@@ -10,11 +10,11 @@ export default function Password() {
 
     return (
         <>
-            <p> Password: </p>
+            <p> Password</p>
             <input onChange={e => setPw(e.target.value)} />
             <br />
             <br />
-            <button class="btn btn-success" onClick={() => authenticate(user, pw, navigate) }> Log in </button>
+            <button class="btn btn-success" onClick={() => authenticate(user.username, pw, navigate) }> Log in </button>
         </>
     )
 }

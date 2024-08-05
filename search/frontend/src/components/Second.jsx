@@ -2,18 +2,18 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
 import DeleteMember from './Util/DeleteMember';
-import View from './View';
+import View from './Util/View';
 import EditMember from './Util/EditMember';
 
 function Second() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("main/secondary");
+  const [data, fields, error, loading] = useFetch("main/secondary", ["id", "korean", "english_name", "mobile", "suite", "street"]);
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info.korean.includes(text));
       setFiltered(filteredArray)
     }
   }, [text])
@@ -29,7 +29,7 @@ function Second() {
           <br /> 
         </div>
       </div>
-      <View data={[loading, text, data, filtered]} />
+      <View data={[loading, text, data, filtered, fields, 6]} />
     </div>
   )
 }
