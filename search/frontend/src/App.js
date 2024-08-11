@@ -49,7 +49,7 @@ function App() {
   return (
     <div className="App">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand"> <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width={'50px'}/> </a>
+        <a class="navbar-brand" href="/login"> <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width={'50px'} /> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -61,7 +61,7 @@ function App() {
             {!currUser ? <li class="nav-item active">
               <Link class="nav-link" to="/login"> Log in </Link>
             </li> : null}
-            {checkLevel("새가족") ? <section style={{display: "flex", flexDirection: "row"}}>
+            {checkLevel("새가족") ? <section style={{ display: "flex", flexDirection: "row" }}>
               <li class="nav-item">
                 <Link class="nav-link" to="/add">등록</Link>
               </li>
@@ -87,18 +87,21 @@ function App() {
               <Link class="nav-link " to="/main/youth">중고등부</Link>
             </li> : null}
             {/* Anyone can see */}
+            {checkLevel("general") || checkLevel("새가족") ? <section style={{ display: "flex", flexDirection: "row" }}>
+              <li class="nav-item">
+                <Link class="nav-link" to="/main/secondary">청년부</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/main/pastors">교역자</Link>
+              </li>
+              <li class="nav-item">
+                <Link class="nav-link" to="/contacts/adults">장년부</Link>
+              </li>
+            </section> : null}
             <li class="nav-item">
-              <Link class="nav-link" to="/main/secondary">청년부</Link>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/main/pastors">교역자</Link>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/contacts/adults">장년부</Link>
-            </li>
-            <li class="nav-item">
-              <Link class="nav-link" to="/profile">프로필</Link>
-            </li>
+                <Link class="nav-link" to="/profile">프로필</Link>
+              </li>
+
           </ul>
         </div>
       </nav>

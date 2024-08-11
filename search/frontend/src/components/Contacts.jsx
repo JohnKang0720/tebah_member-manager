@@ -26,10 +26,6 @@ function Contacts() {
         }).catch(err => console.log(err))
     }
 
-    useEffect(() => {
-        console.log(data)
-    }, [loading])
-
     return (
         <div><h1> {param.route.toUpperCase()} 연락망 </h1>
             {/* <strong> Search member: </strong>

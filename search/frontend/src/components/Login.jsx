@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
+// 이메일 넣고 비밀번호 칠때 이메일이 수정가능하게
+// 이메일 넣고 register 로 갈때 이메일이 입력되있게
+
 function Login() {
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");

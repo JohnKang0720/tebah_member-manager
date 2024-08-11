@@ -15,7 +15,7 @@ function View(props) {
             })} </div>
         })}
       </div>
-        : <div className="table">
+        : <div className="table" style={{gridTemplateColumns: `repeat(${grid_len}, 1fr)`}}>
           {fields.map(f => {
             return <div>
               <section class="table__header"> {f.name} </section>

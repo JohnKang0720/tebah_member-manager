@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-// const sql = require('mysql2');
 const app = express();
 const db = require('./db')
 
@@ -9,6 +8,7 @@ app.use(cors())
 app.use("/main", require("./routes/Main"));
 app.use("/contacts", require("./routes/Contact"));
 app.use("/tebah-family", require("./routes/Family"));
+app.use("/search-card", require("./routes/Searchcard"))
 
 //create db
 app.get("/", (req, res) => {
@@ -36,6 +36,6 @@ app.get("/registered", (req, res) => {
     })
 })
 
-app.listen(5000, () => {
+app.listen(5001, () => {
     console.log("server starting...")
 })

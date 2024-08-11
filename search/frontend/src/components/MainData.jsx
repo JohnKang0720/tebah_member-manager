@@ -10,11 +10,11 @@ function MainData() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("main");
+  const [data, fields, error, loading] = useFetch("main", ["id", "korean", "email", "level"]);
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()) );
+      let filteredArray = data.filter(info => info.korean.includes(text) );
       setFiltered(filteredArray)
     }
   }, [text])
@@ -31,7 +31,7 @@ function MainData() {
         </div>
       </div>
       <br/>
-      <View data={[loading, text, data, filtered]} />
+      <View data={[loading, text, data, filtered, fields, 4]} />
     </div>
   )
 }

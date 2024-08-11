@@ -36,8 +36,6 @@ button {
   grid-template-columns: repeat(3, 1fr);
 }
 
-
-
 .table__header{
   padding: 10px;
   border: solid 1px gray;
@@ -70,4 +68,45 @@ button {
 .inputs__inner input, select {
   margin: 15px;
 }
+
+.card-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.search-card {
+  width: 80%;
+  padding: 20px;
+  border: solid 1px black;
+  border-radius: 10px;
+}
+
+.info-container{
+  width: 100%;
+  height: 50%;
+  display:flex;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+}
+
+.info-left, .info-right{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.family-container{
+  height: 50%;
+}
+
+.family-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+
+
 

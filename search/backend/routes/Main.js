@@ -33,8 +33,8 @@ router.put("/", (req, res) => {
 
 // //view main data
 router.get("/", (req, res) => {
-    
-    db.query("SELECT * FROM mytable ORDER BY id", (err, result) => {
+    let {cols} = req.query
+    db.query(`SELECT id, korean, email, level FROM mytable ORDER BY id`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })

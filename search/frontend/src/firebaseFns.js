@@ -14,14 +14,19 @@ async function authenticate(username, password, n) {
 
             if (user.email.includes("admin")) { //새가족부
                 n("/main");
+                window.location.reload()
             } else if (user.email.includes("youth")) { //유스
                 n("/main/youth");
+                window.location.reload()
             } else if (user.email.includes("child")) { //아동부
                 n("/contacts/children");
+                window.location.reload()
             } else if (user.email.includes("finance")) { //재정부
                 n("/main/finance");
+                window.location.reload()
             } else if (user.email.includes("general")) { //장년부
-                n("/contacts/adult");
+                n("/contacts/adults");
+                window.location.reload()
             } else {
                 alert("Invalid email! Register again.")
             }
@@ -51,13 +56,14 @@ async function createAccount(username, password, tel, n) {
         if (emailVerified) {
             axios.get("http://localhost:5000/main")
                 .then(res => {
-                    res.data.rows.forEach(u => {
-                        if (username === "kangjohn00000@gmail.com") { //SHOULD BE u.email 
-                           member = true
-                           email = u.email
-                           level = u.level
-                        }
-                    })
+                    for(let i = 0; i < res.data.rows.length; i++) {
+                        if (res.data.rows[i].email === username) { //SHOULD BE u.email 
+                            member = true
+                            email = res.data.rows[i].email
+                            level = res.data.rows[i].level
+                            console.log(res.data.rows[i].level)
+                         }
+                    }
                     registerMember(member, tel, email, level)
                 }).catch(err => console.log(err))
 
@@ -83,7 +89,7 @@ async function createAccount(username, password, tel, n) {
 }
 
 const registerMember = (member, tel, email, l) => {
-    if (member == true) {
+    if (member) {
         axios.post("http://localhost:5000/registered", {"email": email, "telephone": tel, 'level': l})
         .catch(err => console.log(err))
     }
