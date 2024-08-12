@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 
+// Edit member for each page, not seperate
 function EditMember() {
     const [info, setInfo] = useState({
         id: 0,

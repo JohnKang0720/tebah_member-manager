@@ -4,6 +4,7 @@ import { UserContext } from '../App'
 import { logout } from '../firebaseFns';
 import { useNavigate } from 'react-router-dom';
 
+// Put other basic information
 export default function Profile() {
     const [user, auth] = useContext(UserContext);
     const navigate = useNavigate();

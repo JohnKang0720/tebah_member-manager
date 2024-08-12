@@ -36,6 +36,6 @@ app.get("/registered", (req, res) => {
     })
 })
 
-app.listen(5001, () => {
+app.listen(5000, () => {
     console.log("server starting...")
 })

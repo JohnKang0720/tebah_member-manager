@@ -3,6 +3,7 @@ import { useFetch } from '../useFetch';
 import axios from 'axios';
 import Mapping from './Util/Mapping';
 
+// Search based on Yes or No
 function Agreement() {
   let [data, fields, error, loading] = useFetch(`tebah-family/consent`);
   const [arr, setArr] = useState([]);

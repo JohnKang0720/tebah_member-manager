@@ -23,8 +23,7 @@ router.get('/', (req, res) => {
     let query = `WITH children_node AS (
         SELECT * FROM mytable
     )`
-    let columns = cols
-    db.query(get_data(query, columns, c), (err, result) => {
+    db.query(get_data(query, cols , c), (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -41,7 +40,7 @@ router.get('/consent', (req,res) => {
 //finding parents of a single child & displaying family tables
 router.post('/', (req, res) => {
     const { search_name } = req.body;
-    let q = query.replace(";", `\n WHERE c.korean = ${search_name} OR m.korean = ${search_name} OR m2.korean = ${search_name};`)
+    let q = query.replace(";", `\n WHERE c.korean = '${search_name}' OR m.korean =' ${search_name}' OR m2.korean = '${search_name}';`)
 
     db.query(q, (err, result) => {
         if (err) throw err;

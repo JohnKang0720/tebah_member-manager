@@ -4,7 +4,7 @@ import axios from 'axios';
 import Mapping from './Util/Mapping';
 
 function Family() {
-  let [data, fields, error, loading] = useFetch(`tebah-family`);
+  let [data, fields, error, loading] = useFetch(`tebah-family`, ["id", "korean"]);
   const [arr, setArr] = useState([]);
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([])

@@ -49,6 +49,8 @@ function App() {
   return (
     <div className="App">
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+        {/* IF logged in, /profile else /login */}
         <a class="navbar-brand" href="/login"> <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width={'50px'} /> </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -74,6 +76,9 @@ function App() {
               <Link class="nav-link " to="/agreement">Agreement</Link>
               <Link class="nav-link " to="/main">Database - All </Link>
               <Link class="nav-link" to="/tebah-family"> Database - Family </Link>
+              <li class="nav-item">
+                <Link class="nav-link" to="/search-card">등록카드</Link>
+              </li>
             </section> : null}
             {/* 아동부 */}
             {checkLevel("새가족") || checkLevel("아동부") ? <li class="nav-item">
@@ -98,6 +103,7 @@ function App() {
                 <Link class="nav-link" to="/contacts/adults">장년부</Link>
               </li>
             </section> : null}
+            {/* remove if logged in */}
             <li class="nav-item">
                 <Link class="nav-link" to="/profile">프로필</Link>
               </li>

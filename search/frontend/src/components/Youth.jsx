@@ -5,6 +5,8 @@ import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 import EditMember from './Util/EditMember';
 
+// Only korean names, put parent names beside each other (order columns)
+// Add youth phone numbers + one parent phone #
 function Youth() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
