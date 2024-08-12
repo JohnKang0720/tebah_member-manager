@@ -1,6 +1,6 @@
 import './App.css';
 import Register from './components/Register';
-import Login from './components/Login';
+import Login from './components/LogIn/Login';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import MainData from './components/MainData';
 import Finance from "./components/Finance";

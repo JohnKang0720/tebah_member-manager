@@ -54,7 +54,7 @@ async function createAccount(username, password, tel, n) {
         let email = ""
         let level = ""
         if (emailVerified) {
-            axios.get("http://localhost:5000/main")
+            axios.get("http://localhost:5001/main")
                 .then(res => {
                     for(let i = 0; i < res.data.rows.length; i++) {
                         if (res.data.rows[i].email === username) { //SHOULD BE u.email 
