@@ -1,6 +1,11 @@
 body {
   overflow-x: hidden;
   text-align: center;
+  background-image: url('../public/bg3.jpg'); 
+  background-size: cover;
+  background-position: center; 
+  background-repeat: no-repeat;
+  font-family: "Comfortaa", sans-serif;
 }
 
 button {

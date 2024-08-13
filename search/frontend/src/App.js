@@ -1,5 +1,5 @@
 import './App.css';
-import Register from './components/Register';
+import Register from './Register/Register';
 import Login from './components/LogIn/Login';
 import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import MainData from './components/MainData';
@@ -9,7 +9,7 @@ import Secondary from "./components/Second";
 import Child from "./components/Child";
 import Contacts from './components/Contacts';
 import AddMember from './components/Util/AddMember';
-import Profile from './components/Profile';
+import Profile from './components/Profile/Profile';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react';
 import Family from './components/Family';
