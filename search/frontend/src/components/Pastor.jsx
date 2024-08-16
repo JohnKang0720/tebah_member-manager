@@ -4,7 +4,7 @@ import { useFetch } from '../useFetch'
 import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 
-// 영어이름 search 되게
+
 function Pastor() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
@@ -13,7 +13,7 @@ function Pastor() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(text));
+      let filteredArray = data.filter(info => info.korean.includes(text) || info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])

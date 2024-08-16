@@ -20,6 +20,7 @@ import Pastor from './components/Pastor'
 import Agreement from './components/Agreement';
 import Verify from './components/Util/Verify';
 import SearchCard from './components/SearchCard';
+import Database from './components/Database';
 
 export const UserContext = createContext(null);
 
@@ -74,8 +75,11 @@ function App() {
                 <Link class="nav-link" to="/delete">맴버삭제</Link>
               </li>
               <Link class="nav-link " to="/agreement">Agreement</Link>
-              <Link class="nav-link " to="/main">Database - All </Link>
-              <Link class="nav-link" to="/tebah-family"> Database - Family </Link>
+              <Link class="nav-link " to="/database/all">Database - All </Link>
+              <Link class="nav-link" to="/database/family"> Database - Family </Link>
+              <Link class="nav-link" to="/database/archive"> Database - Archive </Link>
+              <Link class="nav-link" to="/database/active"> Database - Active </Link>
+              <Link class="nav-link" to="/database/visitor"> Database - Visitor </Link>
               <li class="nav-item">
                 <Link class="nav-link" to="/search-card">등록카드</Link>
               </li>
@@ -133,6 +137,7 @@ function App() {
           <Route path={`/contacts/:route`} element={<Contacts />} />
           <Route path={`/main/pastors`} element={<Pastor />} />
           <Route path="/verify" element={<Verify />} />
+          <Route path={`/database/:type`} element={<Database/>} /> 
 
         </Routes>
       </UserContext.Provider>

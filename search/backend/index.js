@@ -9,14 +9,11 @@ app.use("/main", require("./routes/Main"));
 app.use("/contacts", require("./routes/Contact"));
 app.use("/tebah-family", require("./routes/Family"));
 app.use("/search-card", require("./routes/Searchcard"))
+app.use("/database", require("./routes/Database"))
 
 //create db
 app.get("/", (req, res) => {
     res.send("connected")
-})
-
-app.get("/testing", (req, res) => {
-    res.send("testing")
 })
 
 app.post("/registered", (req, res) => {
