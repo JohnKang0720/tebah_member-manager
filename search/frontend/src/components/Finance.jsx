@@ -5,6 +5,7 @@ import axios from 'axios'
 import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 import EditMember from './Util/EditMember';
+
 function Finance() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
@@ -49,7 +50,7 @@ function Finance() {
       </div>
       <br />
       <br />
-      <View data={[loading, text, data, filtered, fields, 5]} />
+      <View data={[loading, text, data, filtered, fields, fields.length]} />
     </div>
   )
 }

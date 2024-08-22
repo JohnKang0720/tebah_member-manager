@@ -90,9 +90,9 @@ export default function SearchCard() {
                     {family.map(r => {
                       if (key === "관계") {
                         if (r["p_code_1"] || r["p_code_2"]) {
-                          return <p> Child </p>
+                          return <p> 자녀 </p>
                         }
-                        return <p> Parent/Legal Guardian </p>
+                        return <p> 부모 / 부부 </p>
                       }
                       return <p> {r[value] ? r[value] : "-"} </p>
                     })}

@@ -31,7 +31,7 @@ function MainData() {
         </div>
       </div>
       <br/>
-      <View data={[loading, text, data, filtered, fields, 4]} />
+      <View data={[loading, text, data, filtered, fields, fields.length]} />
     </div>
   )
 }

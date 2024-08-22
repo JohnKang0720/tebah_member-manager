@@ -21,6 +21,7 @@ import Agreement from './components/Agreement';
 import Verify from './components/Util/Verify';
 import SearchCard from './components/SearchCard';
 import Database from './components/Database';
+import { Draft } from './components/Util/Draft';
 
 export const UserContext = createContext(null);
 
@@ -138,6 +139,8 @@ function App() {
           <Route path={`/main/pastors`} element={<Pastor />} />
           <Route path="/verify" element={<Verify />} />
           <Route path={`/database/:type`} element={<Database/>} /> 
+          <Route path={`/draft`} element={<Draft/>} /> 
+
 
         </Routes>
       </UserContext.Provider>

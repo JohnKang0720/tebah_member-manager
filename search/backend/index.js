@@ -33,6 +33,14 @@ app.get("/registered", (req, res) => {
     })
 })
 
+app.post("/archive", (req, res) => {
+    let {name} = req.body
+    db.query(`UPDATE mytable SET status='archive' WHERE korean='${name}'`, (err, result) => {
+        if(err) throw err
+        res.status(200).send("Archived")
+    })
+})
+
 app.listen(5000, () => {
     console.log("server starting...")
 })

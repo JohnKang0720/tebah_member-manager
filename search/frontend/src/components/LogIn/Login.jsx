@@ -4,9 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./LogIn.module.css";
 
-// 이메일 넣고 비밀번호 칠때 이메일이 수정가능하게
-// 이메일 넣고 register 로 갈때 이메일이 입력되있게
-
 function Login() {
   const [username, setUser] = useState("");
   const [password, setPass] = useState("");
@@ -20,10 +17,9 @@ function Login() {
     "tebah-general@gmail.com",
   ];
 
-  //TODO: check that the email is in the firebase auth
   const process = (email) => {
     axios
-      .get("http://localhost:5001/registered")
+      .get("http://localhost:5000/registered")
       .then((res) => {
         res.data.rows.forEach((data) => {
           if (

@@ -13,7 +13,7 @@ function Second() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(text));
+      let filteredArray = data.filter(info => info.korean.includes(text) || info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])
@@ -29,7 +29,7 @@ function Second() {
           <br /> 
         </div>
       </div>
-      <View data={[loading, text, data, filtered, fields, 6]} />
+      <View data={[loading, text, data, filtered, fields, fields.length]} />
     </div>
   )
 }

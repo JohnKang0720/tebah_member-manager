@@ -36,7 +36,7 @@ function Pastor() {
       </div>
       <br/>
       <br/>
-      <View data={[loading, text, data, filtered, fields, 5]} />
+      <View data={[loading, text, data, filtered, fields, fields.length]} />
     </div>
   )
 }

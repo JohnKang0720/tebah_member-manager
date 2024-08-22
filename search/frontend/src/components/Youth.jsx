@@ -5,18 +5,16 @@ import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 import EditMember from './Util/EditMember';
 
-// Only korean names, put parent names beside each other (order columns)
-// Add youth phone numbers + one parent phone #
 function Youth() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("tebah-family", ["korean", "english_name", "mobile", "email", "suite", "street"]);
+  const [data, fields, error, loading] = useFetch("main/youth", ["korean", "mobile", "email", "suite", "street"]);
 
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(text));
+      let filteredArray = data.filter(info => info.child_name.includes(text));
       setFiltered(filteredArray)
     }
   }, [text])
@@ -32,9 +30,7 @@ function Youth() {
         </div>
       </div>
       <br />
-      <View data={[loading, text, data, filtered, fields.filter(el => {
-        return el.name !== "mobile" && el.name !== "email" && el.name !== "suite" && el.name !== "street";
-      }), 14]} />
+      <View data={[loading, text, data, filtered, fields, fields.length]} />
     </div>
   )
 }

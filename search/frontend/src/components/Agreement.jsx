@@ -3,11 +3,10 @@ import { useFetch } from '../useFetch';
 import axios from 'axios';
 import Mapping from './Util/Mapping';
 
-// Search based on Yes or No
 function Agreement() {
   let [data, fields, error, loading] = useFetch(`tebah-family/consent`);
   const [arr, setArr] = useState([]);
-  const [name, setName] = useState("");
+  const [query, setQuery] = useState("");
   const [filtered, setFiltered] = useState([])
 
   const columns = fields
@@ -15,10 +14,10 @@ function Agreement() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(name));
+      let filteredArray = data.filter(info => info.korean.includes(query) || info.consent.toLowerCase().includes(query.toLowerCase()));
       setFiltered(filteredArray)
     }
-  }, [name])
+  }, [query])
 
   return (
     <div>
@@ -29,7 +28,7 @@ function Agreement() {
           <h5> 맴버 검색창 </h5>
           <div class="inputs">
             <br />
-            <input class="form-control" placeholder='이름' onChange={e => setName(e.target.value)} />
+            <input class="form-control" placeholder='Name or Consent' onChange={e => setQuery(e.target.value)} />
           </div>
         </div>
         <br />
@@ -38,11 +37,11 @@ function Agreement() {
       {!loading && arr.length === 0 ?
         <div className="table3">
           {columns.map(column => {
-            return <Mapping param={[data,column["name"], name, filtered]} />
+            return <Mapping param={[data,column["name"], query, filtered]} />
           })}
         </div> : <div className="table3">
           {columns.map(column => {
-            return <Mapping param={[arr,column["name"], name, filtered]} />
+            return <Mapping param={[arr,column["name"], query, filtered]} />
           })}
         </div>}
     </div>

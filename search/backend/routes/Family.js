@@ -3,8 +3,6 @@ const router = express.Router();
 // const sql = require('mysql2');
 const db = require('../db')
 
-//USE CTE FOR active, visitors, inactive
-
 const get_data = (start_query, cols, cat) => {
     query = start_query
     query += "SELECT" + "\n"
@@ -20,10 +18,7 @@ const get_data = (start_query, cols, cat) => {
 }
 router.get('/', (req, res) => {
     let {cols, c} = req.query
-    let query = `WITH children_node AS (
-        SELECT * FROM mytable
-    )`
-    db.query(get_data(query, cols , c), (err, result) => {
+    db.query(get_data('', cols , c), (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -31,7 +26,7 @@ router.get('/', (req, res) => {
 
 router.get('/consent', (req,res) => {
 
-    db.query("SELECT id, korean, consent FROM mytable;", (err, result) => {
+    db.query("SELECT korean, consent FROM mytable;", (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })

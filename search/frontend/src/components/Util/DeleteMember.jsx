@@ -13,12 +13,23 @@ function DeleteMember() {
             }).catch(err => console.log(err))
     }
 
+    const handleArchive = () => {
+        axios.post("http://localhost:5000/archive", {
+            name: name
+        }).then(res => {
+            console.log("Archived")
+        }).catch(err => console.log(err))
+    }
+
     return (
         <div class="inputs">
-            <h5> 맴버 삭제: </h5>
-            <input style={{width: "300px"}} class="form-control input-sm" placeholder='맴버 이름' onChange={e => setName(e.target.value)} />
+            <h2> Delete/Archive Member </h2>
             <br />
-            <button class="btn btn-danger" onClick={handleSubmit}> 삭제 </button>
+            <input style={{ width: "300px" }} class="form-control input-sm" placeholder='맴버 이름' onChange={e => setName(e.target.value)} />
+            <div>
+                <button class="btn btn-danger" onClick={handleSubmit}> Delete </button>
+                <button class="btn btn-danger" onClick={handleArchive}> Archive </button>
+            </div>
         </div>
     )
 }

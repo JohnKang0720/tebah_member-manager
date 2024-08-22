@@ -32,9 +32,6 @@ function Family() {
     }
   }, [text])
 
-
-
-
   return (
     <div>
       <h1> Database - Family </h1>

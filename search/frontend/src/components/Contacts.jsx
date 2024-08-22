@@ -41,7 +41,7 @@ function Contacts() {
             </div>
             <br />
             <br />
-            <View data={[loading, text, data, arr, fields, 8]} />
+            <View data={[loading, text, data, arr, fields, fields.length]} />
         </div>
     )
 }
