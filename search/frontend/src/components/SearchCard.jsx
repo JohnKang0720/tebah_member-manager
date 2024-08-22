@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+
+//TODO: How to differentiate parent and parter.
 export default function SearchCard() {
   const [query, setQuery] = useState("")
   const [arr, setArr] = useState([])

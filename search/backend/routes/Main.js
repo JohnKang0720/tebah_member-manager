@@ -11,16 +11,17 @@ db.connect((err) => {
 //TODO
 //Inserts data
 router.post("/", (req, res) => {
-    // const { offering_num, korean, english_name, gender, title, birthdate, age, baptism, baptism_date, email, mobile, suite, street, city, province, postal_code, country, marital_status, hobby, volunteer, consent, registered, last, f_code, p_code_1, p_code_2 } = req.body;
-    // db.query(`INSERT INTO mytable (offering_num,korean,english_name,gender,title,birthdate,age,baptism,baptism_date,email,mobile,suite,street,city,province,postal_code,country,marital_status,hobby,volunteer,consent,registered,last_updated,f_code,p_code_1,p_code_2) VALUES ('${offering_num}',
-    //      '${korean}', '${english_name}', '${gender}', '${title}', '${birthdate}',  '${age}', '${baptism}', '${baptism_date}', '${email}', '${mobile}', '${suite}', '${street}', '${city}', '${province}', '${postal_code}', '${country}', '${marital_status}', '${hobby}', '${volunteer}', '${consent}',  '${registered}', '${last}', '${f_code}', ${p_code_1}, ${p_code_2});`, (err, result) => {
-    //     if (err) throw err;
-    //     res.status(200).send("member added!");
-    // })
-    const {data} = req.body
-    for(let i = 0; i < data.length; i++) {
-        console.log(data[i])
+    const { data } = req.body
+    if (data) {
+        for (let i = 0; i <= data.length; i++) {
+            if (data[i]) {
+                db.query(`INSERT INTO mytable (offering_num, korean, english_name, gender, title, birthdate, age, baptism, baptism_date, email, mobile, suite, street, city, province, postal_code, country, marital_status, hobby, volunteer, consent, registered, last_updated, f_code, p_code_1, p_code_2, level, status) VALUES ('${data[i]["offering_num"]}', '${data[i]["korean"]}', '${data[i]["english_name"]}', '${data[i]["gender"]}', '${data[i]["title"]}',  '${data[i]["birthdate"]}', '${data[i]["age"]}', '${data[i]["baptism"]}', '${data[i]["baptism_date"]}', '${data[i]["email"]}', '${data[i]["mobile"]}', '${data[i]["suite"]}', '${data[i]["street"]}', '${data[i]["city"]}', '${data[i]["province"]}', '${data[i]["postal_code"]}', '${data[i]["country"]}', '${data[i]["marital_status"]}', '${data[i]["hobby"]}', '${data[i]["volunteer"]}',  '${data[i]["consent"]}', '${data[i]["registered"]}', '${data[i]["last_updated"]}', '${data[i]["f_code"]}', ${data[i]["p_code_1"] ? data[i]["p_code_1"] : -1}, ${data[i]["p_code_1"] ? data[i]["p_code_1"] : -1}, '${data[i]["level"]}', '${data[i]["status"]}');`, (err, result) => {
+                    if (err) throw err;
+                })
+            }
+        }
     }
+    res.send("complete.")
 })
 
 // //edit main data
