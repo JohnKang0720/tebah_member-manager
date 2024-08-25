@@ -1,0 +1,61 @@
+/* SearchCard.module.css */
+
+/* Parent container to center everything */
+.main-container {
+    display: flex;            
+    flex-direction: column;   
+    justify-content: center;  
+    align-items: center;      
+    height: 100vh;            
+    width: 100vw;             
+  }
+  
+  /* Container for the search bar */
+  .search-bar {
+    margin-bottom: 30px;   
+  }
+  
+  .search-bar-input{
+    padding: 10px;
+    border-radius: 10px;  
+    border: none;
+    margin-right: 10px;
+  }
+
+  /* Search button styling */
+  .search-bar button {
+    background-color: #155a8f;  
+    color: white;             
+    border: none;            
+    border-radius: 10px;     
+    padding: 10px 20px;       
+    cursor: pointer;         
+    font-size: 16px;         
+    transition: background-color 0.3s; 
+  }
+  
+  /* Button hover effect */
+  .search-bar button:hover {
+    background-color: #0056b3; 
+  }
+  
+  /* Card container styling */
+  .card-container {
+    display: flex;            
+    justify-content: center;  
+    align-items: center;      
+    height: auto;             
+    width: 100%;              
+  }
+  
+  /* Search card styling */
+  .search-card {
+    background-color: rgba(255, 255, 255, 0.8); 
+    border-radius: 20px;                        
+    padding: 20px;                              
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
+    width: 80%;                                 
+    max-width: 600px;                           
+    box-sizing: border-box;                     
+  }
+  
