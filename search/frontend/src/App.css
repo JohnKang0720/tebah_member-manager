@@ -1,13 +1,17 @@
+/* Global styles */
 * {
   box-sizing: border-box;
 }
 
-body,html {
+html, body {
   margin: 0;
   padding: 0;
+  width: 100%;
+  min-height: 100%; /* Ensures the height extends based on content */
 }
 
 body {
+<<<<<<< HEAD
   overflow-x: hidden;
   height: 100%;
   text-align: center;
@@ -15,7 +19,24 @@ body {
   background-size: cover;
   background-position: center; 
   background-repeat: no-repeat;
+=======
+  background-image: url('../public/bg3.jpg'); /* Adjust the path if needed */
+  background-size:auto;
+  background-position: center; /* Centers the background image */
+  background-repeat: no-repeat; /* Prevents the image from repeating */
+>>>>>>> 72fa377715b6f2fc8fdeb44b2e3a8ea08ab87888
   font-family: "Comfortaa", sans-serif;
+}
+
+/* Ensure content is centered and flex-based layout is used */
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* Takes at least full viewport height */
+  text-align: center;
+  overflow-x: hidden; /* Prevents horizontal scrolling */
 }
 
 button {

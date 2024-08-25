@@ -19,7 +19,7 @@ function Login() {
 
   const process = (email) => {
     axios
-      .get("http://localhost:5000/registered")
+      .get("http://localhost:5001/registered")
       .then((res) => {
         res.data.rows.forEach((data) => {
           if (

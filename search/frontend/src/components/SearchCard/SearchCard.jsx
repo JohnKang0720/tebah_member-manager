@@ -15,7 +15,7 @@ export default function SearchCard() {
 
   const filter = () => {
     if (query.length !== 0) {
-      const url = `http://localhost:5000/search-card/${query}`
+      const url = `http://localhost:5001/search-card/${query}`;
       axios.get(url).then(res => {
         if (res.data.rows.length === 0) {
           alert("No such person!")
@@ -28,7 +28,7 @@ export default function SearchCard() {
   }
 
   const getFamily = (q, fcode) => {
-    const url = `http://localhost:5000/search-card/${q}/${fcode}`
+    const url = `http://localhost:5001/search-card/${q}/${fcode}`;
     axios.get(url).then(res => {
       setFamily(res.data.rows)
       console.log(res.data.rows)
@@ -47,8 +47,8 @@ export default function SearchCard() {
         <div className='search-card'>
           <h3> 기본정보 </h3>
           <hr />
-          <div className='info-container'>
-            <div className='info-left'>
+          <div className={styles['info-container']}>
+            <div className={styles['info-left']}>
               {info_column_1.map(i => {
                 const k = Object.keys(i)[0];
                 const v = i[k];
@@ -63,7 +63,7 @@ export default function SearchCard() {
                   </div>)
               })}
             </div>
-            <div className='info-right'>
+            <div className={styles['info-right']}>
               {info_column_2.map(i => {
                 const k = Object.keys(i)[0];
                 const v = i[k];
@@ -80,8 +80,8 @@ export default function SearchCard() {
             </div>
 
           </div>
-          <div className='family-container'>
-            <h3> 가족관계 </h3>
+          <div className={styles['family-container']}>
+            <h3>가족관계</h3>
             <hr />
             <div className='family-grid'>
               {family_columns.map(obj => {

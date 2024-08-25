@@ -1,5 +1,8 @@
-/* SearchCard.module.css */
-
+h1{
+  text-align: center;
+  margin-top:20px;
+  margin-bottom: 20px;
+}
 /* Parent container to center everything */
 .main-container {
     display: flex;            
@@ -52,10 +55,28 @@
   .search-card {
     background-color: rgba(255, 255, 255, 0.8); 
     border-radius: 20px;                        
-    padding: 20px;                              
+    padding: 40px;                              
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);   
-    width: 80%;                                 
-    max-width: 600px;                           
+    width: 90%;                                 
+    max-width: 900px;                           
     box-sizing: border-box;                     
   }
   
+  .family-container{
+    margin-top: 60px;
+  }
+
+  .info-left, 
+  .info-right{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    padding-right: 20px;
+    width: 50%;;
+  }
+
+  .info-container{
+    display: flex;
+    justify-content: space-around;
+    gap:100px;
+  }

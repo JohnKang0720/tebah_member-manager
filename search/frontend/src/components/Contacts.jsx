@@ -1,7 +1,6 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { useFetch } from '../useFetch'
-import axios from 'axios'
+import React, { useState, useEffect } from 'react';
+import { useFetch } from '../useFetch';
+import axios from 'axios';
 import View from './Util/View';
 import { useParams } from 'react-router-dom';
 
@@ -11,40 +10,51 @@ function Contacts() {
     const [filtered, setFiltered] = useState([]);
     const [code, setCode] = useState(1);
     const [arr, setArr] = useState([]);
-    const param = useParams()
+    const param = useParams();
 
     const [data, fields, error, loading] = useFetch(`contacts/${param.route}`, ["korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
 
     const filter = () => {
-        const url = `http://localhost:5000/contacts/${param.route}`
+        const url = `http://localhost:5001/contacts/${param.route}`;
         axios.post(url, {
             code: code
         }).then(res => {
             if (res.data.rows.length === 0) {
-                alert("No such family code.")
+                alert("No such family code.");
             }
-            setArr(res.data.rows)
-        }).catch(err => console.log(err))
+            setArr(res.data.rows);
+        }).catch(err => console.log(err));
     }
 
     return (
+<<<<<<< HEAD
         <div><h1> {param.route === "children" ? "아동부" : "장년부"} 연락망 </h1>
+=======
+        <div style={{ paddingTop: '30px', paddingBottom: '20px', textAlign: 'center' }}>
+            <h1>{param.route.toUpperCase()} 연락망</h1>
+>>>>>>> 72fa377715b6f2fc8fdeb44b2e3a8ea08ab87888
             {/* <strong> Search member: </strong>
             <br /> */}
             {/* <input placeholder='검색' onChange={e => setText(e.target.value)} />
             <br />
             <br /> */}
-            <br />
+          
 
-            <div class="input-div" style={{ flexDirection: "column" }}>
-                <div> <input class="form-control" placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} /> </div>
-                <button class="btn btn-primary" onClick={filter}> 검색 </button>
+            <div className="input-div" style={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
+                <div style={{paddingTop:'22px', paddingBottom:'22px'}}>
+                    <input
+                        style={{padding:'10px'}}
+                        className="form-control"
+                        placeholder="가족코드 입력"
+                        onChange={e => setCode(e.target.value)}
+                    />
+                </div>
+                <button  style={{ backgroundColor: '#1D6AB4', width: '100px',padding:'10px'}}  className="btn btn-primary" onClick={filter}>검색</button>
             </div>
-            <br />
-            <br />
+       
             <View data={[loading, text, data, arr, fields, fields.length]} />
         </div>
-    )
+    );
 }
 
-export default Contacts
+export default Contacts;
