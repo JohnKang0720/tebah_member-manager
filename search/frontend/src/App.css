@@ -11,20 +11,10 @@ html, body {
 }
 
 body {
-<<<<<<< HEAD
-  overflow-x: hidden;
-  height: 100%;
-  text-align: center;
-  background-image: url('../public/bg3.jpg'); 
-  background-size: cover;
-  background-position: center; 
-  background-repeat: no-repeat;
-=======
   background-image: url('../public/bg3.jpg'); /* Adjust the path if needed */
   background-size:auto;
   background-position: center; /* Centers the background image */
   background-repeat: no-repeat; /* Prevents the image from repeating */
->>>>>>> 72fa377715b6f2fc8fdeb44b2e3a8ea08ab87888
   font-family: "Comfortaa", sans-serif;
 }
 

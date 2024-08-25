@@ -5,7 +5,7 @@ import { useFetch } from "../../useFetch";
 import View from "../Util/View";
 import styles from "./Database.module.css"; 
 
-
+// fix
 export default function Database() {
   const param = useParams();
   const [arr, setArr] = useState([]);

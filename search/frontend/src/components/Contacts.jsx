@@ -27,12 +27,8 @@ function Contacts() {
     }
 
     return (
-<<<<<<< HEAD
-        <div><h1> {param.route === "children" ? "아동부" : "장년부"} 연락망 </h1>
-=======
         <div style={{ paddingTop: '30px', paddingBottom: '20px', textAlign: 'center' }}>
             <h1>{param.route.toUpperCase()} 연락망</h1>
->>>>>>> 72fa377715b6f2fc8fdeb44b2e3a8ea08ab87888
             {/* <strong> Search member: </strong>
             <br /> */}
             {/* <input placeholder='검색' onChange={e => setText(e.target.value)} />

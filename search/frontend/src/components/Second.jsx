@@ -1,24 +1,14 @@
-<<<<<<< HEAD
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { useFetch } from '../useFetch'
-import View from './Util/View';
-=======
 import React from "react";
 import { useState, useEffect } from "react";
 import { useFetch } from "../useFetch";
 import DeleteMember from "./Util/DeleteMember";
 import View from "./Util/View";
 import EditMember from "./Util/EditMember";
->>>>>>> 72fa377715b6f2fc8fdeb44b2e3a8ea08ab87888
 
 function Second() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-<<<<<<< HEAD
-  const [data, fields, error, loading] = useFetch("main/secondary", ["korean", "english_name", "mobile", "suite", "street"]);
-=======
   const [data, fields, error, loading] = useFetch("main/secondary", [
     "id",
     "korean",
@@ -27,7 +17,6 @@ function Second() {
     "suite",
     "street",
   ]);
->>>>>>> 72fa377715b6f2fc8fdeb44b2e3a8ea08ab87888
 
   useEffect(() => {
     if (data) {
