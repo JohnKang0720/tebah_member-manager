@@ -1,5 +1,8 @@
-/* SearchCard.module.css */
-
+h1{
+  text-align: center;
+  margin-top:20px;
+  margin-bottom: 20px;
+}
 /* Parent container to center everything */
 .main-container {
     display: flex;            
