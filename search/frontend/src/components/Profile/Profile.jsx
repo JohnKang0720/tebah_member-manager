@@ -10,6 +10,8 @@ export default function Profile() {
   const [user, auth] = useContext(UserContext);
   const navigate = useNavigate();
 
+  //FETCH FROM DB TO GET MORE INFO
+
   return (
     <div className={styles.main}>
       <div className={styles.box}>
@@ -18,7 +20,7 @@ export default function Profile() {
           <>
             이메일: <p> {user.email} </p>
             생성날짜: <p> {user.metadata.creationTime} </p>
-            UID: <p> {user.uid} </p>
+            UID: <p> {user.name} </p>
             <button class="btn btn-danger" onClick={() => logout(navigate)}>
               {" "}
               로그아웃{" "}

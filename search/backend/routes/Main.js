@@ -39,7 +39,7 @@ router.put("/", (req, res) => {
 // //view main data
 router.get("/", (req, res) => {
     let { cols } = req.query
-    db.query(`SELECT id, korean, email, level FROM mytable ORDER BY id WHERE (status is null or status != 'archive')`, (err, result) => {
+    db.query(`SELECT id, korean, email, level FROM mytable WHERE (status is null or status != 'archive') ORDER BY id`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -56,8 +56,6 @@ router.delete("/:name", (req, res) => {
 
 // //view youth data
 router.get("/youth", (req, res) => {
-    let { cols } = req.query
-
     db.query(`WITH youths AS (SELECT * FROM mytable WHERE level='유스') SELECT 
     c.korean AS child_name,
     m.korean AS parent1_name,
@@ -113,7 +111,7 @@ router.get("/pastors", (req, res) => {
 // //view finance data
 router.get("/finance", (req, res) => {
     let { cols } = req.query
-    db.query(`SELECT ${cols} FROM mytable ORDER BY offering_num AND (status is null or status != 'archive')`, (err, result) => {
+    db.query(`SELECT ${cols} FROM mytable WHERE (status is null or status != 'archive') ORDER BY offering_num`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })

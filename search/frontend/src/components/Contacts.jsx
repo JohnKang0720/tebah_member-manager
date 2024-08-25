@@ -37,7 +37,7 @@ function Contacts() {
 
             <div class="input-div" style={{ flexDirection: "column" }}>
                 <div> <input class="form-control" placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} /> </div>
-                <button class="btn btn-primary" onClick={() => filter()}> 검색 </button>
+                <button class="btn btn-primary" onClick={filter}> 검색 </button>
             </div>
             <br />
             <br />

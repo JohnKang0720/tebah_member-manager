@@ -12,11 +12,11 @@ function Finance() {
   const [id, setId] = useState(0);
   const [num, setNum] = useState(0);
 
-  const [data, fields, error, loading] = useFetch("main/finance", ["id", "korean", "english_name", "offering_num", "registered"]);
+  const [data, fields, error, loading] = useFetch("main/finance", ["korean", "english_name", "offering_num", "registered"]);
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(text));
+      let filteredArray = data.filter(info => info.korean.includes(text) || info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])

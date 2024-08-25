@@ -49,72 +49,92 @@ function App() {
 
   return (
     <div className="App">
-      <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-        {/* IF logged in, /profile else /login */}
-        <a class="navbar-brand" href="/login"> <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width={'50px'} /> </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <a className="navbar-brand" href="/login">
+          <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width="50px" alt="brand-logo" />
+        </a>
+        <button
+          className="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav">
-            {!currUser ? <li class="nav-item active">
-              <Link class="nav-link" to="/">Register <span class="sr-only">(current)</span></Link>
-            </li> : null}
-            {!currUser ? <li class="nav-item active">
-              <Link class="nav-link" to="/login"> Log in </Link>
-            </li> : null}
-            {checkLevel("새가족") ? <section style={{ display: "flex", flexDirection: "row" }}>
-              <li class="nav-item">
-                <Link class="nav-link" to="/add">등록</Link>
+        <div className="collapse navbar-collapse" id="navbarNav">
+          <ul className="navbar-nav">
+            {!currUser && (
+              <>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/">
+                    Register <span className="sr-only">(current)</span>
+                  </Link>
+                </li>
+                <li className="nav-item active">
+                  <Link className="nav-link" to="/login">Log in</Link>
+                </li>
+              </>
+            )}
+            {checkLevel("새가족") && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/add">등록</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/edit">맴버수정</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/delete">맴버삭제</Link>
+                </li>
+                <Link className="nav-link" to="/agreement">Agreement</Link>
+                <Link className="nav-link" to="/database/all">Database - All</Link>
+                <Link className="nav-link" to="/database/family">Database - Family</Link>
+                <Link className="nav-link" to="/database/archive">Database - Archive</Link>
+                <Link className="nav-link" to="/database/active">Database - Active</Link>
+                <Link className="nav-link" to="/database/visitor">Database - Visitor</Link>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/search-card">등록카드</Link>
+                </li>
+              </>
+            )}
+            {(checkLevel("새가족") || checkLevel("아동부")) && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/contacts/children">아동부</Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/edit">맴버수정</Link>
+            )}
+            {checkLevel("재정부") && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/main/finance">재정부</Link>
               </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/delete">맴버삭제</Link>
+            )}
+            {(checkLevel("새가족") || checkLevel("유스")) && (
+              <li className="nav-item">
+                <Link className="nav-link" to="/main/youth">중고등부</Link>
               </li>
-              <Link class="nav-link " to="/agreement">Agreement</Link>
-              <Link class="nav-link " to="/database/all">Database - All </Link>
-              <Link class="nav-link" to="/database/family"> Database - Family </Link>
-              <Link class="nav-link" to="/database/archive"> Database - Archive </Link>
-              <Link class="nav-link" to="/database/active"> Database - Active </Link>
-              <Link class="nav-link" to="/database/visitor"> Database - Visitor </Link>
-              <li class="nav-item">
-                <Link class="nav-link" to="/search-card">등록카드</Link>
-              </li>
-            </section> : null}
-            {/* 아동부 */}
-            {checkLevel("새가족") || checkLevel("아동부") ? <li class="nav-item">
-              <Link class="nav-link" to="/contacts/children">아동부</Link>
-            </li> : null}
-            {checkLevel("재정부") ?
-              <li class="nav-item">
-                <Link class="nav-link" to="/main/finance">재정부</Link>
-              </li> : null}
-            {checkLevel("새가족") || checkLevel("유스") ? <li class="nav-item">
-              <Link class="nav-link " to="/main/youth">중고등부</Link>
-            </li> : null}
-            {/* Anyone can see */}
-            {checkLevel("general") || checkLevel("새가족") ? <section style={{ display: "flex", flexDirection: "row" }}>
-              <li class="nav-item">
-                <Link class="nav-link" to="/main/secondary">청년부</Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/main/pastors">교역자</Link>
-              </li>
-              <li class="nav-item">
-                <Link class="nav-link" to="/contacts/adults">장년부</Link>
-              </li>
-            </section> : null}
-            {/* remove if logged in */}
-            <li class="nav-item">
-                <Link class="nav-link" to="/profile">프로필</Link>
-              </li>
-
+            )}
+            {(checkLevel("general") || checkLevel("새가족")) && (
+              <>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/main/secondary">청년부</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/main/pastors">교역자</Link>
+                </li>
+                <li className="nav-item">
+                  <Link className="nav-link" to="/contacts/adults">장년부</Link>
+                </li>
+              </>
+            )}
+            <li className="nav-item">
+              <Link className="nav-link" to="/profile">프로필</Link>
+            </li>
           </ul>
         </div>
       </nav>
+
       <br />
       <UserContext.Provider value={[currUser, auth]}>
         <Routes>
@@ -129,7 +149,7 @@ function App() {
           <Route path="/main/children" element={<Child />} />
           <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />
           <Route path="/add" element={<AddMember />} />
-          <Route path={`/tebah-family`} element={<Family />} />
+          {/* <Route path={`/tebah-family`} element={<Family />} /> */}
           <Route path={`/agreement`} element={<Agreement />} />
           <Route path={`/search-card`} element={<SearchCard />} />
 
@@ -137,7 +157,7 @@ function App() {
           <Route path={`/contacts/:route`} element={<Contacts />} />
           <Route path={`/main/pastors`} element={<Pastor />} />
           <Route path="/verify" element={<Verify />} />
-          <Route path={`/database/:type`} element={<Database/>} /> 
+          <Route path={`/database/:type`} element={<Database />} />
         </Routes>
       </UserContext.Provider>
     </div>

@@ -12,7 +12,7 @@ function Child() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(text));
+      let filteredArray = data.filter(info => info.korean.includes(text) || info.english_name.toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])

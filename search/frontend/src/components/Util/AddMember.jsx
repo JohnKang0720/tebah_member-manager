@@ -78,7 +78,7 @@ const AddMember = () => {
     return (
         <>
             <h1>Add Member Form </h1>
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="member-form">
                 {currentPage === 1 && (
                     <div>
                         <h4>Page 1</h4>
