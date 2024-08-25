@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db')
 
-//TODO
 router.get("/:type", (req, res) => {
     let { cols } = req.query
     let { type } = req.params

@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const date = new Date()
-// const sql = require('mysql2');
 const db = require('../db')
 
 db.connect((err) => {
@@ -111,7 +110,7 @@ router.get("/pastors", (req, res) => {
 // //view finance data
 router.get("/finance", (req, res) => {
     let { cols } = req.query
-    db.query(`SELECT ${cols} FROM mytable WHERE (status is null or status != 'archive') ORDER BY offering_num`, (err, result) => {
+    db.query(`SELECT ${cols} FROM mytable WHERE (status is null or status != 'archive') ORDER BY id DESC`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })

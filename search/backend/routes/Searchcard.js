@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db')
 
+//TODO: find more efficient way of fetching child + parent.
 router.get("/:query", (req, res) => {
     let {query} = req.params
     db.query(`SELECT * FROM mytable WHERE korean='${query}'`

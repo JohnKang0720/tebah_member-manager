@@ -1,7 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
-import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 
 
@@ -9,7 +8,7 @@ function Pastor() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("main/pastors", ["id", "korean", "english_name", "offering_num", "registered"]);
+  const [data, fields, error, loading] = useFetch("main/pastors", ["korean", "english_name", "offering_num", "registered"]);
 
   useEffect(() => {
     if (data) {

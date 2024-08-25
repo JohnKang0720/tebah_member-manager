@@ -9,7 +9,7 @@ body,html {
 
 body {
   overflow-x: hidden;
-  height: 100vh;
+  height: 100%;
   text-align: center;
   background-image: url('../public/bg3.jpg'); 
   background-size: cover;

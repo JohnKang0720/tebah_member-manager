@@ -68,14 +68,14 @@ function App() {
           <ul className="navbar-nav">
             {!currUser && (
               <>
-                <li className="nav-item active">
+                {/* <li className="nav-item active">
                   <Link className="nav-link" to="/">
                     Register <span className="sr-only">(current)</span>
                   </Link>
-                </li>
-                <li className="nav-item active">
+                </li> */}
+                {/* <li className="nav-item active">
                   <Link className="nav-link" to="/login">Log in</Link>
-                </li>
+                </li> */}
               </>
             )}
             {checkLevel("새가족") && (
@@ -128,9 +128,9 @@ function App() {
                 </li>
               </>
             )}
-            <li className="nav-item">
+            {currUser ?  <li className="nav-item">
               <Link className="nav-link" to="/profile">프로필</Link>
-            </li>
+            </li> : null}
           </ul>
         </div>
       </nav>

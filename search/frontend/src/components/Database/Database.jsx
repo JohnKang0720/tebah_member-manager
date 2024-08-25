@@ -5,6 +5,7 @@ import { useFetch } from "../../useFetch";
 import View from "../Util/View";
 import styles from "./Database.module.css"; 
 
+
 export default function Database() {
   const param = useParams();
   const [arr, setArr] = useState([]);
@@ -17,6 +18,7 @@ export default function Database() {
   };
 
   const [data, fields, error, loading] = useFetch(chooseURL(param.type), [
+    "id",
     "korean",
     "english_name",
     "mobile",
@@ -32,7 +34,7 @@ export default function Database() {
   return (
     <div className={styles["database-container"]}>
       <div className={styles["database-header"]}>Database {param.type}</div>
-      <View data={[loading, text, data, arr, fields, 6]} />
+      <View data={[loading, text, data, arr, fields, fields.length]} />
     </div>
   );
 }

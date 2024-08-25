@@ -5,6 +5,7 @@ import axios from 'axios'
 import View from './Util/View';
 import { useParams } from 'react-router-dom';
 
+// TODO: show province and city
 function Contacts() {
     const [text, setText] = useState("");
     const [filtered, setFiltered] = useState([]);
@@ -12,7 +13,7 @@ function Contacts() {
     const [arr, setArr] = useState([]);
     const param = useParams()
 
-    const [data, fields, error, loading] = useFetch(`contacts/${param.route}`, ["id", "korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
+    const [data, fields, error, loading] = useFetch(`contacts/${param.route}`, ["korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
 
     const filter = () => {
         const url = `http://localhost:5000/contacts/${param.route}`
@@ -27,7 +28,7 @@ function Contacts() {
     }
 
     return (
-        <div><h1> {param.route.toUpperCase()} 연락망 </h1>
+        <div><h1> {param.route === "children" ? "아동부" : "장년부"} 연락망 </h1>
             {/* <strong> Search member: </strong>
             <br /> */}
             {/* <input placeholder='검색' onChange={e => setText(e.target.value)} />

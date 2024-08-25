@@ -82,34 +82,34 @@ const AddMember = () => {
                 {currentPage === 1 && (
                     <div>
                         <h4>Page 1</h4>
-                        <label>
+                        {/* <label>
                             Offering Number:
                             <input type="text" name="offering_num" value={formData.offering_num} onChange={handleChange} />
-                        </label>
+                        </label> */}
                         <label>
-                            Korean Name:
+                            한글 이름:
                             <input type="text" name="korean" value={formData.korean} onChange={handleChange} />
                         </label>
                         <label>
-                            English Name:
+                            영문 이름:
                             <input type="text" name="english_name" value={formData.english_name} onChange={handleChange} />
                         </label>
                         <label>
-                            Gender:
+                            성별:
                             <input type="text" name="gender" value={formData.gender} onChange={handleChange} />
                         </label>
                         <label>
-                            Title:
+                            직분:
                             <input type="text" name="title" value={formData.title} onChange={handleChange} />
                         </label>
                         <label>
-                            Birthdate:
+                            생년월일:
                             <input type="date" name="birthdate" value={formData.birthdate} onChange={handleChange} />
                         </label>
-                        <label>
-                            Age:
+                        {/* <label>
+                            나이:
                             <input type="number" name="age" value={formData.age} onChange={handleChange} />
-                        </label>
+                        </label> */}
                     </div>
                 )}
 
@@ -117,19 +117,19 @@ const AddMember = () => {
                     <div>
                         <h4>Page 2</h4>
                         <label>
-                            Baptism:
+                            신급:
                             <input type="text" name="baptism" value={formData.baptism} onChange={handleChange} />
                         </label>
                         <label>
-                            Baptism Date:
+                            세례년도:
                             <input type="date" name="baptism_date" value={formData.baptism_date} onChange={handleChange} />
                         </label>
                         <label>
-                            Email:
+                            이메일:
                             <input type="email" name="email" value={formData.email} onChange={handleChange} />
                         </label>
                         <label>
-                            Mobile:
+                            전화번호:
                             <input type="text" name="mobile" value={formData.mobile} onChange={handleChange} />
                         </label>
                         <label>

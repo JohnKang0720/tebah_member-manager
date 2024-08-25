@@ -2,6 +2,7 @@
 import React from 'react';
 import '../../App.css'; // Import the CSS file
 
+// TODO: combine suite, street, province city .... 
 function View(props) {
   const [loading, text, data, filtered, fields, grid_len] = props.data;
   

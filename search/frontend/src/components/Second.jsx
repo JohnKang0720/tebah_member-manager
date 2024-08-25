@@ -1,15 +1,13 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
-import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
-import EditMember from './Util/EditMember';
 
 function Second() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("main/secondary", ["id", "korean", "english_name", "mobile", "suite", "street"]);
+  const [data, fields, error, loading] = useFetch("main/secondary", ["korean", "english_name", "mobile", "suite", "street"]);
 
   useEffect(() => {
     if (data) {

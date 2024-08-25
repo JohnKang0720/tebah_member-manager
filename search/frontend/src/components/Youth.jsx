@@ -1,10 +1,11 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
-import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
-import EditMember from './Util/EditMember';
 
+// 아빠 엄마 구분 by gender
+// 등록한부모 정보만
+// change column name from parent1 to 부모
 function Youth() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);

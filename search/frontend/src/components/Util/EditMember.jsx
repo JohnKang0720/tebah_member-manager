@@ -2,7 +2,7 @@ import React from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 
-// Edit member for each page, not seperate
+// TODO: import the Active Database component here below the Edit Inputs.
 function EditMember() {
     const [info, setInfo] = useState({
         id: 0,

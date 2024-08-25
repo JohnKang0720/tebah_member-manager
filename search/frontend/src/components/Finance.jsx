@@ -6,13 +6,17 @@ import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 import EditMember from './Util/EditMember';
 
+
+// TODO: CATCH duplicated offering numbers
+// Change registered -> registration date
+// allow dashes as offering numbers
 function Finance() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [id, setId] = useState(0);
   const [num, setNum] = useState(0);
 
-  const [data, fields, error, loading] = useFetch("main/finance", ["korean", "english_name", "offering_num", "registered"]);
+  const [data, fields, error, loading] = useFetch("main/finance", ["id", "korean", "english_name", "offering_num", "registered"]);
 
   useEffect(() => {
     if (data) {
@@ -26,6 +30,7 @@ function Finance() {
     })
       .then(res => {
         console.log(res)
+        window.location.reload()
       }).catch(err => console.log(err))
   }
 
