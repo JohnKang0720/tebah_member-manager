@@ -1,0 +1,22 @@
+.database-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .database-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    overflow-y: auto;
+  }
+
+  .database-header{
+    margin-top:30px;
+    font-weight: 700;
+    font-size: 2rem;
+  }

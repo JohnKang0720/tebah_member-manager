@@ -20,7 +20,7 @@ import Pastor from './components/Pastor'
 import Agreement from './components/Agreement';
 import Verify from './components/Util/Verify';
 import SearchCard from './components/SearchCard';
-import Database from './components/Database';
+import Database from './components/Database/Database';
 
 export const UserContext = createContext(null);
 
