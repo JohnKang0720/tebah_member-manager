@@ -4,7 +4,6 @@ import axios from 'axios';
 import View from './Util/View';
 import { useParams } from 'react-router-dom';
 
-// TODO: show province and city
 function Contacts() {
     const [text, setText] = useState("");
     const [filtered, setFiltered] = useState([]);
@@ -12,10 +11,10 @@ function Contacts() {
     const [arr, setArr] = useState([]);
     const param = useParams();
 
-    const [data, fields, error, loading] = useFetch(`contacts/${param.route}`, ["korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
+    const [data, fields, error, loading] = useFetch(`main/youth/아동부`, ["korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
 
     const filter = () => {
-        const url = `http://localhost:5001/contacts/${param.route}`;
+        const url = `http://localhost:5000/contacts/${param.route}`;
         axios.post(url, {
             code: code
         }).then(res => {
@@ -28,14 +27,7 @@ function Contacts() {
 
     return (
         <div style={{ paddingTop: '30px', paddingBottom: '20px', textAlign: 'center' }}>
-            <h1>{param.route.toUpperCase()} 연락망</h1>
-            {/* <strong> Search member: </strong>
-            <br /> */}
-            {/* <input placeholder='검색' onChange={e => setText(e.target.value)} />
-            <br />
-            <br /> */}
-          
-
+            <h1> 아동부 연락망</h1>
             <div className="input-div" style={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
                 <div style={{paddingTop:'22px', paddingBottom:'22px'}}>
                     <input

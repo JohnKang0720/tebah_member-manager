@@ -26,7 +26,7 @@ body {
   align-items: center;
   min-height: 100vh; /* Takes at least full viewport height */
   text-align: center;
-  overflow-x: hidden; /* Prevents horizontal scrolling */
+  overflow-x: hidden; 
 }
 
 button {
@@ -38,18 +38,17 @@ button {
 }
 
 .table, .table2, .table3 {
-  width: 100%;
+  max-width: 100%;
   height:450px;
   /* border: solid 1px black; */
   margin: 2.5px;
   display: grid;
-  overflow-x: auto;
+  overflow-x: scroll;
   white-space: nowrap;
   text-align: center;
 }
 
 .table {
-  /* grid-template-columns: repeat(8, 1fr); */
   padding: 20px;
 }
 
@@ -144,10 +143,11 @@ button {
 }
 
 .table-container {
+  max-width: 95%;
   display: flex;
   flex-direction: column;
   justify-content: center;  
-  align-items: center;      
+  align-items: center;   
   height: 100vh;                     
   background-color: rgba(255, 255, 255, 0.7); 
   border-radius: 20px;

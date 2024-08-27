@@ -24,8 +24,10 @@ export const useFetch = (keyword, c) => {
         setLoading(true)
         await axios.get(`${BASE_URL}${keyword}`, options)
         .then(res => {
-            setFields(res.data.fields)
-            setData(res.data.rows)
+            if (res.data.rows) {
+                setFields(res.data.fields)
+                setData(res.data.rows)
+            }
         })
         .catch(err => console.log(err))
         .finally(() => {

@@ -3,15 +3,11 @@ import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
 import View from './Util/View';
 
-// 아빠 엄마 구분 by gender
-// 등록한부모 정보만
-// change column name from parent1 to 부모
 function Youth() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("main/youth", ["korean", "mobile", "email", "suite", "street"]);
-
+  const [data, fields, error, loading] = useFetch("main/youth/유스", ["korean", "mobile", "email", "suite", "street"]);
 
   useEffect(() => {
     if (data) {

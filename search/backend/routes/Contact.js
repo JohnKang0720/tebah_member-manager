@@ -21,7 +21,6 @@ router.get('/:group', (req, res) => {
     })
 })
 
-//TODO: make it so that i can only access ids that are within the contact tab;e
 //search family information
 router.post('/:group', (req, res) => {
     const { code } = req.body;

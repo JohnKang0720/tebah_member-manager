@@ -8,15 +8,13 @@ import EditMember from './Util/EditMember';
 
 
 // TODO: CATCH duplicated offering numbers
-// Change registered -> registration date
-// allow dashes as offering numbers
 function Finance() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [id, setId] = useState(0);
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState("");
 
-  const [data, fields, error, loading] = useFetch("main/finance", ["id", "korean", "english_name", "offering_num", "registered"]);
+  const [data, fields, error, loading] = useFetch("main/finance", ["id", "korean", "english_name", "offering_num", "registered_date"]);
 
   useEffect(() => {
     if (data) {
@@ -25,13 +23,26 @@ function Finance() {
     }
   }, [text])
 
-  const assignNum = () => {
-    axios.put(`https://tebah-member-manager.vercel.app/main/finance/${id}/${num}`, {
+  const isDuplicate = (num) => {
+    let dup = false
+    data.map(d => {
+      if (d.offering_num === num) {
+        dup = true
+      }
     })
-      .then(res => {
-        console.log(res)
-        window.location.reload()
-      }).catch(err => console.log(err))
+    return dup
+  }
+
+  const assignNum = () => {
+    if (isDuplicate(num)) {
+      alert("Invalid offering number!")
+    } else {
+      axios.put(`http://localhost:5000/main/finance/${id}/${num}`, {
+      })
+        .then(res => {
+          window.location.reload()
+        }).catch(err => console.log(err))
+    }
   }
 
   return (

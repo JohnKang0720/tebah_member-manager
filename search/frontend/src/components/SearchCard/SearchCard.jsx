@@ -7,8 +7,8 @@ export default function SearchCard() {
   const [arr, setArr] = useState([]);
   const [family, setFamily] = useState([]);
 
-  const family_columns = [{ "성명 (한글)": "korean" }, { "성명 (영문)": "english_name" }, { "생년월일": "birthdate" }, { "관계": "-" }, { "세례년도": "baptism_date" }, { "직분": "level" }, { "교인번호": "registered" }];
-  const info_column_1 = [{ "성명": "korean" }, { "생년월일": "birthdate" }, { "주소": "street" }, { "우편번호": "postal_code" }, { "전화번호": "mobile" }, { "이메일": "email" }, { "교인번호": "registered" }];
+  const family_columns = [{ "성명 (한글)": "korean" }, { "성명 (영문)": "english_name" }, { "생년월일": "birthdate" }, { "관계": "-" }, { "세례년도": "baptism_date" }, { "직분": "level" }, { "등록날짜": "registered_date" }];
+  const info_column_1 = [{ "성명": "korean" }, { "생년월일": "birthdate" }, { "주소": "street" }, { "우편번호": "postal_code" }, { "전화번호": "mobile" }, { "이메일": "email" }, { "등록날짜": "registered_date" }];
   const info_column_2 = [{ "성별": "gender" }, { "신급": "title" }, { "세례년도": "baptism_date" }, { "직분": "level" }, { "취미/특기": "hobby" }, { "봉사경력": "volunteering" }, { "헌금번호": "offering_num" }];
 
   const filter = () => {

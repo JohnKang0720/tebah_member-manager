@@ -21,6 +21,7 @@ import Agreement from './components/Agreement';
 import Verify from './components/Util/Verify';
 import SearchCard from './components/SearchCard/SearchCard';
 import Database from './components/Database/Database';
+import Adults from './components/Adults';
 
 export const UserContext = createContext(null);
 
@@ -124,7 +125,7 @@ function App() {
                   <Link className="nav-link" to="/main/pastors">교역자</Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/contacts/adults">장년부</Link>
+                  <Link className="nav-link" to="/main/adults">장년부</Link>
                 </li>
               </>
             )}
@@ -152,6 +153,8 @@ function App() {
           {/* <Route path={`/tebah-family`} element={<Family />} /> */}
           <Route path={`/agreement`} element={<Agreement />} />
           <Route path={`/search-card`} element={<SearchCard />} />
+          <Route path={`/main/adults`} element={<Adults />} />
+
 
           <Route path={`/password/:username`} element={<Password />} />
           <Route path={`/contacts/:route`} element={<Contacts />} />

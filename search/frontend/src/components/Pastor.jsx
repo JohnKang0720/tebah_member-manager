@@ -8,7 +8,7 @@ function Pastor() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, fields, error, loading] = useFetch("main/pastors", ["korean", "english_name", "offering_num", "registered"]);
+  const [data, fields, error, loading] = useFetch("main/pastors", ["korean", "english_name", "offering_num", "registered_date"]);
 
   useEffect(() => {
     if (data) {

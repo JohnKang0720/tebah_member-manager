@@ -7,14 +7,28 @@ db.connect((err) => {
     console.log("Connected")
 })
 
-//TODO
 //Inserts data
 router.post("/", (req, res) => {
+    function calcAge(birthday) {
+        const birthDate = new Date(birthday);
+        const today = new Date();
+    
+        let calculatedAge = today.getFullYear() - birthDate.getFullYear();
+        const monthDifference = today.getMonth() - birthDate.getMonth();
+        const dayDifference = today.getDate() - birthDate.getDate();
+
+        if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+            calculatedAge--;
+        }
+        
+        return calculatedAge;
+    }
+
     const { data } = req.body
     if (data) {
         for (let i = 0; i <= data.length; i++) {
             if (data[i]) {
-                db.query(`INSERT INTO mytable (offering_num, korean, english_name, gender, title, birthdate, age, baptism, baptism_date, email, mobile, suite, street, city, province, postal_code, country, marital_status, hobby, volunteer, consent, registered, last_updated, f_code, p_code_1, p_code_2, level, status) VALUES ('${data[i]["offering_num"]}', '${data[i]["korean"]}', '${data[i]["english_name"]}', '${data[i]["gender"]}', '${data[i]["title"]}',  '${data[i]["birthdate"]}', '${data[i]["age"]}', '${data[i]["baptism"]}', '${data[i]["baptism_date"]}', '${data[i]["email"]}', '${data[i]["mobile"]}', '${data[i]["suite"]}', '${data[i]["street"]}', '${data[i]["city"]}', '${data[i]["province"]}', '${data[i]["postal_code"]}', '${data[i]["country"]}', '${data[i]["marital_status"]}', '${data[i]["hobby"]}', '${data[i]["volunteer"]}',  '${data[i]["consent"]}', '${data[i]["registered"]}', '${data[i]["last_updated"]}', '${data[i]["f_code"]}', ${data[i]["p_code_1"] ? data[i]["p_code_1"] : -1}, ${data[i]["p_code_1"] ? data[i]["p_code_1"] : -1}, '${data[i]["level"]}', '${data[i]["status"]}');`, (err, result) => {
+                db.query(`INSERT INTO mytable (offering_num, korean, english_name, gender, title, birthdate, age, baptism, baptism_date, email, mobile, suite, street, city, province, postal_code, country, marital_status, hobby, volunteer, consent, registered_date, last_updated, f_code, p_code_1, p_code_2, level, status) VALUES ('${data[i]["offering_num"]}', '${data[i]["korean"]}', '${data[i]["english_name"]}', '${data[i]["gender"]}', '${data[i]["title"]}',  '${data[i]["birthdate"]}', '${calcAge(data[i]["birthdate"])}', '${data[i]["baptism"]}', '${data[i]["baptism_date"]}', '${data[i]["email"]}', '${data[i]["mobile"]}', '${data[i]["suite"]}', '${data[i]["street"]}', '${data[i]["city"]}', '${data[i]["province"]}', '${data[i]["postal_code"]}', '${data[i]["country"]}', '${data[i]["marital_status"]}', '${data[i]["hobby"]}', '${data[i]["volunteer"]}',  '${data[i]["consent"]}', '${data[i]["registration_date"]}', '${data[i]["last_updated"]}', '${data[i]["f_code"]}', ${data[i]["p_code_1"] ? data[i]["p_code_1"] : -1}, ${data[i]["p_code_1"] ? data[i]["p_code_1"] : -1}, '${data[i]["level"]}', '${data[i]["status"]}');`, (err, result) => {
                     if (err) throw err;
                 })
             }
@@ -54,53 +68,117 @@ router.delete("/:name", (req, res) => {
 })
 
 // //view youth data
-router.get("/youth", (req, res) => {
-    db.query(`WITH youths AS (SELECT * FROM mytable WHERE level='유스') SELECT 
-    c.korean AS child_name,
-    m.korean AS parent1_name,
-    m2.korean AS parent2_name,
-    c.mobile AS child_mobile,
-    c.email AS child_email,
-    m.mobile AS parent1_mobile,
-    m.email AS parent1_email,
-    m.suite AS parent1_suite,
-    m.street AS parent1_street,
-    m2.email AS parent2_email,
-    m2.suite AS parent2_suite,
-    m2.street AS parent2_street
+
+// SELECT f_code,  STRING_AGG(korean, ', ') AS members_list
+// FROM mytable
+// GROUP BY f_code
+// HAVING f_code != ''
+
+router.get("/youth/:group", (req, res) => {
+    let { group } = req.params
+    if (group === "아동부") {
+        db.query(`WITH child AS (SELECT * FROM mytable WHERE level='${group}') SELECT 
+    c.korean AS 한글이름,
+    c.english_name AS 영문이름,
+    m.korean AS 부모이름1,
+    m2.korean AS 부모이름2,
+    m.mobile AS 전화번호,
+    m.email AS 이메일,
+    CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소
     FROM 
-    youths c
+    child c
     JOIN 
     mytable m ON m.id = c.p_code_1
     JOIN 
     mytable m2 ON m2.id = c.p_code_2
     WHERE (c.status is null or c.status != 'archive');`, (err, result) => {
-        if (err) throw err;
-        res.status(200).send(result);
+            if (err) throw err;
+            res.status(200).send(result);
+        })
+    } else {
+        db.query(`WITH youths AS (SELECT * FROM mytable WHERE level='${group}') SELECT 
+            c.korean AS 한글이름,
+            c.english_name AS 영문이름,
+            m.korean AS 부모이름1,
+            m2.korean AS 부모이름2,
+            c.mobile AS 전화번호,
+            c.email AS 이메일,
+            CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소,
+            m.mobile AS 전화번호_부모,
+            m.email AS 이메일_부모
+            FROM 
+            youths c
+            JOIN 
+            mytable m ON m.id = c.p_code_1
+            JOIN 
+            mytable m2 ON m2.id = c.p_code_2
+            WHERE (c.status is null or c.status != 'archive');`, (err, result) => {
+                if (err) throw err;
+                res.status(200).send(result);
+            })
+    }
+})
+
+router.get("/adults", (req, res) => {
+    db.query(`SELECT 
+    m.korean AS 장년이름,
+    c.korean AS 자녀이름,
+    m.mobile AS 전화번호,
+    m.email AS 이메일,
+    CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소,
+    m.f_code AS 가족코드
+    FROM 
+    mytable c
+    RIGHT JOIN 
+    mytable m ON m.id = c.p_code_1
+    WHERE (c.status is null or c.status != 'archive') AND m.level = '장년';`, (err, result) => {
+        if (err) throw err
+        res.send(result)
     })
 })
 
 // //view secondary data
 router.get("/secondary", (req, res) => {
     let { cols } = req.query
-    db.query(`SELECT ${cols} FROM mytable WHERE level='청년' AND (status is null or status != 'archive')`, (err, result) => {
+    db.query(`SELECT 
+        korean AS 한글이름,
+        english_name AS 영문이름,
+        mobile AS 전화번호,
+        CONCAT( suite, ' ', street, ' ', city, ', ', province, ' ', postal_code) AS 주소
+        FROM mytable WHERE level='청년' AND (status is null or status != 'archive')`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
 })
 
 // //view children data
-router.get("/children", (req, res) => {
-    db.query("SELECT * FROM mytable WHERE level='아동부' AND (status is null or status != 'archive')", (err, result) => {
-        if (err) throw err;
-        res.status(200).send(result);
-    })
-})
+// router.get("/children", (req, res) => {
+//     db.query("SELECT * FROM mytable WHERE level='아동부' AND (status is null or status != 'archive')", (err, result) => {
+//         if (err) throw err;
+//         res.status(200).send(result);
+//     })
+// })
 
 //pastor data
 router.get("/pastors", (req, res) => {
     let { cols } = req.query
-    db.query(`SELECT ${cols} FROM mytable WHERE level='교역자' AND (status is null or status != 'archive')`, (err, result) => {
+    db.query(`SELECT 
+            c.korean AS 한글이름,
+            c.english_name AS 영문이름,
+            m.korean AS 부모이름1,
+            m2.korean AS 부모이름2,
+            c.mobile AS 전화번호,
+            c.email AS 이메일,
+            CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소,
+            m.mobile AS 전화번호_부모,
+            m.email AS 이메일_부모
+            FROM 
+            mytable c
+            RIGHT JOIN 
+            mytable m ON m.id = c.p_code_1
+            LEFT JOIN 
+            mytable m2 ON m2.id = c.p_code_2
+            WHERE (c.status is null or c.status != 'archive') AND (m.level = '교역자' OR m2.level = '교역자') ;`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -110,7 +188,7 @@ router.get("/pastors", (req, res) => {
 // //view finance data
 router.get("/finance", (req, res) => {
     let { cols } = req.query
-    db.query(`SELECT ${cols} FROM mytable WHERE (status is null or status != 'archive') ORDER BY id DESC`, (err, result) => {
+    db.query(`SELECT ${cols} FROM mytable ORDER BY id DESC`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -120,12 +198,11 @@ router.get("/finance", (req, res) => {
 // //TODO: make sure it edits in the contact tables as well
 router.put("/finance/:id/:num", (req, res) => {
     const { id, num } = req.params;
-    db.query(`UPDATE mytable SET offering_num=${num} WHERE id=${id}`, (err, result) => {
+    db.query(`UPDATE mytable SET offering_num='${num}' WHERE id=${id}`, (err, result) => {
         if (err) throw err;
         console.log("edited (offering number)");
         res.status(200).send(result);
     });
 })
-
 
 module.exports = router;

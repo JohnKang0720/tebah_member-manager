@@ -10,22 +10,22 @@
     font-family: "Comfortaa", sans-serif;
 }
 
-
 .box{
     padding: 20px;             
     border-radius: 20px;        
-    display: flex;             
-    flex-direction: column;    
-    text-align: center;          
+    text-align: start;          
     color: black;              
     margin: 10px 0;            
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
     width: 360px;
     height: 600px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     gap: 20px;
     background: #d1dee7;
+}
+
+.innerbox {
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }

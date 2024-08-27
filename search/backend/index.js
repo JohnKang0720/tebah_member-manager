@@ -41,6 +41,14 @@ app.post("/archive", (req, res) => {
     })
 })
 
+app.get("/profile/:email", (req, res) => {
+    let {email} = req.params
+    db.query(`SELECT korean AS 이름, mobile AS 번호 FROM mytable WHERE email='${email}'`, (err, result) => {
+        if(err) throw err
+        res.status(200).send(result)
+    })
+})
+
 app.listen(5000, () => {
     console.log("server starting...")
 })

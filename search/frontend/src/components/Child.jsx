@@ -4,7 +4,6 @@ import { useFetch } from '../useFetch'
 import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 
-// same format as Youth
 function Child() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);

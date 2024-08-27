@@ -4,28 +4,35 @@ import { UserContext } from "../../App";
 import { logout } from "../../firebaseFns";
 import { useNavigate } from "react-router-dom";
 import styles from "./Profile.module.css";
+import { useFetch } from "../../useFetch";
 
-// Put other basic information
 export default function Profile() {
   const [user, auth] = useContext(UserContext);
   const navigate = useNavigate();
 
-  //FETCH FROM DB TO GET MORE INFO
+  const [data, fields, error, loading] = useFetch(`profile/kangjohn00000@gmail.com`, ["id", "korean", "english_name", "offering_num", "registered_date"]);
 
   return (
     <div className={styles.main}>
       <div className={styles.box}>
         <h1>Profile</h1>
         {user ? (
-          <>
-            이메일: <p> {user.email} </p>
-            생성날짜: <p> {user.metadata.creationTime} </p>
-            UID: <p> {user.name} </p>
-            <button class="btn btn-danger" onClick={() => logout(navigate)}>
+          <div className={styles.innerbox}>
+            <div> 이메일: <span> {user.email} </span> </div>
+            {
+              fields.map(f => {
+                return <div> <span> {f.name}: </span> {data.map(info => (
+                  <span key={info.id}>
+                    {info[f.name] ? info[f.name] : "NA"}
+                  </span>
+                ))} </div>
+              })
+            }
+            <div style={{textAlign: "center"}}> <button class="btn btn-danger" onClick={() => logout(navigate)}>
               {" "}
               로그아웃{" "}
-            </button>
-          </>
+            </button> </div>
+          </div>
         ) : (
           "Not signed in"
         )}

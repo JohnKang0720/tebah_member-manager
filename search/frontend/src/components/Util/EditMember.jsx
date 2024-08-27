@@ -1,14 +1,29 @@
-import React from 'react'
+import React, {  } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
+import View from './View';
+import styles from "../Database/Database.module.css"; 
+import { useFetch } from '../../useFetch';
 
-// TODO: import the Active Database component here below the Edit Inputs.
 function EditMember() {
     const [info, setInfo] = useState({
         id: 0,
         column: "",
         content: ""
     });
+    const [arr, setArr] = useState([]);
+    const [text, setText] = useState("");
+
+    const [data, fields, error, loading] = useFetch("database/all", [
+        "id",
+        "korean",
+        "english_name",
+        "mobile",
+        "email",
+        "suite",
+        "street",
+    ]);
+
 
     const handleEdit = () => {
         axios.put("http://localhost:5000/main", {
@@ -34,7 +49,7 @@ function EditMember() {
                 })} />
                 <br />
                 <br />
-                <input class="form-control"  value={info.column} placeholder='Column' onChange={e => setInfo({
+                <input class="form-control" value={info.column} placeholder='Column' onChange={e => setInfo({
                     id: info.id,
                     column: e.target.value,
                     content: info.content
@@ -46,9 +61,13 @@ function EditMember() {
                     column: info.column,
                     content: e.target.value
                 })} />
-                <br/>
+                <br />
                 <br />
                 <button class="btn btn-success" onClick={handleEdit}> 수정 </button>
+            </div>
+            <hr />
+            <div className={styles["database-container"]}>
+                <View data={[loading, text, data, arr, fields, fields.length]} />
             </div>
         </div>
     )
