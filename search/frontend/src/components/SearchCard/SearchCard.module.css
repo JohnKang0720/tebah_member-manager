@@ -3,7 +3,7 @@ h1{
   margin-top:20px;
   margin-bottom: 20px;
 }
-/* Parent container to center everything */
+
 .main-container {
     display: flex;            
     flex-direction: column;   
@@ -13,7 +13,6 @@ h1{
     width: 100vw;             
   }
   
-  /* Container for the search bar */
   .search-bar {
     margin-bottom: 30px;   
   }
@@ -25,7 +24,6 @@ h1{
     margin-right: 10px;
   }
 
-  /* Search button styling */
   .search-bar button {
     background-color: #155a8f;  
     color: white;             
@@ -37,12 +35,10 @@ h1{
     transition: background-color 0.3s; 
   }
   
-  /* Button hover effect */
   .search-bar button:hover {
     background-color: #0056b3; 
   }
   
-  /* Card container styling */
   .card-container {
     display: flex;            
     justify-content: center;  
@@ -51,7 +47,6 @@ h1{
     width: 100%;              
   }
   
-  /* Search card styling */
   .search-card {
     background-color: rgba(255, 255, 255, 0.8); 
     border-radius: 20px;                        

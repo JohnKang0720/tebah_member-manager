@@ -38,7 +38,7 @@ function EditMember() {
     }
 
     return (
-        <div className='inputs'>
+        <div style={{marginTop: '30px'}} className='inputs'>
             <h5> 맴버 수정 </h5>
             <div>
                 <br />
@@ -63,7 +63,7 @@ function EditMember() {
                 })} />
                 <br />
                 <br />
-                <button class="btn btn-success" onClick={handleEdit}> 수정 </button>
+                <button style = {{width: '220px'}} class="btn btn-success" onClick={handleEdit}> 수정 </button>
             </div>
             <hr />
             <div className={styles["database-container"]}>
