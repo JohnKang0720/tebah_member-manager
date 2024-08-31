@@ -136,10 +136,22 @@ button {
   text-align: left;
 }
  
+.member-form {
+  width:500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  align-items: center;   
+  height: 80vh;                   
+  background-color: rgba(255, 255, 255, 0.7); 
+  border-radius: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
 .member-form div{
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 6px;
 }
 
 .table-container {

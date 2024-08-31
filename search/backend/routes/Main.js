@@ -99,11 +99,11 @@ router.get("/youth/:group", (req, res) => {
         db.query(`WITH youths AS (SELECT * FROM mytable WHERE level='${group}') SELECT 
             c.korean AS 한글이름,
             c.english_name AS 영문이름,
+             c.mobile AS 전화번호_유스,
+            c.email AS 이메일_유스,
+            CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소,
             m.korean AS 부모이름1,
             m2.korean AS 부모이름2,
-            c.mobile AS 전화번호,
-            c.email AS 이메일,
-            CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소,
             m.mobile AS 전화번호_부모,
             m.email AS 이메일_부모
             FROM 
@@ -153,6 +153,7 @@ router.get("/secondary", (req, res) => {
         korean AS 한글이름,
         english_name AS 영문이름,
         mobile AS 전화번호,
+        email AS 이메일,
         CONCAT( suite, ' ', street, ' ', city, ', ', province, ' ', postal_code) AS 주소
         FROM mytable WHERE level='청년' AND (status is null or status != 'archive')`, (err, result) => {
         if (err) throw err;
@@ -173,14 +174,11 @@ router.get("/pastors", (req, res) => {
     let { cols } = req.query
     db.query(`SELECT 
             m.korean AS 이름,
-            m.english_name AS 영문이름,
             c.korean AS 자녀이름,
             m2.korean AS 아내이름,
             m.mobile AS 전화번호,
             m.email AS 이메일,
-            CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소,
-            m.mobile AS 전화번호,
-            m.email AS 이메일
+            CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소
             FROM 
             mytable c
             RIGHT JOIN 

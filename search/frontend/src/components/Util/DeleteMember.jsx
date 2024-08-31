@@ -22,13 +22,13 @@ function DeleteMember() {
     }
 
     return (
-        <div class="inputs">
+        <div style={{paddingTop:'30px'}} class="inputs">
             <h2> Delete/Archive Member </h2>
             <br />
-            <input style={{ width: "300px" }} class="form-control input-sm" placeholder='맴버 이름' onChange={e => setName(e.target.value)} />
+            <input style={{ width: "350px", marginBottom:'15px' }} class="form-control input-sm" placeholder='맴버 이름' onChange={e => setName(e.target.value)} />
             <div>
-                <button class="btn btn-danger" onClick={handleSubmit}> Delete </button>
-                <button class="btn btn-danger" onClick={handleArchive}> Archive </button>
+                <button style={{width:"170px"}} class="btn btn-danger" onClick={handleSubmit}> Delete </button>
+                <button style={{width:"170px", backgroundColor:'green', border:'green'}} class="btn btn-danger" onClick={handleArchive}> Archive </button>
             </div>
         </div>
     )
