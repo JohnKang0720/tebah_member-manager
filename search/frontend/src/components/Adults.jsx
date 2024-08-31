@@ -2,20 +2,37 @@ import React, { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch';
 import axios from 'axios';
 import View from './Util/View';
-import { useParams } from 'react-router-dom';
 
 export default function Adults() {
-    const [text, setText] = useState("");
-    const [filtered, setFiltered] = useState([]);
     const [code, setCode] = useState(1);
     const [arr, setArr] = useState([]);
-    const param = useParams();
-    const [data, fields, error, loading] = useFetch(`main/adults`, []);
+    const [f, setFields] = useState([])
+    const [data, fields, error, loading] = useFetch(`main/adults/-1`, []);
+    
+    useEffect(() => {
+        setFields(fields)
+    }, [data])
+
+     const filter = () => {
+        console.log(code)
+        axios.get(`http://localhost:5000/main/adults/${code}`)
+        .then(res => {
+            if (res.data.rows.length === 0) {
+                alert("No such family code.");
+            }
+            setFields(res.data.fields)
+            setArr(res.data.rows);
+        }).catch(err => console.log(err));
+    }
 
     return (
         <div>
-            <h1>장년부 기록 (자녀있음) </h1>
-            {!loading ? <View data={[loading, text, data, arr, fields, fields.length]} /> : null}
+            <h1>장년부 기록 </h1>
+            <div className="input-div" style={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
+                <input style={{padding:'10px', width:'200px'}} className="form-control" placeholder='가족코드' type="text" onChange={e => setCode(e.target.value)} />
+                <button  style={{ backgroundColor: '#1D6AB4', width: '100px',padding:'10px'}}  className="btn btn-primary" onClick={filter}>검색</button>
+            </div>
+            {!loading ? <View data={[loading, "", data, arr, f, f.length]} /> : null}
         </div>
     )
 }

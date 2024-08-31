@@ -119,8 +119,9 @@ router.get("/youth/:group", (req, res) => {
     }
 })
 
-router.get("/adults", (req, res) => {
-    db.query(`SELECT 
+router.get("/adults/:code", (req, res) => {
+    let { code } = req.params
+    query = `SELECT 
     m.korean AS 장년이름,
     c.korean AS 자녀이름,
     m.mobile AS 전화번호,
@@ -131,10 +132,18 @@ router.get("/adults", (req, res) => {
     mytable c
     RIGHT JOIN 
     mytable m ON m.id = c.p_code_1
-    WHERE (c.status is null or c.status != 'archive') AND m.level = '장년';`, (err, result) => {
-        if (err) throw err
-        res.send(result)
-    })
+    WHERE (c.status is null or c.status != 'archive') AND m.level = '장년'`
+    if (code == -1) {
+        db.query(query, (err, result) => {
+            if (err) throw err
+            res.send(result)
+        })
+    } else {
+        db.query(`SELECT m.korean AS 부모1, m2.korean AS 부모2, c.korean AS 자녀이름, m.mobile AS 전화번호, m.email AS 이메일, CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소, m.f_code AS 가족코드 FROM  mytable c JOIN mytable m ON m.id = c.p_code_1 JOIN mytable m2 on m2.id = c.p_code_2 WHERE (c.status is null or c.status != 'archive') AND m.level = '장년' AND m.f_code = '${code}'`, (err, result) => {
+            if (err) throw err
+            res.send(result)
+        })
+    }
 })
 
 // //view secondary data
@@ -163,15 +172,15 @@ router.get("/secondary", (req, res) => {
 router.get("/pastors", (req, res) => {
     let { cols } = req.query
     db.query(`SELECT 
-            c.korean AS 한글이름,
-            c.english_name AS 영문이름,
-            m.korean AS 부모이름1,
-            m2.korean AS 부모이름2,
-            c.mobile AS 전화번호,
-            c.email AS 이메일,
+            m.korean AS 이름,
+            m.english_name AS 영문이름,
+            c.korean AS 자녀이름,
+            m2.korean AS 아내이름,
+            m.mobile AS 전화번호,
+            m.email AS 이메일,
             CONCAT( m.suite, ' ', m.street, ' ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소,
-            m.mobile AS 전화번호_부모,
-            m.email AS 이메일_부모
+            m.mobile AS 전화번호,
+            m.email AS 이메일
             FROM 
             mytable c
             RIGHT JOIN 
@@ -187,8 +196,7 @@ router.get("/pastors", (req, res) => {
 
 // //view finance data
 router.get("/finance", (req, res) => {
-    let { cols } = req.query
-    db.query(`SELECT ${cols} FROM mytable ORDER BY id DESC`, (err, result) => {
+    db.query(`SELECT id, korean AS 한글이름, english_name AS 영문이름, offering_num AS 헌금번호, registered_date AS 등록날짜 FROM mytable ORDER BY id DESC`, (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })

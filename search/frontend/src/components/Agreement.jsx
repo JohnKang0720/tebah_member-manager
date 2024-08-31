@@ -14,7 +14,7 @@ function Agreement() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(query) || info.consent.toLowerCase().includes(query.toLowerCase()));
+      let filteredArray = data.filter(info => info["한글이름"].includes(query) || info["동의"].toLowerCase().includes(query.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [query])

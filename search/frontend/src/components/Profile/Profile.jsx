@@ -9,8 +9,7 @@ import { useFetch } from "../../useFetch";
 export default function Profile() {
   const [user, auth] = useContext(UserContext);
   const navigate = useNavigate();
-
-  const [data, fields, error, loading] = useFetch(`profile/kangjohn00000@gmail.com`, ["id", "korean", "english_name", "offering_num", "registered_date"]);
+  const [data, fields, error, loading] = useFetch(`profile/${user ? user.email : ''}`, []); //requires user check as it takes time for component to mount & context to pass
 
   return (
     <div className={styles.main}>
@@ -18,8 +17,8 @@ export default function Profile() {
         <h1>Profile</h1>
         {user ? (
           <div className={styles.innerbox}>
-            <div> 이메일: <span> {user.email} </span> </div>
-            {
+             <div> 이메일: <span> {user.email} </span> </div>
+            { data ?
               fields.map(f => {
                 return <div> <span> {f.name}: </span> {data.map(info => (
                   <span key={info.id}>
@@ -27,7 +26,7 @@ export default function Profile() {
                   </span>
                 ))} </div>
               })
-            }
+            : "No such user"}
             <div style={{textAlign: "center"}}> <button class="btn btn-danger" onClick={() => logout(navigate)}>
               {" "}
               로그아웃{" "}

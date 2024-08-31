@@ -11,7 +11,7 @@ function Youth() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.child_name.includes(text));
+      let filteredArray = data.filter(info => info["한글이름"].includes(text) || info["영문이름"].includes(text));
       setFiltered(filteredArray)
     }
   }, [text])

@@ -15,12 +15,12 @@ router.get("/:type", (req, res) => {
     let { type } = req.params
 
     if (type === "all") {
-        db.query(`SELECT id, korean AS 한국이름, english_name AS 영문이름, email AS 이메일, CONCAT( suite, ' ', street, ' ', city, ', ', province, ' ', postal_code) AS 주소 FROM mytable`, (err, result) => {
+        db.query(`SELECT id, korean AS 한국이름, english_name AS 영문이름, email AS 이메일, CONCAT( suite, ' ', street, ' ', city, ', ', province, ' ', postal_code) AS 주소 FROM mytable ORDER BY id`, (err, result) => {
             if (err) throw err
             res.status(200).send(result)
         })
     } else {
-        db.query(`SELECT id, korean AS 한국이름, english_name AS 영문이름, email AS 이메일, CONCAT( suite, ' ', street, ' ', city, ', ', province, ' ', postal_code) AS 주소 FROM mytable WHERE status='${type}'`, (err, result) => {
+        db.query(`SELECT id, korean AS 한국이름, english_name AS 영문이름, email AS 이메일, CONCAT( suite, ' ', street, ' ', city, ', ', province, ' ', postal_code) AS 주소 FROM mytable WHERE status='${type}' ORDER BY id`, (err, result) => {
             if (err) throw err
             res.status(200).send(result)
         })

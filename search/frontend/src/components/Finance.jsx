@@ -6,19 +6,17 @@ import DeleteMember from './Util/DeleteMember';
 import View from './Util/View';
 import EditMember from './Util/EditMember';
 
-
-// TODO: CATCH duplicated offering numbers
 function Finance() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [id, setId] = useState(0);
   const [num, setNum] = useState("");
 
-  const [data, fields, error, loading] = useFetch("main/finance", ["id", "korean", "english_name", "offering_num", "registered_date"]);
+  const [data, fields, error, loading] = useFetch("main/finance", []);
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(text) || info.english_name.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info["한글이름"].includes(text) || info["영문이름"].toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])

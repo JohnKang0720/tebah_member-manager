@@ -12,7 +12,7 @@ function Pastor() {
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.korean.includes(text) || info.english_name.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info["이름"].includes(text) || info["영문이름"].toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])

@@ -7,40 +7,36 @@ import { useParams } from 'react-router-dom';
 function Contacts() {
     const [text, setText] = useState("");
     const [filtered, setFiltered] = useState([]);
-    const [code, setCode] = useState(1);
-    const [arr, setArr] = useState([]);
     const param = useParams();
 
     const [data, fields, error, loading] = useFetch(`main/youth/아동부`, ["korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
 
-    const filter = () => {
-        const url = `http://localhost:5000/contacts/${param.route}`;
-        axios.post(url, {
-            code: code
-        }).then(res => {
-            if (res.data.rows.length === 0) {
-                alert("No such family code.");
-            }
-            setArr(res.data.rows);
-        }).catch(err => console.log(err));
-    }
+    // const filter = () => {
+    //     const url = `http://localhost:5000/contacts/아동부`;
+    //     axios.post(url, {
+    //         code: code
+    //     }).then(res => {
+    //         if (res.data.rows.length === 0) {
+    //             alert("No such family code.");
+    //         }
+    //         setFiltered(res.data.rows);
+    //         console.log(res.data.rows)
+    //     }).catch(err => console.log(err));
+    // }
 
+    useEffect(() => {
+        if (data) {
+          let filteredArray = data.filter(info => info["한글이름"].includes(text) || info["영문이름"].toLowerCase().includes(text.toLowerCase()));
+          setFiltered(filteredArray)
+        }
+      }, [text])
     return (
         <div style={{ paddingTop: '30px', paddingBottom: '20px', textAlign: 'center' }}>
             <h1> 아동부 연락망</h1>
             <div className="input-div" style={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
-                <div style={{paddingTop:'22px', paddingBottom:'22px'}}>
-                    <input
-                        style={{padding:'10px'}}
-                        className="form-control"
-                        placeholder="가족코드 입력"
-                        onChange={e => setCode(e.target.value)}
-                    />
-                </div>
-                <button  style={{ backgroundColor: '#1D6AB4', width: '100px',padding:'10px'}}  className="btn btn-primary" onClick={filter}>검색</button>
+                맴버검색: <input style={{padding:'10px', width:'200px'}} className="form-control" placeholder='이름' type="text" onChange={e => setText(e.target.value)} />
             </div>
-       
-            <View data={[loading, text, data, arr, fields, fields.length]} />
+            <View data={[loading, text, data, filtered, fields, fields.length]} />
         </div>
     );
 }
