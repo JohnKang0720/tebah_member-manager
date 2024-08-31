@@ -36,7 +36,10 @@ function Login() {
   };
 
   return (
-    <>
+    <form onSubmit={(e) => {
+      e.preventDefault(); // Prevent the form from reloading the page
+      process(username);  // Your form processing function
+  }}>
       <div className={styles.main}>
         <div className={styles.box}>
           <img src="/logo.png" alt="Logo" className={styles.logo} />
@@ -45,16 +48,17 @@ function Login() {
             onChange={(e) => setUser(e.target.value)}
             placeholder="User Email"
             className={styles.inputField}
+            value={username}
           />
         
        
-          <button class="btn btn-success" className={styles.btn} onClick={() => process(username)}>
+          <button type="submit" class="btn btn-success" className={styles.btn}>
             {" "}
             Submit{" "}
           </button>
         </div>
       </div>
-    </>
+    </form  >
   );
 }
 

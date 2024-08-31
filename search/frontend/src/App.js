@@ -50,8 +50,8 @@ function App() {
 
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="/login">
+      <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{padding: "10px"}}>
+        <a className="navbar-brand" href="/login" style={{margin: 0}}>
           <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width="50px" alt="brand-logo" />
         </a>
         <button
@@ -81,55 +81,76 @@ function App() {
             )}
             {checkLevel("새가족") && (
               <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/add">등록</Link>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    새가족
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li className="nav-item dropdown-item">
+                      <Link className="nav-link" to="/add">등록</Link>
+                    </li>
+                    <li className="nav-item dropdown-item">
+                      <Link className="nav-link" to="/edit">맴버수정</Link>
+                    </li>
+                    <li className="nav-item dropdown-item">
+                      <Link className="nav-link" to="/delete">맴버삭제</Link>
+                    </li>
+                  </ul>
+                </li>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Database
+                  </a>
+                  <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <Link className="nav-link" to="/agreement">Agreement</Link>
+                    <Link className="nav-link" to="/database/all">Database - All</Link>
+                    <Link className="nav-link" to="/database/family">Database - Family</Link>
+                    <Link className="nav-link" to="/database/archive">Database - Archive</Link>
+                    <Link className="nav-link" to="/database/active">Database - Active</Link>
+                    <Link className="nav-link" to="/database/visitor">Database - Visitor</Link>
+                  </ul>
                 </li>
                 <li className="nav-item">
-                  <Link className="nav-link" to="/edit">맴버수정</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/delete">맴버삭제</Link>
-                </li>
-                <Link className="nav-link" to="/agreement">Agreement</Link>
-                <Link className="nav-link" to="/database/all">Database - All</Link>
-                <Link className="nav-link" to="/database/family">Database - Family</Link>
-                <Link className="nav-link" to="/database/archive">Database - Archive</Link>
-                <Link className="nav-link" to="/database/active">Database - Active</Link>
-                <Link className="nav-link" to="/database/visitor">Database - Visitor</Link>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/search-card">등록카드</Link>
-                </li>
-              </>
-            )}
-            {(checkLevel("새가족") || checkLevel("아동부")) && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/contacts/children">아동부</Link>
-              </li>
-            )}
-            {checkLevel("재정부") && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/main/finance">재정부</Link>
-              </li>
-            )}
-            {(checkLevel("새가족") || checkLevel("유스")) && (
-              <li className="nav-item">
-                <Link className="nav-link" to="/main/youth">중고등부</Link>
-              </li>
-            )}
-            {(checkLevel("general") || checkLevel("새가족")) && (
-              <>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/main/secondary">청년부</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/main/pastors">교역자</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link" to="/main/adults">장년부</Link>
+                  <Link className="nav-link" to="/search-card">등록카드 검색</Link>
                 </li>
               </>
             )}
-            {currUser ?  <li className="nav-item">
+            {currUser ? <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                부서별
+              </a>
+              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+                {(checkLevel("새가족") || checkLevel("아동부")) && (
+                  <li>
+                    <Link className="nav-item dropdown-item" to="/contacts/children">아동부</Link>
+                  </li>
+                )}
+                {checkLevel("재정부") && (
+                  <li>
+                    <Link className="nav-item dropdown-item" to="/main/finance">재정부</Link>
+                  </li>
+                )}
+                {(checkLevel("새가족") || checkLevel("유스")) && (
+                  <li>
+                    <Link className="nav-item dropdown-item" to="/main/youth">중고등부</Link>
+                  </li>
+                )}
+                {(checkLevel("general") || checkLevel("새가족")) && (
+                  <>
+                    <li>
+                      <Link className="nav-item dropdown-item" to="/main/secondary">청년부</Link>
+                    </li>
+                    <li>
+                      <Link className="nav-item dropdown-item" to="/main/pastors">교역자</Link>
+                    </li>
+                    <li>
+                      <Link className="nav-item dropdown-item" to="/main/adults">장년부</Link>
+                    </li>
+                  </>
+                )}
+              </ul>
+            </li> : null}
+            {currUser ? <li className="nav-item">
               <Link className="nav-link" to="/profile">프로필</Link>
             </li> : null}
           </ul>

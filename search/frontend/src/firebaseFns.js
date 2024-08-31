@@ -13,7 +13,7 @@ async function authenticate(username, password, n) {
             console.log("logged in!");
 
             if (user.email.includes("admin")) { //새가족부
-                n("/main");
+                n("/add");
                 window.location.reload()
             } else if (user.email.includes("youth")) { //유스
                 n("/main/youth");
@@ -25,7 +25,7 @@ async function authenticate(username, password, n) {
                 n("/main/finance");
                 window.location.reload()
             } else if (user.email.includes("general")) { //장년부
-                n("/contacts/adults");
+                n("/main/adults");
                 window.location.reload()
             } else {
                 alert("Invalid email! Register again.")
