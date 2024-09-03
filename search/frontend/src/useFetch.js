@@ -1,18 +1,22 @@
 import { useState, useEffect, useMemo} from "react";
 import axios from "axios"
 
-export const useFetch = (keyword) => {
+export const useFetch = (keyword, c) => {
     const [data, setData] = useState(null)
     const [error, setError] = useState(null)
+    const [fields, setFields] = useState([])
     const [loading, setLoading] = useState(true)
 
     const BASE_URL = "https://tebah-member-manager.vercel.app/";
-
+    // const BASE_URL = "http://localhost:5000/"
     const options = {
         method: 'GET',
         headers: {
             accept: 'application/json',
             'X-Requested-With': 'XMLHttpRequest'
+        },
+        params: {
+            cols: c
         }
     };
 
@@ -20,8 +24,12 @@ export const useFetch = (keyword) => {
         setLoading(true)
         await axios.get(`${BASE_URL}${keyword}`, options)
         .then(res => {
-            setData(res.data.rows)
+            if (res.data.rows) {
+                setFields(res.data.fields)
+                setData(res.data.rows)
+            }
         })
+        .catch(err => console.log(err))
         .finally(() => {
             setLoading(false)
         })
@@ -31,5 +39,5 @@ export const useFetch = (keyword) => {
         fetchData();
     }, [keyword])
 
-    return [data, error, loading] 
+    return [data, fields, error, loading] 
 }

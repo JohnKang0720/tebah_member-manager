@@ -3,30 +3,45 @@ import { useState, useEffect, useMemo } from 'react';
 import { useFetch } from '../useFetch'
 import axios from 'axios'
 import DeleteMember from './Util/DeleteMember';
-import View from './View';
+import View from './Util/View';
 import EditMember from './Util/EditMember';
+
 function Finance() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [id, setId] = useState(0);
-  const [num, setNum] = useState(0);
+  const [num, setNum] = useState("");
 
-  const [data, error, loading] = useFetch("main/finance");
-
+  const [data, fields, error, loading] = useFetch("main/finance", []);
 
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info["한글이름"].includes(text) || info["영문이름"].toLowerCase().includes(text.toLowerCase()));
       setFiltered(filteredArray)
     }
   }, [text])
 
-  const assignNum = () => {
-    axios.put(`https://tebah-member-manager.vercel.app/main/finance/${id}/${num}`, {
+  const isDuplicate = (num) => {
+    let dup = false
+    data.map(d => {
+      if (d.offering_num === num) {
+        dup = true
+      }
     })
-      .then(res => {
-        console.log(res)
-      }).catch(err => console.log(err))
+    return dup
+  }
+
+  const assignNum = (e) => {
+    e.preventDefault()
+    if (isDuplicate(num)) {
+      alert("Invalid offering number!")
+    } else {
+      axios.put(`https://tebah-member-manager.vercel.app/main/finance/${id}/${num}`, {
+      })
+        .then(res => {
+          window.location.reload()
+        }).catch(err => console.log(err))
+    }
   }
 
   return (
@@ -39,18 +54,20 @@ function Finance() {
           <input class="form-control" placeholder='검색' onChange={e => setText(e.target.value)} />
         </div>
         <div className='inputs'>
-          <h5> Assign offering #: </h5>
-          <br />
-          <input class="form-control" placeholder="Enter id" onChange={e => setId(e.target.value)} />
-          <br />
-          <input class="form-control" placeholder="Offering #" onChange={e => setNum(e.target.value)} />
-          <br />
-          <button class="btn btn-success" onClick={assignNum}> Submit </button>
+          <form onSubmit={assignNum}>
+            <h5> Assign offering #: </h5>
+            <br />
+            <input class="form-control" placeholder="Enter id" onChange={e => setId(e.target.value)} />
+            <br />
+            <input class="form-control" placeholder="Offering #" onChange={e => setNum(e.target.value)} />
+            <br />
+            <button class="btn btn-success" type="submit"> Submit </button>
+          </form>
         </div>
       </div>
       <br />
       <br />
-      <View data={[loading, text, data, filtered]} />
+      <View data={[loading, text, data, filtered, fields, fields.length]} />
     </div>
   )
 }

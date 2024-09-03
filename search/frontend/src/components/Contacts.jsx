@@ -1,53 +1,44 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { useFetch } from '../useFetch'
-import axios from 'axios'
-import View from './View';
+import React, { useState, useEffect } from 'react';
+import { useFetch } from '../useFetch';
+import axios from 'axios';
+import View from './Util/View';
 import { useParams } from 'react-router-dom';
 
 function Contacts() {
     const [text, setText] = useState("");
     const [filtered, setFiltered] = useState([]);
-    const [code, setCode] = useState(1);
-    const [arr, setArr] = useState([]);
-    const param = useParams()
+    const param = useParams();
 
-    const [data, error, loading] = useFetch(`contacts/${param.route}`);
+    const [data, fields, error, loading] = useFetch(`main/youth/아동부`, ["korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
 
-    const filter = () => {
-        const url = `https://tebah-member-manager.vercel.app/contacts/${param.route}`
-        axios.post(url, {
-            code: code
-        }).then(res => {
-            if (res.data.rows.length === 0) {
-                alert("No such family code.")
-            }
-            setArr(res.data.rows)
-        }).catch(err => console.log(err))
-    }
+    // const filter = () => {
+    //     const url = `http://localhost:5000/contacts/아동부`;
+    //     axios.post(url, {
+    //         code: code
+    //     }).then(res => {
+    //         if (res.data.rows.length === 0) {
+    //             alert("No such family code.");
+    //         }
+    //         setFiltered(res.data.rows);
+    //         console.log(res.data.rows)
+    //     }).catch(err => console.log(err));
+    // }
 
+    useEffect(() => {
+        if (data) {
+          let filteredArray = data.filter(info => info["한글이름"].includes(text) || info["영문이름"].toLowerCase().includes(text.toLowerCase()));
+          setFiltered(filteredArray)
+        }
+      }, [text])
     return (
-        <div><h1> 기본주소록 </h1>
-            {/* <strong> Search member: </strong>
-            <br /> */}
-            {/* <input placeholder='검색' onChange={e => setText(e.target.value)} />
-            <br />
-            <br /> */}
-            <br />
-            <div class="input-div" style={{ flexDirection: "column" }}>
-                <h5> 가족검색창 </h5>
-                <div class="inputs" style={{ flexDirection: "column" }}>
-                    <br />
-                    <input class="form-control" placeholder='가족코드 입력' onChange={e => setCode(e.target.value)} />
-                    <button class="btn btn-primary" onClick={filter}> 검색 </button>
-                    <br />
-                </div>
+        <div style={{ paddingTop: '30px', paddingBottom: '20px', textAlign: 'center' }}>
+            <h1> 아동부 연락망</h1>
+            <div className="input-div" style={{ display:'flex', justifyContent:'center', alignItems:'center'}}>
+                맴버검색: <input style={{padding:'10px', width:'200px'}} className="form-control" placeholder='이름' type="text" onChange={e => setText(e.target.value)} />
             </div>
-            <br />
-            <br />
-            <View data={[loading, text, data, arr]} />
+            <View data={[loading, text, data, filtered, fields, fields.length]} />
         </div>
-    )
+    );
 }
 
-export default Contacts
+export default Contacts;

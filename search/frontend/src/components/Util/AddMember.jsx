@@ -1,154 +1,589 @@
-import React from 'react'
-import { useState } from 'react';
-import axios from 'axios'
+import axios from "axios";
+import React, { useState, useEffect } from "react";
 
-function AddMember() {
+const AddMember = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [count, setCount] = useState(0);
+  const [formData, setFormData] = useState({
+    offering_num: "NA",
+    korean: "",
+    english_name: "",
+    gender: "",
+    title: "",
+    birthdate: "",
+    age: "",
+    baptism: "",
+    baptism_date: "",
+    email: "",
+    mobile: "",
+    suite: "",
+    street: "",
+    city: "",
+    province: "",
+    postal_code: "",
+    country: "",
+    marital_status: "",
+    hobby: "",
+    volunteer: "",
+    consent: "",
+    registration_date: "",
+    last_updated: new Date().toLocaleDateString(),
+    f_code: "",
+    p_code_1: "",
+    p_code_2: "",
+    level: "",
+    status: "",
+  });
 
-    const [eng, setEng] = useState("");
-    const [kor, setKor] = useState("");
-    const [gender, setGen] = useState("");
-    const [category, setCat] = useState("");
-    const [married, setMar] = useState("");
-    const [age, setAge] = useState("");
-    const [baptism, setBap] = useState("");
-    const [email, setEmail] = useState("");
-    const [telephone, setTel] = useState("");
-    const [address, setAd] = useState("");
-    const [hobby, setHob] = useState("");
-    const [vol, setVol] = useState("");
-    const [fcode, setF] = useState("");
-    const [p1, setP1] = useState(0);
-    const [p2, setP2] = useState(0);
-    const [agreement, setAg] = useState("");
-    const [offering_num, setOff] = useState("");
+  useEffect(() => {
+    localStorage.clear();
+  }, []);
 
-    const [birth, setDate] = useState("");
-    const [baptism_date, setBapDate] = useState("");
-    const [suite, setSuite] = useState("");
-    const [city, setCity] = useState("");
-    const [prov, setProv] = useState("");
-    const [postal, setPostal] = useState("");
-    const [country, setCount] = useState("");
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-    const date = new Date()
+  const handleNext = () => {
+    if (currentPage < 3) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
 
-    const handleSubmit = () => {
-        axios.post("https://tebah-member-manager.vercel.app/main", {
-            offering_num: offering_num,
-            korean: kor,
-            english_name: eng,
-            gender: gender,
-            title: category,
-            birthdate: birth,
-            age: age,
-            baptism: baptism,
-            baptism_date: baptism_date,
-            email: email,
-            mobile: telephone,
-            suite: suite,
-            street: address,
-            city: city,
-            province: prov,
-            postal_code: postal,
-            country: country,
-            marital_status: married,
-            hobby: hobby,
-            volunteer: vol,
-            consent: agreement,
-            registered: date.getDate(),
-            last: date.getDate(),
-            f_code: fcode,
-            p_code_1: p1,
-            p_code_2: p2
-        })
-            .then(res => {
-                console.log(res)
-            }).catch(err => console.log(err))
+  const handlePrevious = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem(count, JSON.stringify(formData));
+    let res = [];
+    for (let i = 0; i <= localStorage.length; i++) {
+      res.push(JSON.parse(localStorage.getItem(i)));
     }
 
-    return (
-        <div className='inputs'>
-            <h5> 새교인 등록 </h5>
-            <br />
-            <div className='inputs__inner'>
-                <div>
-                    <input class="form-control" placeholder='영어 이름' onChange={e => setEng(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='한국 이름' onChange={e => setKor(e.target.value)} />
-                    <br />
-                    <select class="form-control" placeholder='성' onChange={e => setGen(e.target.value)}>
-                        <option value="">  </option>
-                        <option value="남"> 남 </option>
-                        <option value="여"> 여 </option>
-                    </select>
-                    <br />
-                    <input class="form-control" placeholder='Birthday (DOW, M D, Y)' onChange={e => setDate(e.target.value)} />
-                    <br />
-                    <select class="form-control" placeholder='셰례여부' onChange={e => setBap(e.target.value)}>
-                        <option value="">  </option>
-                        <option value="Y"> 유아세레 </option>
-                        <option value="A"> 입교 </option>
-                        <option value="B"> 세레 </option>
-                        <option value="None"> 없음 </option>
-                    </select>
-                    <br />
-                    <input class="form-control" placeholder='Baptism Date (MM/DD/YYYY) ' onChange={e => setBapDate(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='Suite' onChange={e => setSuite(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='주소' onChange={e => setAd(e.target.value)} />
-                </div>
-                <br />
-                <div>
-                    <input class="form-control" placeholder='전화번호 (no dash)' onChange={e => setTel(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='City' onChange={e => setCity(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='Province' onChange={e => setProv(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='Postal Code' onChange={e => setPostal(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='Country' onChange={e => setCount(e.target.value)} />
-                    <br />
-                    <select class="form-control" placeholder='직분' onChange={e => setCat(e.target.value)}>
-                        <option value="">  </option>
-                        <option value="admin"> Pastor </option>
-                        <option value="admin"> Admin </option>
-                        <option value="regular"> Saint </option>
-                        <option value="regular"> Deacon </option>
-                    </select>
-                    <br />
-                    <select class="form-control" placeholder='결혼여부' onChange={e => setMar(e.target.value)}>
-                        <option value="">  </option>
-                        <option value="기혼"> 기혼 </option>
-                        <option value="미혼"> 미혼 </option>
-                    </select>
-                    <br />
-                    <input class="form-control" placeholder='나이' onChange={e => setAge(e.target.value)} />
-                </div>
-                <br />
-                <div>
-                    <input class="form-control" placeholder='Offering #' onChange={e => setOff(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='이메일' onChange={e => setEmail(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='취미/직업' onChange={e => setHob(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='봉사여부' onChange={e => setVol(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='새맴버 가족코드' onChange={e => setF(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='부모코드 1' onChange={e => setP1(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='부모 코드 2' onChange={e => setP2(e.target.value)} />
-                    <br />
-                    <input class="form-control" placeholder='사진 & 영상 동의 (Y or N)' onChange={e => setAg(e.target.value)} />
-                </div>
-            </div>
-            <br />
-            <button class="btn btn-primary" onClick={handleSubmit}> 등록 </button>
-        </div>
-    )
-}
+    axios
+      .post("https://tebah-member-manager.vercel.app/main", {
+        data: res.filter((e) => e !== undefined && e !== null),
+      })
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
-export default AddMember
+  const handleFamily = (e) => {
+    localStorage.setItem(count, JSON.stringify(formData));
+    setCurrentPage(1);
+    setCount(count + 1);
+  };
+
+  return (
+    <form onSubmit={e => {
+      e.preventDefault()
+      handleFamily()
+  }}>
+      <div
+        style={{
+          marginTop: "8px",
+          marginBottom: "50px",
+          paddingBottom: "60px",
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <h1>Add Member Form </h1>
+        <form onSubmit={handleSubmit} className="member-form">
+          {currentPage === 1 && (
+            <div>
+              <h4 style={{ fontSize: "1rem", marginBottom: "20px" }}>Page 1</h4>
+              <label>
+                이메일:
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                등록날짜:
+                <input
+                  type="date"
+                  name="registration_date"
+                  value={formData.registration_date}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                한국이름:
+                <input
+                  type="text"
+                  name="korean"
+                  value={formData.korean}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                영문:
+                <input
+                  type="text"
+                  name="english_name"
+                  value={formData.english_name}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                성별:
+                <input
+                  type="text"
+                  name="gender"
+                  value={formData.gender}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                생년월일:
+                <input
+                  type="date"
+                  name="birthdate"
+                  value={formData.birthdate}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+            </div>
+          )}
+
+          {currentPage === 2 && (
+            <div>
+              <h4 style={{ fontSize: "1rem", marginBottom: "20px" }}>Page 2</h4>
+              <label>
+                유닛 #:
+                <input
+                  type="text"
+                  name="suite"
+                  value={formData.suite}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                주소:
+                <input
+                  type="text"
+                  name="street"
+                  value={formData.street}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                도시:
+                <input
+                  type="text"
+                  name="city"
+                  value={formData.city}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                주:
+                <input
+                  type="text"
+                  name="province"
+                  value={formData.province}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                우편번호:
+                <input
+                  type="text"
+                  name="postal_code"
+                  value={formData.postal_code}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                나라:
+                <input
+                  type="text"
+                  name="country"
+                  value={formData.country}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                휴대번호:
+                <input
+                  type="text"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+            </div>
+          )}
+
+          {currentPage === 3 && (
+            <div>
+              <h4 style={{ fontSize: "1rem", marginBottom: "20px" }}>Page 3</h4>
+              <label>
+                신급:
+                <input
+                  type="text"
+                  name="baptism"
+                  value={formData.baptism}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                세례년도:
+                <input
+                  type="date"
+                  name="baptism_date"
+                  value={formData.baptism_date}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                직분:
+                <input
+                  type="text"
+                  name="title"
+                  value={formData.title}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                그룹:
+                <input
+                  type="text"
+                  name="level"
+                  value={formData.level}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                취미/특기:
+                <input
+                  type="text"
+                  name="hobby"
+                  value={formData.hobby}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                봉사경력:
+                <input
+                  type="text"
+                  name="volunteer"
+                  value={formData.volunteer}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                결혼여부:
+                <input
+                  type="text"
+                  name="marital_status"
+                  value={formData.marital_status}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                사진/영상 동의서:
+                <input
+                  type="checkbox"
+                  name="consent"
+                  checked={formData.consent}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                가족코드:
+                <input
+                  type="text"
+                  name="f_code"
+                  value={formData.f_code}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                부모코드 1:
+                <input
+                  type="text"
+                  name="p_code_1"
+                  value={formData.p_code_1}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                부모코드 2:
+                <input
+                  type="text"
+                  name="p_code_2"
+                  value={formData.p_code_2}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+              <label>
+                Status:
+                <input
+                  type="text"
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                  style={{
+                    border: "none",
+                    borderRadius: "10px",
+                    padding: "5px",
+                    marginLeft: "10px",
+                    boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
+                  }}
+                />
+              </label>
+            </div>
+          )}
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}
+          >
+            <button
+              type="button"
+              onClick={handlePrevious}
+              disabled={currentPage === 1}
+              style={{
+                border: "none",
+                borderRadius: "10px",
+                backgroundColor: "#3c82c3",
+                padding: "10px",
+                color: "white",
+              }}
+            >
+              Previous
+            </button>
+            {currentPage < 3 ? (
+              <button
+                style={{
+                  border: "none",
+                  borderRadius: "10px",
+                  backgroundColor: "#1D6AB4",
+                  padding: "10px",
+                  color: "white",
+                }}
+                type="button"
+                onClick={handleNext}
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                style={{
+                  border: "none",
+                  borderRadius: "10px",
+                  backgroundColor: "#1D6AB4",
+                  padding: "10px",
+                  color: "white",
+                }}
+                type="button"
+                onClick={handleSubmit}
+              >
+                Submit
+              </button>
+            )}
+            {currentPage === 3 ? (
+              <button
+                style={{
+                  border: "none",
+                  borderRadius: "10px",
+                  backgroundColor: "green",
+                  padding: "10px",
+                  color: "white",
+                }}
+                type="submit"
+              >
+                {" "}
+                Add Family Member{" "}
+              </button>
+            ) : null}
+          </div>
+        </form>
+      </div>
+    </form>
+  );
+};
+
+export default AddMember;

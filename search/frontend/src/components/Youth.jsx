@@ -1,36 +1,33 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useFetch } from '../useFetch'
-import DeleteMember from './Util/DeleteMember';
-import View from './View';
-import EditMember from './Util/EditMember';
+import View from './Util/View';
 
 function Youth() {
   const [text, setText] = useState("");
   const [filtered, setFiltered] = useState([]);
 
-  const [data, error, loading] = useFetch("main/youth");
+  const [data, fields, error, loading] = useFetch("main/youth/유스", ["korean", "mobile", "email", "suite", "street"]);
 
-  
   useEffect(() => {
     if (data) {
-      let filteredArray = data.filter(info => info.english_name.toLowerCase().includes(text.toLowerCase()));
+      let filteredArray = data.filter(info => info["한글이름"].includes(text) || info["영문이름"].includes(text));
       setFiltered(filteredArray)
     }
   }, [text])
 
   return (
-    <div><h1> 유스 데이터 </h1>
+    <div style={{ paddingTop: '30px', paddingBottom: '30px', textAlign: 'center' }}>
+    <h1> 유스 데이터 </h1>
       <br />
-      <div class="input-div">
-        <div class="inputs">
-          <h5> 맴버 검색: </h5>
-          <br />
-          <input class="form-control" placeholder='검색' onChange={e => setText(e.target.value)} />
+      <div style={{ display:'flex', justifyContent:'center', alignItems:'center'}} class="input-div">
+        <div style={{ display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
+          <h5 style={{width:'100%', paddingRight:'20px'}}> 맴버 검색: </h5>
+          <input style={{padding:'20px', width:'200px'}} class="form-control" placeholder='검색' onChange={e => setText(e.target.value)} />
         </div>
       </div>
       <br />
-      <View data={[loading, text, data, filtered]} />
+      <View data={[loading, text, data, filtered, fields, fields.length]} />
     </div>
   )
 }

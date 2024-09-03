@@ -1,29 +1,31 @@
 const express = require('express');
 const router = express.Router();
-// const sql = require('mysql2');
+const db = require('../db')
 
-const { Pool } = require('pg')
-require('dotenv').config()
+const get_data = (start_query, cols, cat) => {
+    query = start_query
+    query += "SELECT" + "\n"
+    query += cols.map(col => `c.${col}`).join(',\n') + ',\n';
+    query += cols.map(col => `m.${col} AS p1_${col}`).join(',\n') + '\n';
+    query += ","
+    query += cols.map(col => `m2.${col} AS p2_${col}`).join(',\n') + '\n';
+    query += "FROM mytable c" + "\n"
+    query += `JOIN mytable m ON m.ID = c.p_code_1` + "\n"
+    query += `JOIN mytable m2 ON m2.ID = c.p_code_2`
 
-const db = new Pool({
-  connectionString: "postgres://default:LgnO1f8UPHDI@ep-crimson-paper-a45txdup-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require?sslmode=require",
-})
-const query = `
-    WITH children_node AS (
-        SELECT * FROM mytable
-        WHERE p_code_1 IS NOT NULL OR p_code_2 IS NOT NULL
-    ) 
-        SELECT c.ID AS child_id, c.english_name AS child_name, c.gender AS child_gender, c.age AS child_age, c.title AS child_title, c.f_code AS family_code,
-        m.english_name AS parent_1_name, m.gender AS parent_1_gender, m.age AS parent_1_age, m.title AS parent_1_title,
-        m2.english_name AS parent_2_name, m2.gender AS parent_2_gender, m2.age AS parent_2_age, m2.title AS parent_2_title
-        FROM children_node c
-        JOIN mytable m 
-        ON m.ID = c.p_code_1
-        JOIN mytable m2
-        ON m2.ID = c.p_code_2;`
-
+    return query
+}
 router.get('/', (req, res) => {
-    db.query(query, (err, result) => {
+    let {cols, c} = req.query
+    db.query("SELECT  c.korean AS 한글이름, c.english_name AS 영문이름, m.korean AS 부모이름1, m2.korean AS 부모이름2, c.mobile AS 전화번호, c.email AS 이메일, CONCAT( m.suite, ' - ', m.street, ', ', m.city, ', ', m.province, ' ', m.postal_code) AS 주소, m.mobile AS 전화번호_부모, m.email AS 이메일_부모 FROM  mytable c JOIN  mytable m ON m.id = c.p_code_1 JOIN  mytable m2 ON m2.id = c.p_code_2 WHERE (c.status is null or c.status != 'archive');", (err, result) => {
+        if (err) throw err;
+        res.status(200).send(result);
+    })
+})
+
+router.get('/consent', (req,res) => {
+
+    db.query("SELECT korean AS 한글이름, consent AS 동의 FROM mytable;", (err, result) => {
         if (err) throw err;
         res.status(200).send(result);
     })
@@ -31,8 +33,8 @@ router.get('/', (req, res) => {
 
 //finding parents of a single child & displaying family tables
 router.post('/', (req, res) => {
-    const { search_id } = req.body;
-    let q = query.replace(";", `\n WHERE c.ID = ${search_id};`)
+    const { search_name } = req.body;
+    let q = query.replace(";", `\n WHERE c.korean = '${search_name}' OR m.korean =' ${search_name}' OR m2.korean = '${search_name}';`)
 
     db.query(q, (err, result) => {
         if (err) throw err;
