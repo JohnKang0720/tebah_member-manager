@@ -31,7 +31,7 @@ function Second() {
 
   return (
     <div
-      style={{ paddingTop: "30px", paddingBottom: "30px", textAlign: "center" }}
+      style={{ paddingTop: "30px", paddingBottom: "30px", textAlign: "center" }} 
     >
       <h1> 청년부 데이터 </h1>
       <br />

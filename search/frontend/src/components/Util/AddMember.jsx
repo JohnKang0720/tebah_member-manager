@@ -64,7 +64,7 @@ const AddMember = () => {
     }
 
     axios
-      .post("http://localhost:5000/main", {
+      .post("https://tebah-member-manager.vercel.app/main", {
         data: res.filter((e) => e !== undefined && e !== null),
       })
       .then((res) => console.log(res))
@@ -78,10 +78,13 @@ const AddMember = () => {
   };
 
   return (
-    <>
+    <form onSubmit={e => {
+      e.preventDefault()
+      handleFamily()
+  }}>
       <div
         style={{
-          marginTop: "30px",
+          marginTop: "8px",
           marginBottom: "50px",
           paddingBottom: "60px",
           display: "flex",
@@ -570,7 +573,7 @@ const AddMember = () => {
                   padding: "10px",
                   color: "white",
                 }}
-                onClick={handleFamily}
+                type="submit"
               >
                 {" "}
                 Add Family Member{" "}
@@ -579,7 +582,7 @@ const AddMember = () => {
           </div>
         </form>
       </div>
-    </>
+    </form>
   );
 };
 

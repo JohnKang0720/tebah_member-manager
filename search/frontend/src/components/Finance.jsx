@@ -31,11 +31,12 @@ function Finance() {
     return dup
   }
 
-  const assignNum = () => {
+  const assignNum = (e) => {
+    e.preventDefault()
     if (isDuplicate(num)) {
       alert("Invalid offering number!")
     } else {
-      axios.put(`http://localhost:5000/main/finance/${id}/${num}`, {
+      axios.put(`https://tebah-member-manager.vercel.app/main/finance/${id}/${num}`, {
       })
         .then(res => {
           window.location.reload()
@@ -53,13 +54,15 @@ function Finance() {
           <input class="form-control" placeholder='검색' onChange={e => setText(e.target.value)} />
         </div>
         <div className='inputs'>
-          <h5> Assign offering #: </h5>
-          <br />
-          <input class="form-control" placeholder="Enter id" onChange={e => setId(e.target.value)} />
-          <br />
-          <input class="form-control" placeholder="Offering #" onChange={e => setNum(e.target.value)} />
-          <br />
-          <button class="btn btn-success" onClick={assignNum}> Submit </button>
+          <form onSubmit={assignNum}>
+            <h5> Assign offering #: </h5>
+            <br />
+            <input class="form-control" placeholder="Enter id" onChange={e => setId(e.target.value)} />
+            <br />
+            <input class="form-control" placeholder="Offering #" onChange={e => setNum(e.target.value)} />
+            <br />
+            <button class="btn btn-success" type="submit"> Submit </button>
+          </form>
         </div>
       </div>
       <br />

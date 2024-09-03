@@ -23,7 +23,10 @@ function Register() {
   };
 
   return (
-    <>
+    <form onSubmit={e => {
+      e.preventDefault()
+      checkValidThenCreate()
+    }}>
       <div className={styles.main}>
         <div className={styles.box}>
           <h2 className={styles.title}>
@@ -65,14 +68,14 @@ function Register() {
           <button
             class="btn btn-danger"
             className={styles.btn}
-            onClick={() => checkValidThenCreate()}
+            type="submit"
           >
             {" "}
             Register{" "}
           </button>
         </div>
       </div>
-    </>
+    </form>
   );
 }
 

@@ -13,7 +13,7 @@ export default function SearchCard() {
 
   const filter = () => {
     if (query.length !== 0) {
-      const url = `http://localhost:5001/search-card/${query}`;
+      const url = `https://tebah-member-manager.vercel.app/search-card/${query}`;
       axios.get(url).then(res => {
         if (res.data.rows.length === 0) {
           alert("No such person!");
@@ -26,7 +26,7 @@ export default function SearchCard() {
   };
 
   const getFamily = (q, fcode) => {
-    const url = `http://localhost:5001/search-card/${q}/${fcode}`;
+    const url = `https://tebah-member-manager.vercel.app/search-card/${q}/${fcode}`;
     axios.get(url).then(res => {
       setFamily(res.data.rows);
       console.log(res.data.rows);
@@ -38,8 +38,13 @@ export default function SearchCard() {
     <div className={styles['main-container']}>
       <h1>교인카드 검색</h1>
       <section className={styles['search-bar']}>
-        <input className={styles['search-bar-input']} type="text" onChange={e => setQuery(e.target.value)} />
-        <button onClick={filter}>Search</button>
+        <form onSubmit={e => {
+          e.preventDefault()
+          filter()
+        }}>
+          <input className={styles['search-bar-input']} type="text" onChange={e => setQuery(e.target.value)} />
+          <button type="submit">Search</button>
+        </form>
       </section>
       <section className={styles['card-container']}>
         <div className={styles['search-card']}>

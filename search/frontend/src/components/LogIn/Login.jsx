@@ -19,7 +19,7 @@ function Login() {
 
   const process = (email) => {
     axios
-      .get("http://localhost:5000/registered")
+      .get("https://tebah-member-manager.vercel.app/registered")
       .then((res) => {
         res.data.rows.forEach((data) => {
           if (

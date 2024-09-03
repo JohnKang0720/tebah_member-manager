@@ -14,7 +14,7 @@ function DeleteMember() {
     }
 
     const handleArchive = () => {
-        axios.post("http://localhost:5000/archive", {
+        axios.post("https://tebah-member-manager.vercel.app/archive", {
             name: name
         }).then(res => {
             console.log("Archived")
@@ -22,15 +22,20 @@ function DeleteMember() {
     }
 
     return (
-        <div style={{paddingTop:'30px'}} class="inputs">
-            <h2> Delete/Archive Member </h2>
-            <br />
-            <input style={{ width: "350px", marginBottom:'15px' }} class="form-control input-sm" placeholder='맴버 이름' onChange={e => setName(e.target.value)} />
-            <div>
-                <button style={{width:"170px"}} class="btn btn-danger" onClick={handleSubmit}> Delete </button>
-                <button style={{width:"170px", backgroundColor:'green', border:'green'}} class="btn btn-danger" onClick={handleArchive}> Archive </button>
+        <form onSubmit={e => {
+            e.preventDefault()
+            handleArchive()
+        }}>
+            <div style={{ paddingTop: '30px' }} class="inputs">
+                <h2> Archive Member </h2>
+                <br />
+                <input style={{ width: "350px", marginBottom: '15px' }} class="form-control input-sm" placeholder='맴버 이름' onChange={e => setName(e.target.value)} />
+                <div>
+                    {/* <button style={{width:"170px"}} class="btn btn-danger" onClick={handleSubmit}> Delete </button> */}
+                    <button style={{ width: "170px", backgroundColor: 'green', border: 'green' }} class="btn btn-danger" type="submit"> Archive </button>
+                </div>
             </div>
-        </div>
+        </form>
     )
 }
 

@@ -50,8 +50,8 @@ function App() {
 
   return (
     <div className="App">
-      <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{padding: "10px"}}>
-        <a className="navbar-brand" href="/login" style={{margin: 0}}>
+      <nav className="navbar navbar-expand-lg navbar-light bg-light" style={{ padding: "10px" }}>
+        <a className="navbar-brand" href="/login" style={{ margin: 0 }}>
           <img src={`${process.env.PUBLIC_URL}/tebah.jpg`} width="50px" alt="brand-logo" />
         </a>
         <button
@@ -99,15 +99,15 @@ function App() {
                 </li>
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Database
+                    DB
                   </a>
                   <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <Link className="nav-link" to="/agreement">Agreement</Link>
-                    <Link className="nav-link" to="/database/all">Database - All</Link>
-                    <Link className="nav-link" to="/database/family">Database - Family</Link>
-                    <Link className="nav-link" to="/database/archive">Database - Archive</Link>
-                    <Link className="nav-link" to="/database/active">Database - Active</Link>
-                    <Link className="nav-link" to="/database/visitor">Database - Visitor</Link>
+                    <Link className="nav-link" to="/database/active"> Members </Link>
+                    <Link className="nav-link" to="/database/family"> Family</Link>
+                    <Link className="nav-link" to="/database/visitor"> Visitor</Link>
+                    <Link className="nav-link" to="/database/archive"> Archive</Link>
+                    <Link className="nav-link" to="/database/all"> All</Link>
+                    <Link className="nav-link" to="/agreement">Consent</Link>
                   </ul>
                 </li>
                 <li className="nav-item">

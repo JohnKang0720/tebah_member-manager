@@ -54,7 +54,7 @@ async function createAccount(username, password, tel, n) {
         let email = ""
         let level = ""
         if (emailVerified) {
-            axios.get("http://localhost:5001/main")
+            axios.get("https://tebah-member-manager.vercel.app/main")
                 .then(res => {
                     for(let i = 0; i < res.data.rows.length; i++) {
                         if (res.data.rows[i].email === username) { //SHOULD BE u.email 
@@ -90,7 +90,7 @@ async function createAccount(username, password, tel, n) {
 
 const registerMember = (member, tel, email, l) => {
     if (member) {
-        axios.post("http://localhost:5000/registered", {"email": email, "telephone": tel, 'level': l})
+        axios.post("https://tebah-member-manager.vercel.app/registered", {"email": email, "telephone": tel, 'level': l})
         .catch(err => console.log(err))
     }
 }

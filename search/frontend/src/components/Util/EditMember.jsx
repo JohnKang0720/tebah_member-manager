@@ -1,8 +1,8 @@
-import React, {  } from 'react'
+import React, { } from 'react'
 import { useState } from 'react';
 import axios from 'axios';
 import View from './View';
-import styles from "../Database/Database.module.css"; 
+import styles from "../Database/Database.module.css";
 import { useFetch } from '../../useFetch';
 
 function EditMember() {
@@ -26,7 +26,7 @@ function EditMember() {
 
 
     const handleEdit = () => {
-        axios.put("http://localhost:5000/main", {
+        axios.put("https://tebah-member-manager.vercel.app/main", {
             id: info.id,
             column: info.column.toLowerCase(),
             content: info.content
@@ -38,38 +38,44 @@ function EditMember() {
     }
 
     return (
-        <div style={{marginTop: '30px'}} className='inputs'>
-            <h5> 맴버 수정 </h5>
-            <div>
-                <br />
-                <input class="form-control" placeholder='ID' onChange={e => setInfo({
-                    id: e.target.value,
-                    column: info.column,
-                    content: info.content
-                })} />
-                <br />
-                <br />
-                <input class="form-control" value={info.column} placeholder='Column' onChange={e => setInfo({
-                    id: info.id,
-                    column: e.target.value,
-                    content: info.content
-                })} />
-                <br />
-                <br />
-                <input class="form-control" value={info.content} placeholder='New content' onChange={e => setInfo({
-                    id: info.id,
-                    column: info.column,
-                    content: e.target.value
-                })} />
-                <br />
-                <br />
-                <button style = {{width: '220px'}} class="btn btn-success" onClick={handleEdit}> 수정 </button>
+        <form onSubmit={e => {
+            e.preventDefault()
+            handleEdit()
+        }}>
+            <div style={{ marginTop: '30px' }} className='inputs'>
+                <h5> 맴버 수정 </h5>
+                <div>
+                    <br />
+                    <input class="form-control" placeholder='ID' onChange={e => setInfo({
+                        id: e.target.value,
+                        column: info.column,
+                        content: info.content
+                    })} />
+                    <br />
+                    <input class="form-control" value={info.column} placeholder='Column' onChange={e => setInfo({
+                        id: info.id,
+                        column: e.target.value,
+                        content: info.content
+                    })} />
+                    <br />
+                    <input class="form-control" value={info.content} placeholder='New content' onChange={e => setInfo({
+                        id: info.id,
+                        column: info.column,
+                        content: e.target.value
+                    })} />
+                    <br />
+                    <button style={{ width: '220px' }} class="btn btn-success" type="submit"> 수정 </button>
+                </div>
+                <div style={{
+                    width: '90%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center'
+                }}>
+                    <View data={[loading, text, data, arr, fields, fields.length]} />
+                </div>
             </div>
-            <hr />
-            <div className={styles["database-container"]}>
-                <View data={[loading, text, data, arr, fields, fields.length]} />
-            </div>
-        </div>
+        </form>
     )
 }
 

@@ -43,7 +43,7 @@ app.post("/archive", (req, res) => {
 
 app.get("/profile/:email", (req, res) => {
     let {email} = req.params
-    db.query(`SELECT korean AS 이름, mobile AS 번호 FROM mytable WHERE email='${email}'`, (err, result) => {
+    db.query(`SELECT korean AS 이름, mobile AS 전화번호, CONCAT(suite, ' - ', street, ', ', city, ', ', province, ' ', postal_code) AS 주소 FROM mytable WHERE email='${email}'`, (err, result) => {
         if(err) throw err
         res.status(200).send(result)
     })
