@@ -72,6 +72,10 @@ button {
   border: solid 0.5px gray;
 }
 
+.table__data p {
+  background: transparent;
+}
+
 .input-div{
   width: 100%;
   display: flex;
