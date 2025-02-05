@@ -18,6 +18,7 @@ function DeleteMember() {
             name: name
         }).then(res => {
             console.log("Archived")
+            alert("Archived!")
         }).catch(err => console.log(err))
     }
 
