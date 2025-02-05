@@ -67,7 +67,7 @@ const AddMember = () => {
       .post("https://tebah-member-manager.vercel.app/main", {
         data: res.filter((e) => e !== undefined && e !== null),
       })
-      .then((res) => 
+      .then(res => 
         console.log(res)
             alert("Member added!")
            )
