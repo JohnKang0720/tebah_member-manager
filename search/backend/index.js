@@ -29,8 +29,8 @@ app.post("/registered", (req, res) => {
 app.get("/registered", (req, res) => {
     db.query("SELECT email FROM registered", (err, result) => {
         if (err) throw err
-        res.status(200).send(result)
     })
+    res.send("connected")
 })
 
 app.post("/archive", (req, res) => {
