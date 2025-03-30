@@ -34,10 +34,18 @@ const AddMember = () => {
     level: "",
     status: "",
   });
+  const [submitted, setSubmitted] = useState(false);
+  const [id, setId] = useState(0)
 
   useEffect(() => {
     localStorage.clear();
-  }, []);
+  }, [submitted]);
+
+  useEffect(() => {
+    axios.get("https://tebah-member-manager.vercel.app/main/get_latest_id").then((res) => {
+      setId(res.data.rows[0].id)
+    })
+  }, [])
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -67,7 +75,11 @@ const AddMember = () => {
       .post("https://tebah-member-manager.vercel.app/main", {
         data: res.filter((e) => e !== undefined && e !== null),
       })
-      .then((res) => console.log(res))
+      .then((res) => {
+        console.log(res)
+        alert("Member added successfully!")
+        setSubmitted(true);
+      })
       .catch((err) => console.log(err));
   };
 
@@ -75,13 +87,11 @@ const AddMember = () => {
     localStorage.setItem(count, JSON.stringify(formData));
     setCurrentPage(1);
     setCount(count + 1);
+    setId(id + 1)
   };
 
   return (
-    <form onSubmit={e => {
-      e.preventDefault()
-      handleFamily()
-  }}>
+    <form>
       <div
         style={{
           marginTop: "8px",
@@ -93,7 +103,7 @@ const AddMember = () => {
           alignItems: "center",
         }}
       >
-        <h1>Add Member Form </h1>
+        <h1>Add Member Form (id: {id}) </h1>
         <form onSubmit={handleSubmit} className="member-form">
           {currentPage === 1 && (
             <div>
@@ -103,7 +113,6 @@ const AddMember = () => {
                 <input
                   type="email"
                   name="email"
-                  value={formData.email}
                   onChange={handleChange}
                   style={{
                     border: "none",
@@ -135,7 +144,6 @@ const AddMember = () => {
                 <input
                   type="text"
                   name="korean"
-                  value={formData.korean}
                   onChange={handleChange}
                   style={{
                     border: "none",
@@ -151,7 +159,6 @@ const AddMember = () => {
                 <input
                   type="text"
                   name="english_name"
-                  value={formData.english_name}
                   onChange={handleChange}
                   style={{
                     border: "none",
@@ -467,7 +474,6 @@ const AddMember = () => {
                 <input
                   type="text"
                   name="p_code_1"
-                  value={formData.p_code_1}
                   onChange={handleChange}
                   style={{
                     border: "none",
@@ -483,7 +489,6 @@ const AddMember = () => {
                 <input
                   type="text"
                   name="p_code_2"
-                  value={formData.p_code_2}
                   onChange={handleChange}
                   style={{
                     border: "none",
@@ -573,7 +578,7 @@ const AddMember = () => {
                   padding: "10px",
                   color: "white",
                 }}
-                type="submit"
+                onClick={e => handleFamily(e)}
               >
                 {" "}
                 Add Family Member{" "}

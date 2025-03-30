@@ -58,6 +58,13 @@ router.get("/", (req, res) => {
     })
 })
 
+router.get("/get_latest_id", (req, res) => {
+    db.query(`SELECT id FROM mytable ORDER BY id DESC LIMIT 1`, (err, result) => {
+        if (err) throw err;
+        res.status(200).send(result);
+    })
+})
+
 // //delete data in maindata
 router.delete("/:name", (req, res) => {
     const { name } = req.params;
@@ -66,13 +73,6 @@ router.delete("/:name", (req, res) => {
     });
     res.status(200).send("deleted");
 })
-
-// //view youth data
-
-// SELECT f_code,  STRING_AGG(korean, ', ') AS members_list
-// FROM mytable
-// GROUP BY f_code
-// HAVING f_code != ''
 
 router.get("/youth/:group", (req, res) => {
     let { group } = req.params
