@@ -287,7 +287,7 @@ const AddMember = () => {
                   }}
                 />
               </label>
-              <label>
+{/*               <label>
                 나라:
                 <input
                   type="text"
@@ -302,7 +302,7 @@ const AddMember = () => {
                     boxShadow: "0 0 5px rgba(0, 0, 0, 0.1)",
                   }}
                 />
-              </label>
+              </label> */}
               <label>
                 휴대번호:
                 <input

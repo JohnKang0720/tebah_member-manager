@@ -125,7 +125,7 @@ function App() {
                     <Link className="nav-item dropdown-item" to="/contacts/children">아동부</Link>
                   </li>
                 )}
-                {checkLevel("재정부") && (
+                {(checkLevel("재정부") || checkLevel("새가족")) && (
                   <li>
                     <Link className="nav-item dropdown-item" to="/main/finance">재정부</Link>
                   </li>
