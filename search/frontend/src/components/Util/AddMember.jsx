@@ -43,7 +43,7 @@ const AddMember = () => {
 
   useEffect(() => {
     axios.get("https://tebah-member-manager.vercel.app/main/get_latest_id").then((res) => {
-      setId(res.data.rows[0].id)
+      setId(res.data.rows[0].id+1)
     })
   }, [])
 
@@ -103,7 +103,7 @@ const AddMember = () => {
           alignItems: "center",
         }}
       >
-        <h1>Add Member Form (id: {id}) </h1>
+        <h1>Add Member Form </h1>  <p> FOR ID  <strong> {id} </strong> </p>
         <form onSubmit={handleSubmit} className="member-form">
           {currentPage === 1 && (
             <div>
