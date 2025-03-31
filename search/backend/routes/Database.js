@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const db = require('../db')
 
-// email AS 이메일, mobile AS 휴대번호, CONCAT( suite, ' - ', street, ', ', city, ', ', province, ' ', postal_code) AS 주소 ,
-            // hobby AS 취미, volunteer AS 봉사경험, consent 동의, registered_date 등록날짜, last_updated 수정날짜, f_code 가족코드, p_code_1 AS 부모코드1, p_code_2 AS 부모코드2, level AS 카테고리, status
 router.get("/:type", (req, res) => {
     let { cols } = req.query
     let { type } = req.params

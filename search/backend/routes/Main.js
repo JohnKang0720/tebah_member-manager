@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
             if (data[i]) {
                 db.query(`INSERT INTO mytable (offering_num, korean, english_name, gender, title, birthdate, age, baptism, baptism_date, email, mobile, suite, street, city, province, postal_code, country, marital_status, hobby, volunteer, consent, registered_date, last_updated, f_code, p_code_1, p_code_2, level, status) VALUES ('${data[i]["offering_num"]}', '${data[i]["korean"]}', '${data[i]["english_name"]}', '${data[i]["gender"]}', '${data[i]["title"]}',  '${data[i]["birthdate"]}', ${calcAge(data[i]["birthdate"])}, '${data[i]["baptism"]}', '${data[i]["baptism_date"]}', '${data[i]["email"]}', '${data[i]["mobile"]}', '${data[i]["suite"]}', '${data[i]["street"]}', '${data[i]["city"]}', '${data[i]["province"]}', '${data[i]["postal_code"]}', '${data[i]["country"]}', '${data[i]["marital_status"]}', '${data[i]["hobby"]}', '${data[i]["volunteer"]}',  '${data[i]["consent"]}', '${data[i]["registration_date"]}', '${data[i]["last_updated"]}', '${data[i]["f_code"]}', ${data[i]["p_code_1"] ? data[i]["p_code_1"] : -1}, ${data[i]["p_code_2"] ? data[i]["p_code_2"] : -1}, '${data[i]["level"]}', '${data[i]["status"]}');`, (err, result) => {
                     if (err) throw err;
-                     res.send("complete.")
+                    res.send("complete.")
                 })
             }
         }
@@ -76,7 +76,7 @@ router.delete("/:name", (req, res) => {
 
 router.get("/youth/:group", (req, res) => {
     let { group } = req.params
-    console.log(group)
+    
     if (group === "아동부") {
         db.query(`WITH child AS (SELECT * FROM mytable WHERE level='${group}') SELECT 
     c.korean AS 한글이름,
@@ -158,14 +158,6 @@ router.get("/secondary", (req, res) => {
         res.status(200).send(result);
     })
 })
-
-// //view children data
-// router.get("/children", (req, res) => {
-//     db.query("SELECT * FROM mytable WHERE level='아동부' AND (status is null or status != 'archive')", (err, result) => {
-//         if (err) throw err;
-//         res.status(200).send(result);
-//     })
-// })
 
 //pastor data
 router.get("/pastors/:code", (req, res) => {

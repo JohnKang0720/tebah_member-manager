@@ -11,19 +11,6 @@ function Contacts() {
 
     const [data, fields, error, loading] = useFetch(`main/youth/아동부`, ["korean", "english_name", "mobile", "email", "suite", "street", "f_code"]);
 
-    // const filter = () => {
-    //     const url = `http://localhost:5000/contacts/아동부`;
-    //     axios.post(url, {
-    //         code: code
-    //     }).then(res => {
-    //         if (res.data.rows.length === 0) {
-    //             alert("No such family code.");
-    //         }
-    //         setFiltered(res.data.rows);
-    //         console.log(res.data.rows)
-    //     }).catch(err => console.log(err));
-    // }
-
     useEffect(() => {
         if (data) {
           let filteredArray = data.filter(info => info["한글이름"].includes(text) || info["영문이름"].toLowerCase().includes(text.toLowerCase()));
