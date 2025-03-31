@@ -166,15 +166,11 @@ function App() {
           <Route path="/delete" element={<DeleteMember />} /> : <Route path="/" element={<></>} />
           <Route path="/main/secondary" element={<Secondary />} />
           <Route path="/main/youth" element={<Youth />} />
-          <Route path="/main/children" element={<Child />} />
           <Route path="/main/finance" element={<Finance />} /> :  <Route path="/" element={<></>} />
           <Route path="/add" element={<AddMember />} />
-          {/* <Route path={`/tebah-family`} element={<Family />} /> */}
           <Route path={`/agreement`} element={<Agreement />} />
           <Route path={`/search-card`} element={<SearchCard />} />
           <Route path={`/main/adults`} element={<Adults />} />
-
-
           <Route path={`/password/:username`} element={<Password />} />
           <Route path={`/contacts/:route`} element={<Contacts />} />
           <Route path={`/main/pastors`} element={<Pastor />} />

@@ -12,19 +12,6 @@ function Family() {
   const columns = fields
   const url = `https://tebah-member-manager.vercel.app/tebah-family`
 
-  // const filter = () => {
-  //   axios.post(url, {
-  //     search_id: memberId
-  //   }).then(res => {
-  //     setArr(res.data.rows)
-  //     if (res.data.length === 0) {
-  //       alert(`No such member with name ${memberId}.`)
-  //     }
-  //   }
-  //   )
-  //     .catch(err => console.log(err))
-  // }
-
   useEffect(() => {
     if (data) {
       let filteredArray = data.filter(info => info.korean.includes(text) );
