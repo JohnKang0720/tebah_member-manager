@@ -7,7 +7,7 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  max-height: 100%; /* Ensures the height extends based on content */
+  /* max-height: 100%; Ensures the height extends based on content */
 }
 
 body {
@@ -22,10 +22,9 @@ body {
 .app {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: stretch;
   min-height: 100vh; /* Takes at least full viewport height */
-  text-align: center;
   overflow-x: hidden; 
 }
 
@@ -40,12 +39,12 @@ button {
 
 .table, .table2, .table3 {
   max-width: 100%;
-  height:450px;
+  height:auto;
   /* border: solid 1px black; */
   margin: 2.5px;
   display: grid;
-  overflow-x: scroll;
-  white-space: nowrap;
+  /* overflow-x: scroll;*/
+  white-space: nowrap; 
   text-align: center;
 }
 
@@ -65,11 +64,17 @@ button {
 .table__header{
   padding: 10px;
   border: solid 1px gray;
+  font-weight: bold; /* 이미 있었지만 재강조 */
+  text-align: center; /* 이미 있었지만 재강조 */
 }
 
 .table__data {  
   padding: 10px;
   border: solid 0.5px gray;
+  display: flex; /* 내부 텍스트 정렬을 위해 flex 유지 */
+  justify-content: center;
+  align-items: center;
+  text-align: center; /* 텍스트 중앙 정렬 유지 */
 }
 
 .table__data p {
@@ -161,20 +166,55 @@ button {
 }
 
 .table-container {
-  max-width: 95%;
+  /* max-width: 95%; */
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;  
-  align-items: center;   
-  height: 360px;                     
+  justify-content: flex-start;  
+  align-items: stretch;   
+  /* height: auto;                      */
+  max-height: calc(100vh - 120px);
+  overflow-x: auto; /* 가로 내용이 넘칠 때 스크롤바 생성 */
+  overflow-y: auto; /* 세로 스크롤도 필요할 때 생기도록 */
+  
+  position: relative;
+
   background-color: rgba(255, 255, 255, 0.7); 
   border-radius: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  margin-left: 100px;
-  margin-right: 100px;
-  margin-bottom: 80px;
-  margin-top: 20px;
+  /* margin-left: 100px; */
+  /* margin-right: 100px; */
+  margin: 20px auto 80px auto; /* 상하 마진은 유지하고, 좌우는 auto로 중앙 정렬 */
+  padding: 20px; /* 내부 패딩을 조절하여 여백 확보 */
+  min-width: 300px; /* 컨테이너의 최소 너비 설정 (필요에 따라 조절) */
 }
+
+/* Webkit 브라우저용 스크롤바 스타일 */
+/* .table-container에 적용된 스크롤바에 스타일을 적용합니다. */
+.table-container::-webkit-scrollbar {
+  width: 10px; /* 세로 스크롤바 너비 */
+  height: 10px; /* 가로 스크롤바 높이 */
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: transparent; /* !!!! 스크롤바 트랙(배경)을 투명하게 설정 !!!! */
+  /* 또는, 컨테이너 배경색과 동일하게 설정하여 자연스럽게 만듭니다. */
+  /* background: rgba(255, 255, 255, 0.7); /* table-container의 배경색과 동일하게 설정 */
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* 스크롤바 손잡이 색상 (어둡게 반투명) */
+  border-radius: 5px; /* 스크롤바 손잡이 둥근 모서리 */
+  border: 2px solid transparent; /* 손잡이 주변 여백을 만들기 위해 투명 테두리 추가 */
+  background-clip: padding-box; /* 테두리 안쪽에만 배경색 적용 */
+}
+
+/* 마우스 오버 시 스크롤바 손잡이 색상 변경 (선택 사항) */
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+
 
 /* Grid table styling */
 .table {

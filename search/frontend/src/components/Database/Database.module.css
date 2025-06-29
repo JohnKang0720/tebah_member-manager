@@ -1,12 +1,26 @@
 body {
-  overflow-y: hidden;
+  /* overflow-y: hidden; */
+  overflow-y: auto;
 }
 .database-container {
-    min-height: 100vh;
+    /* min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; /* 이 줄을 제거하거나 flex-start로 변경 */ 
+    justify-content: flex-start; /* 위에서부터 시작 */
+    /* align-items: center;    /* 이 줄을 완전히 제거하거나 stretch로 변경 */
+    /* align-items: stretch; 기본값으로 충분 */
+    
+    width: 100%; /* 컨테이너가 가로 너비를 모두 사용하도록 */
+    /* max-width: none;  // flex 아이템의 경우 필요 없을 수 있지만, 명시적으로 넣을 수 있음 */
+    padding: 20px; /* 적절한 패딩을 추가하여 내용과 가장자리의 여백 확보 */
+    box-sizing: border-box; /* 패딩이 너비 계산에 포함되도록 */
   }
   
   .database-content {
@@ -19,7 +33,15 @@ body {
   }
 
   .database-header{
+    /* margin-top:30px;
+    font-weight: 700;
+    font-size: 2rem; */
+
     margin-top:30px;
+    margin-bottom: 20px; /* 헤더 아래 여백 추가 */
     font-weight: 700;
     font-size: 2rem;
+    align-self: flex-start; /* 헤더를 왼쪽 정렬 (컨테이너가 더 이상 중앙 정렬이 아니므로) */
+    width: 100%; /* 헤더가 컨테이너 너비를 모두 사용하도록 */
+    
   }
